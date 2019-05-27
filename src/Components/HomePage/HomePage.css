@@ -1,6 +1,32 @@
 .mainDiv {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.mainDiv h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.mainDiv a {
+  font-weight: 400;
+}
+
+.createButtonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.createButtonDiv a {
+  margin: 0.25rem;
+  padding: 0.5rem;
+  font-weight: 600;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 15px;
+  font-size: 1.2em;
+  transition: 0.2s ease-out;
 }

@@ -13,21 +13,21 @@ import KuulaLogo from "../../Assets/images/logo-kuula.png";
 const Footer = () => {
   return (
     <footer className={classes.mainDiv}>
-      <div>
-        <img src={FestviewBetaImg} />
+      <div className={classes.legalDiv}>
+        <img src={FestviewBetaImg} alt="fb-logo" />
         <p>Mentions légales - Copyright © 2017 FestView</p>
       </div>
       <div className={classes.followUsDiv}>
         <div>Suivez-nous</div>
         <div className={classes.logoDiv}>
-          <img src={FacebookLogo} />
-          <img src={SpotifyLogo} />
-          <img src={YoutubeLogo} />
-          <img src={TwitterLogo} />
-          <img src={LinkdInLogo} />
-          <img src={InstagramLogo} />
-          <img src={VeerLogo} />
-          <img src={KuulaLogo} />
+          <img src={FacebookLogo} alt="fb-logo" />
+          <img src={SpotifyLogo} alt="spot-logo" />
+          <img src={YoutubeLogo} alt="youtube-logo" />
+          <img src={TwitterLogo} alt="twitt-logo" />
+          <img src={LinkdInLogo} alt="ld-logo" />
+          <img src={InstagramLogo} alt="insta-logo" />
+          <img src={VeerLogo} alt="veer-logo" />
+          <img src={KuulaLogo} alt="kuula-logo" />
         </div>
       </div>
     </footer>

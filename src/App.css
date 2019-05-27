@@ -5,3 +5,8 @@
     linear-gradient(90deg, #2eaed5, #8937e5);
   height: 100vh;
 }
+
+a {
+  color: white;
+  text-decoration: none;
+}
