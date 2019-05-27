@@ -1,0 +1,15 @@
+.mainDiv {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+
+.imageDiv {
+  width: 30%;
+}
+
+.listDiv {
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -1,0 +1,25 @@
+.mainDiv {
+  display: flex;
+  flex-direction: inherit;
+  justify-content: space-around;
+  height: 100px;
+  width: 100%;
+}
+
+.followUsDiv {
+  display: flex;
+  width: 70%;
+  justify-content: flex-end;
+  padding: 40px 0;
+}
+
+.logoDiv {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+}
+
+.logoDiv img {
+  height: 25px;
+  width: 25px;
+}

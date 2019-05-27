@@ -1,0 +1,6 @@
+.mainDiv {
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

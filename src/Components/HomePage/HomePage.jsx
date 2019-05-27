@@ -1,12 +1,14 @@
 import React from "react";
+import classes from "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <React.Fragment>
+    <div className={classes.mainDiv}>
       <div>
         <h1>
-          FestView est une encyclopédie musicale participative <br />Contribuez
-          aux pages de vos <a>artistes</a> et <a>festival</a> préférés
+          FestView est une encyclopédie musicale participative <br />
+          Contribuez aux pages de vos <a>artistes</a> et <a>festivals</a>{" "}
+          préférés
         </h1>
       </div>
       <div>
@@ -20,7 +22,7 @@ const HomePage = () => {
           <a>Créer une page festival</a>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
