@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import classes from "../HomePage/HomePage.css";
+import classList from "./allArtists.css";
+import ArtistComp from "./ArtistComp/ArtistComp";
 import { getArtists } from "../../Api/apiHandler";
 
-class TestApi extends Component {
+class AllArtists extends Component {
   state = {
     artistList: []
   };
@@ -21,11 +24,22 @@ class TestApi extends Component {
     const { artistList } = this.state;
     console.log(artistList);
     return (
-      <div>
-        <p>HELLO</p>
+      <div className={classes.mainDiv}>
+        <p>Let's display artists name:</p>
+        <ul>
+          {artistList.map(oneArtist => {
+            return (
+              <ArtistComp
+                key={oneArtist.basic_data.slug}
+                artistName={oneArtist.basic_data.name}
+                artistSlug={oneArtist.basic_data.slug}
+              />
+            );
+          })}
+        </ul>
       </div>
     );
   }
 }
 
-export default TestApi;
+export default AllArtists;

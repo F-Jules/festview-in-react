@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import classes from "./NavBar.css";
 import FestviewBetaImg from "../../../Assets/images/festview_inline.png.png";
 import SearchBar from "./SearchBar/SearchBar";
@@ -25,7 +26,9 @@ class NavBar extends Component {
           <div className={classes.listDiv}>
             <p>AIDE</p>
             <p>FESTVALS</p>
-            <p>ARTISTES</p>
+            <p>
+              <Link to="/AllArtists">ARTISTS</Link>
+            </p>
             <p onClick={this.getSearchBar}>RECHERCHER</p>
             <p>
               <a href="/">SE CONNECTER</a>

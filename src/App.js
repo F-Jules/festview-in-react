@@ -4,7 +4,8 @@ import classes from "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
-import allArtists from "./Components/Artists/allArtists";
+import allArtists from "./Components/Artists/AllArtists";
+import OneArtist from "./Components/Artists/OneArtist/OneArtist";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" component={HomePage} exact />
-        <Route path="/allArtists" component={allArtists} />
+        <Route path="/AllArtists" component={allArtists} />
+        <Route path="/OneArtist/:artistSlug" component={OneArtist} />
       </Switch>
       <Footer />
     </div>
