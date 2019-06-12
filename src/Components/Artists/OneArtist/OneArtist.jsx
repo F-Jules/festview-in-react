@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-import { getArtists } from "../../../Api/apiHandler";
+import { getOneArtist } from "../../../Api/apiHandler";
+import classes from "./OneArtist.css";
+import ArtistHeader from "./OneArtistHeader";
+import Contributor from "../../ContributorComp/ContributorComp";
 
 class OneArtist extends Component {
-  state = { artistInfos: [] };
+  state = {};
   componentDidMount = () => {
     const { params } = this.props.match;
-    getArtists()
+    getOneArtist(params.id)
       .then(dbRes => {
-        dbRes.data.forEach(oneArtist => {
-          if (oneArtist.basic_data.slug.includes(params.artistSlug)) {
-            this.setState({
-              artistInfos: oneArtist.basic_data
-            });
-          }
+        const datas = dbRes.data;
+        this.setState({
+          artistInfos: datas.basic_data,
+          artistImage: datas.image,
+          creatorInfos: datas.creator,
+          editorsInfos: datas.editors
         });
       })
       .catch(dbErr => {
@@ -20,9 +23,21 @@ class OneArtist extends Component {
       });
   };
   render() {
-    const { artistInfos } = this.state;
-    console.log(artistInfos);
-    return <p>{artistInfos.name}</p>;
+    const { artistInfos, artistImage, creatorInfos, editorsInfos } = this.state;
+    if (!creatorInfos || !artistInfos || !artistImage || !editorsInfos) {
+      return <div className={classes.mainDiv} />;
+    }
+    return (
+      <div className={classes.mainDiv}>
+        <div className={classes.header}>
+          <ArtistHeader artistImage={artistImage} artistInfos={artistInfos} />
+          <Contributor
+            creatorInfos={creatorInfos}
+            editorsInfos={editorsInfos}
+          />
+        </div>
+      </div>
+    );
   }
 }
 

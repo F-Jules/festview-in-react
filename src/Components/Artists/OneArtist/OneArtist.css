@@ -1,0 +1,17 @@
+.mainDiv {
+  height: calc(100vh - 140px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 40px;
+}
+
+.header img {
+  border-radius: 50%;
+}
+
+.artistHeader img {
+  width: 150px;
+}

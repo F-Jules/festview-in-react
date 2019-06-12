@@ -1,0 +1,15 @@
+.creatorHeader {
+  width: 20vw;
+  background-color: rgba(34, 34, 34, 0.2);
+  border-radius: 10px;
+}
+
+.creatorHeader img {
+  width: 40px;
+  height: 40px;
+}
+
+.creatorInfos {
+  display: flex;
+  justify-content: space-evenly;
+}

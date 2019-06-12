@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route path="/" component={HomePage} exact />
         <Route path="/AllArtists" component={allArtists} />
-        <Route path="/OneArtist/:artistSlug" component={OneArtist} />
+        <Route path="/OneArtist/:artistPseudo/:id" component={OneArtist} />
       </Switch>
       <Footer />
     </div>

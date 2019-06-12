@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classes from "./NavBar.css";
 import FestviewBetaImg from "../../../Assets/images/festview_inline.png.png";
-import SearchBar from "./SearchBar/SearchBar";
+import Modal from "./SearchBar/Modal";
 
 class NavBar extends Component {
   state = {
@@ -11,7 +11,7 @@ class NavBar extends Component {
 
   getSearchBar = () => {
     this.setState({
-      showSearch: true
+      showSearch: !this.state.showSearch
     });
   };
 
@@ -35,7 +35,7 @@ class NavBar extends Component {
             </p>
           </div>
         </nav>
-        <SearchBar showSearch={showSearch} />
+        <Modal getStateSearch={showSearch} getSearchBar={this.getSearchBar} />
       </React.Fragment>
     );
   }

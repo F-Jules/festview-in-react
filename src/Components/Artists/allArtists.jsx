@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import classes from "../HomePage/HomePage.css";
-import classList from "./allArtists.css";
+import classes from "./allArtists.css";
 import ArtistComp from "./ArtistComp/ArtistComp";
 import { getArtists } from "../../Api/apiHandler";
 
@@ -22,6 +21,9 @@ class AllArtists extends Component {
 
   render() {
     const { artistList } = this.state;
+    if (!artistList) {
+      return <div className={classes.mainDiv} />;
+    }
     console.log(artistList);
     return (
       <div className={classes.mainDiv}>
@@ -32,7 +34,8 @@ class AllArtists extends Component {
               <ArtistComp
                 key={oneArtist.basic_data.slug}
                 artistName={oneArtist.basic_data.name}
-                artistSlug={oneArtist.basic_data.slug}
+                artistPseudo={oneArtist.basic_data.pseudo}
+                artistId={oneArtist.id}
               />
             );
           })}
