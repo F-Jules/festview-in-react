@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { getOneArtist } from "../../../Api/apiHandler";
 import classes from "./OneArtist.css";
-import ArtistHeader from "./OneArtistHeader";
-import Contributor from "../../ContributorComp/ContributorComp";
+import ArtistHeader from "../../PageHeaderComp/OnePageHeader";
+import Contributor from "../../PageHeaderComp/ContributorComp";
 
 class OneArtist extends Component {
   state = {};
+
   componentDidMount = () => {
     const { params } = this.props.match;
     getOneArtist(params.id)
@@ -22,6 +23,7 @@ class OneArtist extends Component {
         console.log(dbErr);
       });
   };
+
   render() {
     const { artistInfos, artistImage, creatorInfos, editorsInfos } = this.state;
     if (!creatorInfos || !artistInfos || !artistImage || !editorsInfos) {
@@ -30,7 +32,11 @@ class OneArtist extends Component {
     return (
       <div className={classes.mainDiv}>
         <div className={classes.header}>
-          <ArtistHeader artistImage={artistImage} artistInfos={artistInfos} />
+          <ArtistHeader
+            artistImage={artistImage}
+            artistInfos={artistInfos}
+            isArtist={true}
+          />
           <Contributor
             creatorInfos={creatorInfos}
             editorsInfos={editorsInfos}

@@ -25,7 +25,9 @@ class NavBar extends Component {
           </div>
           <div className={classes.listDiv}>
             <p>AIDE</p>
-            <p>FESTVALS</p>
+            <p>
+              <Link to="/AllFestivals">FESTIVALS</Link>
+            </p>
             <p>
               <Link to="/AllArtists">ARTISTS</Link>
             </p>

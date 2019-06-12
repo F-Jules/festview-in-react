@@ -8,3 +8,5 @@ export const getOneArtist = id =>
 // ------ FESTIVALS ----------
 export const getFestivals = () =>
   axios.get("http://www.fest-view.com/api/festivals");
+export const getOneFestival = id =>
+  axios.get(`http://fest-view.com/api/pages/${id}`);
