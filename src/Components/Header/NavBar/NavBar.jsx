@@ -9,7 +9,8 @@ class NavBar extends Component {
     showSearch: false
   };
 
-  getSearchBar = () => {
+  getSearchBar = evt => {
+    evt.preventDefault();
     this.setState({
       showSearch: !this.state.showSearch
     });
@@ -21,7 +22,9 @@ class NavBar extends Component {
       <React.Fragment>
         <nav className={classes.mainDiv}>
           <div className={classes.imageDiv}>
-            <img src={FestviewBetaImg} alt="festview" />
+            <Link to="/">
+              <img src={FestviewBetaImg} alt="festview" />
+            </Link>
           </div>
           <div className={classes.listDiv}>
             <p>AIDE</p>
@@ -37,7 +40,11 @@ class NavBar extends Component {
             </p>
           </div>
         </nav>
-        <Modal getStateSearch={showSearch} getSearchBar={this.getSearchBar} />
+        <Modal
+          getStateSearch={showSearch}
+          getSearchBar={this.getSearchBar}
+          dataList={this.props.dataList}
+        />
       </React.Fragment>
     );
   }

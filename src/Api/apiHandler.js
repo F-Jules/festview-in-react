@@ -1,12 +1,11 @@
 import axios from "axios";
 
-// ------ ARTISTS ----------
-export const getArtists = () =>
-  axios.get("http://www.fest-view.com/api/artists");
-export const getOneArtist = id =>
-  axios.get(`http://fest-view.com/api/pages/${id}`);
-// ------ FESTIVALS ----------
-export const getFestivals = () =>
-  axios.get("http://www.fest-view.com/api/festivals");
-export const getOneFestival = id =>
+// ------ GETALLFORSEARCH ----------
+export const getAll = () =>
+  axios.get("http://www.fest-view.com/api/test/pages");
+// ------ GETALLFORSEARCH ----------
+export const getAllPages = () =>
+  axios.get("http://www.fest-view.com/api/test/pages/header");
+// ------ GETONEPAGES ----------
+export const getOnePage = id =>
   axios.get(`http://fest-view.com/api/pages/${id}`);
