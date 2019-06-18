@@ -12,14 +12,9 @@ import SearchResultPage from "./Components/AllPages/SearchResult/SearchResultPag
 class App extends Component {
   state = {};
 
-  componentDidMount = () => {
-    getAllPages()
-      .then(dbRes =>
-        this.setState({
-          dataList: dbRes.data
-        })
-      )
-      .catch(dbErr => console.log(dbErr));
+  componentDidMount = async () => {
+    const res = await getAllPages();
+    this.setState({ dataList: res.data });
   };
 
   render() {
