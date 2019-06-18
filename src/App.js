@@ -5,8 +5,8 @@ import classes from "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
 import Footer from "./Components/Footer/Footer";
-import AllPages from "./Components/AllPages/AllPages";
-import OnePage from "./Components/AllPages/OnePage/OnePage";
+import AllPages from "./Components/AllPages/AllPages/AllPages";
+import OnePage from "./Components/OnePage/OnePage/OnePage";
 import SearchResultPage from "./Components/AllPages/SearchResult/SearchResultPage";
 
 class App extends Component {

@@ -21,7 +21,6 @@ class SearchBar extends Component {
 
   clearInput = () => {
     this.setState({ inputField: "" });
-    return this.props.closeModal;
   };
 
   render() {
@@ -38,7 +37,7 @@ class SearchBar extends Component {
             type="text"
             onChange={this.checkInputLength}
           />
-          <button onClick={this.clearInput}>
+          <button onClick={this.props.closeModal}>
             <Link to={this.getSearchResult(inputField)}>GO</Link>
           </button>
         </form>

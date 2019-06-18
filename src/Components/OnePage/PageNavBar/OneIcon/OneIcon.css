@@ -1,0 +1,15 @@
+.bgc {
+  border-radius: 50%;
+  margin: auto;
+  width: 75px;
+  height: 75px;
+}
+
+.custIcon {
+  width: 37.5px;
+  margin-top: 19px;
+}
+
+.title {
+  padding-top: 20px;
+}

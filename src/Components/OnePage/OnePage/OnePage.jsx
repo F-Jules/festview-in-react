@@ -3,6 +3,7 @@ import { getOnePage } from "../../../Api/apiHandler";
 import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComp/ContributorComp";
 import OnePageHeader from "../PageHeaderComp/OnePageHeader";
+import PageNavBar from "../PageNavBar/PageNavBar";
 
 class OnePage extends Component {
   state = {};
@@ -12,6 +13,7 @@ class OnePage extends Component {
     getOnePage(params.id)
       .then(dbRes => {
         const datas = dbRes.data;
+        console.log(datas);
         this.setState({
           pageInfos: datas.basicData,
           pageImage: datas.image,
@@ -31,7 +33,7 @@ class OnePage extends Component {
       return <div className={classes.mainDiv} />;
     }
     return (
-      <div className={classes.mainDiv}>
+      <div>
         <div className={classes.header}>
           <OnePageHeader pageImage={pageImage} pageInfos={pageInfos} />
           <Contributor
@@ -39,6 +41,7 @@ class OnePage extends Component {
             editorsInfos={editorsInfos}
           />
         </div>
+        <PageNavBar pageType={pageInfos.title} />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./AllPages.css";
-import AllPageComp from "./AllPagesComp/AllPagesComp";
+import AllPageComp from "../AllPagesComp/AllPagesComp";
 
 const AllPages = props => {
   let dataArray = [];
@@ -17,7 +17,6 @@ const AllPages = props => {
     );
     customTitle = "Here is our Festivals list:";
   }
-  console.log(dataArray);
   return (
     <div className={classes.mainDiv}>
       <h3>{customTitle}</h3>
