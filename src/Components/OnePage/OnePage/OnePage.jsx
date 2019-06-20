@@ -6,6 +6,8 @@ import OnePageHeader from "../PageHeaderComp/OnePageHeader";
 import PageNavBar from "../PageNavBar/PageNavBar";
 import ProgComp from "../PageComp/ProgComp/ProgComp";
 import MusicComp from "../PageComp/MusicComp/MusicComp";
+import VideoComp from "../PageComp/VideoComp/VideoComp";
+import NetworkComp from "../PageComp/NetworkComp/NetworkComp";
 
 class OnePage extends Component {
   state = {};
@@ -25,9 +27,8 @@ class OnePage extends Component {
   render() {
     const { pageInfos, creatorInfos, editorsInfos } = this.state;
     if (!pageInfos || !creatorInfos) return <div className={classes.mainDiv} />;
-    console.log(pageInfos);
     return (
-      <div>
+      <div className={classes.mainDiv}>
         <div className={classes.header}>
           <OnePageHeader pageInfos={pageInfos} />
           <Contributor
@@ -36,8 +37,10 @@ class OnePage extends Component {
           />
         </div>
         <PageNavBar pageType={pageInfos.title} />
-        <ProgComp />
-        <MusicComp />
+        <ProgComp pageId={pageInfos.id} />
+        <MusicComp pageId={pageInfos.id} />
+        <VideoComp pageId={pageInfos.id} />
+        <NetworkComp pageId={pageInfos.id} />
       </div>
     );
   }

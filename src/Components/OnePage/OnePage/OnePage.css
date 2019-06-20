@@ -1,5 +1,6 @@
 .mainDiv {
-  height: calc(100vh - 140px);
+  min-height: 100vh;
+  height: min-content;
 }
 
 .header {

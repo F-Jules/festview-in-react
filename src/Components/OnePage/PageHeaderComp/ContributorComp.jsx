@@ -13,7 +13,7 @@ const Contributor = props => {
           }`}
         />
         <h5>{props.creatorInfos.slug}</h5>
-        <p>{props.creatorInfos.point}</p>
+        <p>{props.creatorInfos.points}</p>
       </div>
       {props.editorsInfos.length > 0 ? (
         <div>
@@ -28,7 +28,7 @@ const Contributor = props => {
                   }`}
                 />
                 <h5>{oneEditor.slug}</h5>
-                <p>{oneEditor.point}</p>
+                <p>{oneEditor.points}</p>
               </div>
             );
           })}

@@ -20,7 +20,7 @@ class App extends Component {
   render() {
     const { dataList } = this.state;
     return (
-      <div className={classes.App}>
+      <div className={`${classes.App} ${classes.section}`}>
         <Header dataList={dataList} />
         <Switch>
           <Route path="/" component={HomePage} exact />

@@ -1,12 +1,25 @@
 import axios from "axios";
 
-// ------ GETALLFORSEARCH ----------
-export const getAllPages = () =>
-  axios.get("http://www.fest-view.com/api/test/pages");
-export const getAllPagesHeader = () =>
-  axios.get("http://www.fest-view.com/api/pages/headers");
-// ------ GETONEPAGES ----------
-export const getOnePage = id =>
-  axios.get(`http://fest-view.com/api/pages/${id}`);
+const uri = "http://fest-view.com";
+
+// ------ GET ALL HEADERS ----------
+
+export const getAllPagesHeader = () => axios.get(`${uri}/api/pages/headers`);
+
+// ------ GET ALL ----------
+
+export const getAllPages = () => axios.get(`${uri}/api/test/pages`);
+
+// ------ GET ONE PAGES HEADER ----------
+
 export const getOnePageHeader = id =>
-  axios.get(`http://fest-view.com/api/pages/${id}/headers`);
+  axios.get(`${uri}/api/pages/${id}/headers`);
+
+// ------ GET ONE PAGES ----------
+
+export const getOnePage = id => axios.get(`${uri}/api/pages/${id}`);
+
+// ------ GET COMP INFOS ----------
+
+export const getOnePageComp = (id, title) =>
+  axios.get(`${uri}/api/pages/${id}/${title}`);

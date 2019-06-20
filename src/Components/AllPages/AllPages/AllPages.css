@@ -1,7 +1,8 @@
-.mainDiv {
-  height: calc(100vh - 140px);
-}
-
 ul {
   list-style: none;
+}
+
+.mainDiv {
+  min-height: 100vh;
+  height: min-content;
 }
