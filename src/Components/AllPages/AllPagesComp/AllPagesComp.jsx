@@ -11,7 +11,7 @@ const OnePageComp = props => {
       <Link to={getPageAdress(props.pseudo, props.id)}>
         <div>
           <img
-            alt={props.name}
+            alt={props.imageAlt}
             src={`https://s3.eu-west-3.amazonaws.com/festview/${props.image}`}
           />
           <h4>{props.name}</h4>

@@ -5,9 +5,9 @@ const OnePageHeader = props => {
   return (
     <div className={classes.onePageHeader}>
       <img
-        alt={props.pageInfos.name}
+        alt={props.pageInfos.profile_picture_alt}
         src={`https://s3.eu-west-3.amazonaws.com/festview/${
-          props.pageImage.file
+          props.pageInfos.profile_picture_file
         }`}
       />
       <h1>{props.pageInfos.name}</h1>

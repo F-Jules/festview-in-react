@@ -1,47 +1,43 @@
 import React, { Component } from "react";
-import { getOnePage } from "../../../Api/apiHandler";
+import { getOnePageHeader } from "../../../Api/apiHandler";
 import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComp/ContributorComp";
 import OnePageHeader from "../PageHeaderComp/OnePageHeader";
 import PageNavBar from "../PageNavBar/PageNavBar";
+import ProgComp from "../PageComp/ProgComp/ProgComp";
+import MusicComp from "../PageComp/MusicComp/MusicComp";
 
 class OnePage extends Component {
   state = {};
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const { params } = this.props.match;
-    getOnePage(params.id)
-      .then(dbRes => {
-        const datas = dbRes.data;
-        console.log(datas);
-        this.setState({
-          pageInfos: datas.basicData,
-          pageImage: datas.image,
-          creatorInfos: datas.creator,
-          editorsInfos: datas.editors,
-          festivalDate: datas.event
-        });
-      })
-      .catch(dbErr => {
-        console.log(dbErr);
-      });
+    const dBres = await getOnePageHeader(params.id);
+    let dataEditors = [];
+    if (dBres.data.contributors) dataEditors = dBres.data.contributors;
+    this.setState({
+      pageInfos: dBres.data,
+      creatorInfos: dBres.data.creator,
+      editorsInfos: dataEditors
+    });
   };
 
   render() {
-    const { pageInfos, pageImage, creatorInfos, editorsInfos } = this.state;
-    if (!pageInfos || !pageImage || !creatorInfos || !editorsInfos) {
-      return <div className={classes.mainDiv} />;
-    }
+    const { pageInfos, creatorInfos, editorsInfos } = this.state;
+    if (!pageInfos || !creatorInfos) return <div className={classes.mainDiv} />;
+    console.log(pageInfos);
     return (
       <div>
         <div className={classes.header}>
-          <OnePageHeader pageImage={pageImage} pageInfos={pageInfos} />
+          <OnePageHeader pageInfos={pageInfos} />
           <Contributor
             creatorInfos={creatorInfos}
             editorsInfos={editorsInfos}
           />
         </div>
         <PageNavBar pageType={pageInfos.title} />
+        <ProgComp />
+        <MusicComp />
       </div>
     );
   }

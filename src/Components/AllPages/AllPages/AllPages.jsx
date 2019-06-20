@@ -17,6 +17,7 @@ const AllPages = props => {
     );
     customTitle = "Here is our Festivals list:";
   }
+  console.log(dataArray);
   return (
     <div className={classes.mainDiv}>
       <h3>{customTitle}</h3>
@@ -28,7 +29,8 @@ const AllPages = props => {
               name={oneData.name}
               pseudo={oneData.pseudo}
               id={oneData.id}
-              image={oneData.profile_picture}
+              image={oneData.profile_picture_file}
+              imageAlt={oneData.profile_picture_alt}
             />
           );
         })}

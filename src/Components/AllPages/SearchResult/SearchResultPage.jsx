@@ -20,7 +20,8 @@ const SearchResult = props => {
               key={oneArray.slug}
               name={oneArray.name}
               pseudo={oneArray.pseudo}
-              image={oneArray.profile_picture}
+              image={oneArray.profile_picture_file}
+              imageAlt={oneArray.profile_picture_alt}
               id={oneArray.id}
             />
           );

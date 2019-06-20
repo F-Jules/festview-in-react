@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { getAllPages } from "./Api/apiHandler";
+import { getAllPagesHeader } from "./Api/apiHandler";
 import classes from "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
@@ -13,8 +13,8 @@ class App extends Component {
   state = {};
 
   componentDidMount = async () => {
-    const res = await getAllPages();
-    this.setState({ dataList: res.data });
+    const dBres = await getAllPagesHeader();
+    this.setState({ dataList: dBres.data });
   };
 
   render() {

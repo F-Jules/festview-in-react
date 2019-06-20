@@ -7,24 +7,24 @@ const Contributor = props => {
       <h3>Createur:</h3>
       <div className={classes.creatorInfos}>
         <img
-          alt={props.creatorInfos.slug}
+          alt={props.creatorInfos.profile_picture_alt}
           src={`https://s3.eu-west-3.amazonaws.com/festview/${
-            props.creatorInfos.image.file
+            props.creatorInfos.profile_picture_file
           }`}
         />
         <h5>{props.creatorInfos.slug}</h5>
         <p>{props.creatorInfos.point}</p>
       </div>
-      {props.editorsInfos.length !== 0 ? (
+      {props.editorsInfos.length > 0 ? (
         <div>
           <h3>Designers:</h3>
           {props.editorsInfos.map(oneEditor => {
             return (
               <div key={oneEditor.slug} className={classes.creatorInfos}>
                 <img
-                  alt={oneEditor.slug}
+                  alt={oneEditor.profile_picture_alt}
                   src={`https://s3.eu-west-3.amazonaws.com/festview/${
-                    oneEditor.image.file
+                    oneEditor.profile_picture_file
                   }`}
                 />
                 <h5>{oneEditor.slug}</h5>
