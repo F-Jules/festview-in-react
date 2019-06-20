@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { getOnePageComp } from "../../../../Api/apiHandler";
-import classes from "../PageComp.css";
+import { getOnePageComp } from "../../../Api/apiHandler";
+import classes from "./PageComp.css";
 
 class NetworkComp extends Component {
   state = {};
@@ -19,7 +19,6 @@ class NetworkComp extends Component {
         </div>
       );
     }
-    console.log(snList);
     return (
       <div className={classes.pageComp}>
         <h2>Réseaux sociaux</h2>
@@ -28,7 +27,9 @@ class NetworkComp extends Component {
             return (
               <div key={oneSN.id}>
                 <li>
-                  <p>{oneSN.category}</p>
+                  <a href={oneSN.url}>
+                    <p>{oneSN.category}</p>
+                  </a>
                 </li>
               </div>
             );

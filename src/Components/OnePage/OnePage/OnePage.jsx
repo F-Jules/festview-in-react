@@ -4,10 +4,11 @@ import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComp/ContributorComp";
 import OnePageHeader from "../PageHeaderComp/OnePageHeader";
 import PageNavBar from "../PageNavBar/PageNavBar";
-import ProgComp from "../PageComp/ProgComp/ProgComp";
-import MusicComp from "../PageComp/MusicComp/MusicComp";
-import VideoComp from "../PageComp/VideoComp/VideoComp";
-import NetworkComp from "../PageComp/NetworkComp/NetworkComp";
+import ProgComp from "../PageComp/ProgComp";
+import MusicComp from "../PageComp/MusicComp";
+import BarComp from "../PageComp/BarComp";
+import VideoComp from "../PageComp/VideoComp";
+import NetworkComp from "../PageComp/NetworkComp";
 
 class OnePage extends Component {
   state = {};
@@ -38,6 +39,11 @@ class OnePage extends Component {
         </div>
         <PageNavBar pageType={pageInfos.title} />
         <ProgComp pageId={pageInfos.id} />
+        {pageInfos.title === "artists" ? (
+          <MusicComp pageId={pageInfos.id} />
+        ) : (
+          <BarComp pageId={pageInfos.id} />
+        )}
         <MusicComp pageId={pageInfos.id} />
         <VideoComp pageId={pageInfos.id} />
         <NetworkComp pageId={pageInfos.id} />

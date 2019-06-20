@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { getOnePageComp } from "../../../../Api/apiHandler";
-import classes from "../PageComp.css";
+import { getOnePageComp } from "../../../Api/apiHandler";
+import classes from "./PageComp.css";
 
 class MusicComp extends Component {
   state = {};
