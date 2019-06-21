@@ -5,7 +5,7 @@ const OneIcon = props => {
   return (
     <div>
       <div className={classes.bgc} style={{ backgroundColor: props.bgc }}>
-        <a href="/">
+        <a href="/" onClick={props.enableModify}>
           <img className={classes.custIcon} src={props.custIcon} alt="icon" />
         </a>
       </div>

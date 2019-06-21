@@ -11,7 +11,7 @@ import VideoComp from "../PageComp/VideoComp";
 import NetworkComp from "../PageComp/NetworkComp";
 
 class OnePage extends Component {
-  state = {};
+  state = { modify: false };
 
   componentDidMount = async () => {
     const { params } = this.props.match;
@@ -25,28 +25,37 @@ class OnePage extends Component {
     });
   };
 
+  enableModify = evt => {
+    evt.preventDefault();
+    this.setState({ modify: !this.state.modify });
+  };
+
   render() {
-    const { pageInfos, creatorInfos, editorsInfos } = this.state;
+    const { pageInfos, creatorInfos, editorsInfos, modify } = this.state;
     if (!pageInfos || !creatorInfos) return <div className={classes.mainDiv} />;
     return (
       <div className={classes.mainDiv}>
         <div className={classes.header}>
-          <OnePageHeader pageInfos={pageInfos} />
+          <OnePageHeader pageInfos={pageInfos} modifyState={modify} />
           <Contributor
             creatorInfos={creatorInfos}
             editorsInfos={editorsInfos}
           />
         </div>
-        <PageNavBar pageType={pageInfos.title} />
-        <ProgComp pageId={pageInfos.id} />
+        <PageNavBar
+          pageType={pageInfos.title}
+          enableModify={this.enableModify}
+          modifyState={modify}
+        />
+        <ProgComp pageId={pageInfos.id} modifyState={modify} />
         {pageInfos.title === "artists" ? (
-          <MusicComp pageId={pageInfos.id} />
+          <MusicComp pageId={pageInfos.id} modifyState={modify} />
         ) : (
-          <BarComp pageId={pageInfos.id} />
+          <BarComp pageId={pageInfos.id} modifyState={modify} />
         )}
-        <MusicComp pageId={pageInfos.id} />
-        <VideoComp pageId={pageInfos.id} />
-        <NetworkComp pageId={pageInfos.id} />
+        <MusicComp pageId={pageInfos.id} modifyState={modify} />
+        <VideoComp pageId={pageInfos.id} modifyState={modify} />
+        <NetworkComp pageId={pageInfos.id} modifyState={modify} />
       </div>
     );
   }

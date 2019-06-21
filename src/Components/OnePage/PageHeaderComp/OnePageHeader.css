@@ -1,3 +1,17 @@
+.bgc {
+  border-radius: 50%;
+  border: 5px solid #b177ff;
+  margin: auto;
+  width: 75px;
+  height: 75px;
+  background-color: #5466b8;
+}
+
+.custIcon {
+  width: 37.5px !important;
+  margin-top: 19px;
+}
+
 .onePageHeader img {
   width: 150px;
 }

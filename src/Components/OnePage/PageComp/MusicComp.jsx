@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { getOnePageComp } from "../../../Api/apiHandler";
 import classes from "./PageComp.css";
+import plusIcon from "../../../Assets/images/icon-plus.png";
+import moreIcon from "../../../Assets/images/icon-more.png";
 
 class MusicComp extends Component {
   state = {};
@@ -19,9 +21,16 @@ class MusicComp extends Component {
         </div>
       );
     }
+    let noShow;
+    if (!this.props.modifyState) noShow = { display: "none" };
     return (
       <div className={classes.pageComp}>
         <h2>Musique</h2>
+        <div className={classes.bgc} style={noShow}>
+          {/* <a> */}
+          <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
+          {/* </a> */}
+        </div>
         <ul>
           {musicList.map(oneProgram => {
             return (
@@ -35,6 +44,15 @@ class MusicComp extends Component {
                   />
                 </li>
                 <li>{oneProgram.name}</li>
+                <li style={noShow}>
+                  {/* <a> */}
+                  <img
+                    className={classes.custIcon}
+                    src={moreIcon}
+                    alt="modify icon"
+                  />
+                  {/* </a> */}
+                </li>
               </div>
             );
           })}
