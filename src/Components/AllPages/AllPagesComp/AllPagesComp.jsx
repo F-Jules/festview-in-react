@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function getPageAdress(page, id) {
-  return `/${page}/${id}`;
+  return `/details/${page}/${id}`;
 }
 
 const OnePageComp = props => {

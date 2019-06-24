@@ -1,0 +1,18 @@
+.form {
+  width: 480px;
+  margin: auto;
+  min-height: 100vh;
+  height: min-content;
+}
+
+.title {
+  border-bottom: 1px solid rgba(250, 250, 250, 0.5);
+  height: 100px;
+  font-weight: 400;
+}
+
+.editButton {
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: rgba(153, 113, 240, 0.8);
+}

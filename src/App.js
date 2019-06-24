@@ -8,6 +8,7 @@ import Footer from "./Components/Footer/Footer";
 import AllPages from "./Components/AllPages/AllPages/AllPages";
 import OnePage from "./Components/OnePage/OnePage/OnePage";
 import SearchResultPage from "./Components/AllPages/SearchResult/SearchResultPage";
+import PageHeaderForm from "./Components/Forms/PageFrom/PageHeaderForm";
 
 class App extends Component {
   state = {};
@@ -38,7 +39,8 @@ class App extends Component {
               <SearchResultPage {...props} dataList={dataList} />
             )}
           />
-          <Route path="/:page/:id" component={OnePage} />
+          <Route path="/details/:page/:id" component={OnePage} />
+          <Route path="/edit/:type/:page/:id" component={PageHeaderForm} />
         </Switch>
         <Footer />
       </div>

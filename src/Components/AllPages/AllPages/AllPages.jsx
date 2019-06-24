@@ -17,7 +17,6 @@ const AllPages = props => {
     );
     customTitle = "Here is our Festivals list:";
   }
-  console.log(dataArray);
   return (
     <div className={classes.mainDiv}>
       <h3>{customTitle}</h3>
