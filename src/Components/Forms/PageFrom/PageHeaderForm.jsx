@@ -68,6 +68,7 @@ class PageHeaderForm extends Component {
             placeholder={pic}
             handleInput={this.handleInput}
           />
+          <EditButton text="Valider les modifications" />
         </form>
       </div>
     ) : (
@@ -102,7 +103,7 @@ class PageHeaderForm extends Component {
             placeholder={pic}
             handleInput={this.handleInput}
           />
-          <EditButton />
+          <EditButton text="Valider les modifications" />
         </form>
       </div>
     );

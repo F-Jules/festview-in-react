@@ -29,7 +29,9 @@ const SearchResult = props => {
       </ul>
     </div>
   ) : (
-    <p>Oups, rien ne correspond a ta recherche...</p>
+    <p className={classes.mainDiv}>
+      Oups, rien ne correspond a ta recherche...
+    </p>
   );
 };
 

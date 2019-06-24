@@ -16,3 +16,8 @@ li img {
   width: 150px;
   border-radius: 50%;
 }
+
+.mainDiv {
+  min-height: 100vh;
+  height: min-content;
+}
