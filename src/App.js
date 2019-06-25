@@ -10,6 +10,7 @@ import OnePage from "./Components/OnePage/OnePage/OnePage";
 import SearchResultPage from "./Components/AllPages/SearchResult/SearchResultPage";
 import PageHeaderForm from "./Components/Forms/PageFrom/PageHeaderForm";
 import Login from "./Components/Forms/ConnecForm/Login";
+import Signup from "./Components/Forms/ConnecForm/Signup";
 
 class App extends Component {
   state = {};
@@ -27,6 +28,7 @@ class App extends Component {
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
           <Route
             path="/AllArtists"
             render={props => <AllPages {...props} dataList={dataList} />}

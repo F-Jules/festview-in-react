@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import classes from "../form.css";
 import InputFrom from "../Composants/Input/InputForm";
 import Button from "../Composants/Buttons/Button";
-import classes from "../form.css";
+import TitleFormCo from "../Composants/TitleForm/TitleFormCo";
+import CreateButton from "../Composants/Buttons/CreateAccBut";
 
 class Login extends Component {
   state = {};
@@ -12,11 +15,15 @@ class Login extends Component {
   render() {
     return (
       <div className={classes.form}>
+        <TitleFormCo text="Connexion" />
         <form action="post">
-          <InputFrom text="Email" type="text" name="email" />
+          <InputFrom text="Email" type="email" name="email" />
           <InputFrom text="Mot de passe" type="password" name="password" />
           <Button text="Me Connecter" />
         </form>
+        <Link to="/signup">
+          <CreateButton />
+        </Link>
       </div>
     );
   }

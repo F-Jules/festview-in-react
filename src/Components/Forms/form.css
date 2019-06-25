@@ -19,3 +19,14 @@
   padding: 5px;
   border: 5px solid rgba(250, 250, 250, 0.5);
 }
+
+.createButton {
+  border: 2px solid #fff;
+  color: rgb(153, 113, 240);
+  border-radius: 15px;
+  font-size: 1.2em;
+  transition: 0.2s ease-out;
+  margin: 40px 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
