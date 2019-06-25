@@ -36,7 +36,7 @@ class NavBar extends Component {
             </p>
             <p onClick={this.getSearchBar}>RECHERCHER</p>
             <p>
-              <a href="/">SE CONNECTER</a>
+              <Link to="/login">SE CONNECTER</Link>
             </p>
           </div>
         </nav>

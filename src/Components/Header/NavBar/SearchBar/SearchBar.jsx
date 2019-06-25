@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classes from "../../../Forms/Composants/Input/input.css";
-import EditButton from "../../../Forms/Composants/Buttons/EditButton";
+import Button from "../../../Forms/Composants/Buttons/Button";
 
 class SearchBar extends Component {
   state = {
@@ -44,7 +44,7 @@ class SearchBar extends Component {
           />
           <div onClick={this.props.closeModal}>
             <Link to={this.getSearchResult(inputField)}>
-              <EditButton text="Search" />
+              <Button text="Search" />
             </Link>
           </div>
         </form>

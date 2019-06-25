@@ -1,7 +1,12 @@
 import React from "react";
 import classes from "./ContributorComp.css";
 
+function uniqueArray(a) {
+  return [...new Set(a.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
+}
+
 const Contributor = props => {
+  const uniqueEditors = uniqueArray(props.editorsInfos);
   return (
     <div className={classes.creatorHeader}>
       <h3>Createur:</h3>
@@ -15,10 +20,10 @@ const Contributor = props => {
         <h5>{props.creatorInfos.slug}</h5>
         <p>{props.creatorInfos.points}</p>
       </div>
-      {props.editorsInfos.length > 0 ? (
+      {uniqueEditors.length > 0 ? (
         <div>
           <h3>Designers:</h3>
-          {props.editorsInfos.map(oneEditor => {
+          {uniqueEditors.map(oneEditor => {
             return (
               <div key={oneEditor.slug} className={classes.creatorInfos}>
                 <img

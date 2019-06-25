@@ -4,7 +4,7 @@ import InputForm from "../Composants/Input/InputForm";
 import SelectForm from "../Composants/Input/SelectForm";
 import classes from "../form.css";
 import TitleForm from "../Composants/TitleForm/TitleForm";
-import EditButton from "../Composants/Buttons/EditButton";
+import Button from "../Composants/Buttons/Button";
 
 class PageHeaderForm extends Component {
   state = { name: "", category: "", pic: "", startingDate: "", endingDate: "" };
@@ -68,7 +68,7 @@ class PageHeaderForm extends Component {
             placeholder={pic}
             handleInput={this.handleInput}
           />
-          <EditButton text="Valider les modifications" />
+          <Button text="Valider les modifications" />
         </form>
       </div>
     ) : (
@@ -103,7 +103,7 @@ class PageHeaderForm extends Component {
             placeholder={pic}
             handleInput={this.handleInput}
           />
-          <EditButton text="Valider les modifications" />
+          <Button text="Valider les modifications" />
         </form>
       </div>
     );
