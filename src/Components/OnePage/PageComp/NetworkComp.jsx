@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getOnePageComp } from "../../../Api/apiHandler";
+import { Link } from "react-router-dom";
 import classes from "./PageComp.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
@@ -10,6 +11,10 @@ class NetworkComp extends Component {
   componentDidMount = async () => {
     const dbRes = await getOnePageComp(this.props.pageId, "networks");
     this.setState({ snList: dbRes.data });
+  };
+
+  getAddAddress = (pageName, id) => {
+    return `/add/network/${pageName}/${id}`;
   };
 
   render() {
@@ -27,9 +32,13 @@ class NetworkComp extends Component {
       <div className={classes.pageComp}>
         <h2>Réseaux sociaux</h2>
         <div className={classes.bgc} style={noShow}>
-          {/* <a> */}
-          <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
-          {/* </a> */}
+          <Link to={this.getAddAddress(this.props.pageName, this.props.pageId)}>
+            <img
+              className={classes.custIcon}
+              src={plusIcon}
+              alt="modify icon"
+            />
+          </Link>
         </div>
         <ul>
           {snList.map(oneSN => {
@@ -41,13 +50,18 @@ class NetworkComp extends Component {
                   </a>
                 </li>
                 <li style={noShow}>
-                  {/* <a> */}
-                  <img
-                    className={classes.custIcon}
-                    src={moreIcon}
-                    alt="modify icon"
-                  />
-                  {/* </a> */}
+                  <Link
+                    to={this.getAddAddress(
+                      this.props.pageName,
+                      this.props.pageId
+                    )}
+                  >
+                    <img
+                      className={classes.custIcon}
+                      src={moreIcon}
+                      alt="modify icon"
+                    />
+                  </Link>
                 </li>
               </div>
             );

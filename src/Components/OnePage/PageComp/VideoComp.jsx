@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getOnePageComp } from "../../../Api/apiHandler";
+import { Link } from "react-router-dom";
 import classes from "./PageComp.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
@@ -10,6 +11,10 @@ class VideoComp extends Component {
   componentDidMount = async () => {
     const dbRes = await getOnePageComp(this.props.pageId, "videos");
     this.setState({ videoList: dbRes.data });
+  };
+
+  getAddAddress = (pageName, id) => {
+    return `/add/video/${pageName}/${id}`;
   };
 
   render() {
@@ -27,9 +32,13 @@ class VideoComp extends Component {
       <div className={classes.pageComp}>
         <h2>Videos</h2>
         <div className={classes.bgc} style={noShow}>
-          {/* <a> */}
-          <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
-          {/* </a> */}
+          <Link to={this.getAddAddress(this.props.pageName, this.props.pageId)}>
+            <img
+              className={classes.custIcon}
+              src={plusIcon}
+              alt="modify icon"
+            />
+          </Link>
         </div>
         <ul>
           {videoList.map(oneVideo => {
@@ -41,13 +50,18 @@ class VideoComp extends Component {
                   title="video"
                 />
                 <li style={noShow}>
-                  {/* <a> */}
-                  <img
-                    className={classes.custIcon}
-                    src={moreIcon}
-                    alt="modify icon"
-                  />
-                  {/* </a> */}
+                  <Link
+                    to={this.getAddAddress(
+                      this.props.pageName,
+                      this.props.pageId
+                    )}
+                  >
+                    <img
+                      className={classes.custIcon}
+                      src={moreIcon}
+                      alt="modify icon"
+                    />
+                  </Link>
                 </li>
               </div>
             );

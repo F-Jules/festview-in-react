@@ -53,13 +53,33 @@ class OnePage extends Component {
           modifyState={modify}
         />
         {pageInfos.title === "artists" ? (
-          <MusicComp pageId={pageInfos.id} modifyState={modify} />
+          <MusicComp
+            pageId={pageInfos.id}
+            pageName={pageInfos.pseudo}
+            modifyState={modify}
+          />
         ) : (
-          <BarComp pageId={pageInfos.id} modifyState={modify} />
+          <BarComp
+            pageId={pageInfos.id}
+            pageName={pageInfos.pseudo}
+            modifyState={modify}
+          />
         )}
-        <MusicComp pageId={pageInfos.id} modifyState={modify} />
-        <VideoComp pageId={pageInfos.id} modifyState={modify} />
-        <NetworkComp pageId={pageInfos.id} modifyState={modify} />
+        <MusicComp
+          pageId={pageInfos.id}
+          pageName={pageInfos.pseudo}
+          modifyState={modify}
+        />
+        <VideoComp
+          pageId={pageInfos.id}
+          pageName={pageInfos.pseudo}
+          modifyState={modify}
+        />
+        <NetworkComp
+          pageId={pageInfos.id}
+          pageName={pageInfos.pseudo}
+          modifyState={modify}
+        />
       </div>
     );
   }

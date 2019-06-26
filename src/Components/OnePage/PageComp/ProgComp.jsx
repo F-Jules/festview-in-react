@@ -26,7 +26,6 @@ class ProgComp extends Component {
         </div>
       );
     }
-    console.log(this.props);
     let noShow;
     if (!this.props.modifyState) noShow = { display: "none" };
     return (

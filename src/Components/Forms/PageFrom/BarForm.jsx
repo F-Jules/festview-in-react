@@ -7,7 +7,7 @@ import AddCompButton from "../Composants/Buttons/AddContentButton";
 import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
 
-class ProgForm extends Component {
+class BarForm extends Component {
   state = { formArr: [] };
 
   handleInput = evt => {
@@ -31,29 +31,31 @@ class ProgForm extends Component {
       <div className={classes.formItselft}>
         <form action="post">
           <Input
-            text="Url* "
+            text="Nom de la boisson*"
             type="url"
-            name="videoUrl"
+            name="drinkName"
             handleInput={this.handleInput}
           />
           <Select
-            text="Type de vidéo"
+            text="
+            Type de boisson*"
             type="submit"
-            name="videoType"
+            name="drinkType"
             option={[
-              "Live",
-              "Live session",
-              "Freestyle",
-              "Clip",
-              "Documentaire",
-              "Interview"
+              "Bière (demi - 25 cl)",
+              "Bière (pinte - 50 cl)",
+              "Vin",
+              "Champagne",
+              "Cocktail",
+              "Shooter",
+              "Soft"
             ]}
             handleInput={this.handleInput}
           />
           <Input
-            text="Date*"
-            type="date"
-            name="videoDate"
+            text="Prix (€)*"
+            type="number"
+            name="drinkPrice"
             handleInput={this.handleInput}
           />
           <Button text="submit" />
@@ -62,14 +64,14 @@ class ProgForm extends Component {
     );
     return (
       <div className={classes.form}>
-        <CompTitle name={name} text="vidéos" />
+        <CompTitle name={name} text="boissons" />
         {newForm}
         {formArr.map(oneEl => {
           return oneEl;
         })}
         <CancelButton removeForm={this.removeForm} />
         <AddCompButton
-          text="autre vidéo"
+          text="autre boisson"
           addAForm={this.addForm}
           newForm={newForm}
         />
@@ -78,4 +80,4 @@ class ProgForm extends Component {
   }
 }
 
-export default ProgForm;
+export default BarForm;

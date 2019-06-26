@@ -7,7 +7,7 @@ import AddCompButton from "../Composants/Buttons/AddContentButton";
 import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
 
-class ProgForm extends Component {
+class SocialForm extends Component {
   state = { formArr: [] };
 
   handleInput = evt => {
@@ -30,30 +30,29 @@ class ProgForm extends Component {
     const newForm = (
       <div className={classes.formItselft}>
         <form action="post">
-          <Input
-            text="Url* "
-            type="url"
-            name="videoUrl"
-            handleInput={this.handleInput}
-          />
           <Select
-            text="Type de vidéo"
+            text="
+            Nom du site*"
             type="submit"
-            name="videoType"
+            name="socialType"
             option={[
-              "Live",
-              "Live session",
-              "Freestyle",
-              "Clip",
-              "Documentaire",
-              "Interview"
+              "Dailymotion",
+              "Deezer",
+              "Facebook",
+              "Instagram",
+              "Last.fm",
+              "Resident Advisor",
+              "SoundCloud",
+              "Spotify",
+              "Twitter",
+              "Youtube"
             ]}
             handleInput={this.handleInput}
           />
           <Input
-            text="Date*"
-            type="date"
-            name="videoDate"
+            text="Url*"
+            type="url"
+            name="socialUrl"
             handleInput={this.handleInput}
           />
           <Button text="submit" />
@@ -78,4 +77,4 @@ class ProgForm extends Component {
   }
 }
 
-export default ProgForm;
+export default SocialForm;

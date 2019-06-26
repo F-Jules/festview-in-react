@@ -11,8 +11,11 @@ const InputForm = props => {
         name={props.name}
         onChange={props.handleInput}
       >
-        <option value="dog">{props.option[0]}</option>
-        <option value="cat">{props.option[1]}</option>
+        {props.option.map((oneOption, index) => (
+          <option key={index} value={oneOption}>
+            {oneOption}
+          </option>
+        ))}
         />
       </select>
     </React.Fragment>

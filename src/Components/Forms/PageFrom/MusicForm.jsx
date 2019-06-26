@@ -7,7 +7,7 @@ import AddCompButton from "../Composants/Buttons/AddContentButton";
 import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
 
-class ProgForm extends Component {
+class MusicForm extends Component {
   state = { formArr: [] };
 
   handleInput = evt => {
@@ -31,29 +31,35 @@ class ProgForm extends Component {
       <div className={classes.formItselft}>
         <form action="post">
           <Input
-            text="Url* "
-            type="url"
-            name="videoUrl"
-            handleInput={this.handleInput}
-          />
-          <Select
-            text="Type de vidéo"
-            type="submit"
-            name="videoType"
-            option={[
-              "Live",
-              "Live session",
-              "Freestyle",
-              "Clip",
-              "Documentaire",
-              "Interview"
-            ]}
+            text="Nom de l'album*"
+            type="text"
+            name="albumName"
             handleInput={this.handleInput}
           />
           <Input
-            text="Date*"
+            text="Pochette de l'album*"
+            type="url"
+            name="albumPic"
+            handleInput={this.handleInput}
+          />
+          <Input
+            text="Date de sortie*"
             type="date"
-            name="videoDate"
+            name="realeaseDate"
+            handleInput={this.handleInput}
+          />
+          <Select
+            text="
+            Type d'album"
+            type="submit"
+            name="albumType"
+            option={["LP", "EP", "Live", "Compilation"]}
+            handleInput={this.handleInput}
+          />
+          <Input
+            text="Url Spotify"
+            type="url"
+            name="albumSpotify"
             handleInput={this.handleInput}
           />
           <Button text="submit" />
@@ -62,14 +68,14 @@ class ProgForm extends Component {
     );
     return (
       <div className={classes.form}>
-        <CompTitle name={name} text="vidéos" />
+        <CompTitle name={name} text="albums" />
         {newForm}
         {formArr.map(oneEl => {
           return oneEl;
         })}
         <CancelButton removeForm={this.removeForm} />
         <AddCompButton
-          text="autre vidéo"
+          text="autre album"
           addAForm={this.addForm}
           newForm={newForm}
         />
@@ -78,4 +84,4 @@ class ProgForm extends Component {
   }
 }
 
-export default ProgForm;
+export default MusicForm;

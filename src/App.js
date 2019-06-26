@@ -8,10 +8,14 @@ import Footer from "./Components/Footer/Footer";
 import AllPages from "./Components/AllPages/AllPages/AllPages";
 import OnePage from "./Components/OnePage/OnePage/OnePage";
 import SearchResultPage from "./Components/AllPages/SearchResult/SearchResultPage";
-import PageHeaderForm from "./Components/Forms/PageFrom/PageHeaderForm";
+import PageHeaderForm from "./Components/Forms/HeaderForm/PageHeaderForm";
 import Login from "./Components/Forms/ConnecForm/Login";
 import Signup from "./Components/Forms/ConnecForm/Signup";
 import ProgForm from "./Components/Forms/PageFrom/ProgForm";
+import MusicForm from "./Components/Forms/PageFrom/MusicForm";
+import VideoForm from "./Components/Forms/PageFrom/VideoForm";
+import SocialForm from "./Components/Forms/PageFrom/NetworkForm";
+import BarForm from "./Components/Forms/PageFrom/BarForm";
 
 class App extends Component {
   state = {};
@@ -64,6 +68,10 @@ class App extends Component {
 
           <Route path="/edit/:type/:page/:id" component={PageHeaderForm} />
           <Route path="/add/prog/:page/:id" component={ProgForm} />
+          <Route path="/add/album/:page/:id" component={MusicForm} />
+          <Route path="/add/barInfos/:page/:id" component={BarForm} />
+          <Route path="/add/video/:page/:id" component={VideoForm} />
+          <Route path="/add/network/:page/:id" component={SocialForm} />
         </Switch>
         <Footer />
       </div>

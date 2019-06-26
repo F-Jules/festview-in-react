@@ -7,7 +7,7 @@ import AddCompButton from "../Composants/Buttons/AddContentButton";
 import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
 
-class ProgForm extends Component {
+class VideoForm extends Component {
   state = { formArr: [] };
 
   handleInput = evt => {
@@ -31,13 +31,14 @@ class ProgForm extends Component {
       <div className={classes.formItselft}>
         <form action="post">
           <Input
-            text="Url* "
+            text="Url*"
             type="url"
             name="videoUrl"
             handleInput={this.handleInput}
           />
           <Select
-            text="Type de vidéo"
+            text="
+            Type de vidéo"
             type="submit"
             name="videoType"
             option={[
@@ -78,4 +79,4 @@ class ProgForm extends Component {
   }
 }
 
-export default ProgForm;
+export default VideoForm;
