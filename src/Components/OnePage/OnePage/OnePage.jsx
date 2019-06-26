@@ -47,7 +47,11 @@ class OnePage extends Component {
           enableModify={this.enableModify}
           modifyState={modify}
         />
-        <ProgComp pageId={pageInfos.id} modifyState={modify} />
+        <ProgComp
+          pageId={pageInfos.id}
+          pageName={pageInfos.pseudo}
+          modifyState={modify}
+        />
         {pageInfos.title === "artists" ? (
           <MusicComp pageId={pageInfos.id} modifyState={modify} />
         ) : (

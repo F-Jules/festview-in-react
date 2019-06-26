@@ -55,7 +55,7 @@ class PageHeaderForm extends Component {
             handleInput={this.handleInput}
           />
           <SelectForm
-            text={"Sélectionnez*"}
+            text="Sélectionnez*"
             type="submit"
             name={category}
             option={["Artist solo", "Groupe"]}

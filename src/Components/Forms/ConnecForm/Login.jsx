@@ -17,8 +17,18 @@ class Login extends Component {
       <div className={classes.form}>
         <TitleFormCo text="Connexion" />
         <form action="post">
-          <InputFrom text="Email" type="email" name="email" />
-          <InputFrom text="Mot de passe" type="password" name="password" />
+          <InputFrom
+            text="Email"
+            type="email"
+            name="email"
+            handleInput={this.handleInput}
+          />
+          <InputFrom
+            text="Mot de passe"
+            type="password"
+            name="password"
+            handleInput={this.handleInput}
+          />
           <Button text="Me Connecter" />
         </form>
         <Link to="/signup">

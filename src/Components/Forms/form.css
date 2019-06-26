@@ -5,6 +5,11 @@
   height: min-content;
 }
 
+.formItselft {
+  padding: 25px;
+  border-bottom: 2px solid rgba(250, 250, 250, 0.5);
+}
+
 .title {
   border-bottom: 1px solid rgba(250, 250, 250, 0.5);
   height: 100px;
@@ -28,5 +33,25 @@
   transition: 0.2s ease-out;
   margin: 40px 0;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.addButton {
+  border: 1px solid #fff;
+  color: rgb(153, 113, 240);
+  border-radius: 15px;
+  font-size: 1.2em;
+  transition: 0.2s ease-out;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.deleteButton {
+  border: 1px solid #fff;
+  color: rgb(153, 113, 240);
+  border-radius: 50%;
+  font-size: 1.2em;
+  transition: 0.2s ease-out;
+  margin: 10px 20px;
   cursor: pointer;
 }
