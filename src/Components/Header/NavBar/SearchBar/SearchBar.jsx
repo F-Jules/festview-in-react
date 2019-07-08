@@ -29,7 +29,21 @@ class SearchBar extends Component {
 
   render() {
     const { inputField, inputList } = this.state;
-    if (!this.props.dataList) return null;
+    if (!this.props.dataList) {
+      return (
+        <div>
+          <label className={classes.label}>RECHERCHER</label>
+          <input
+            className={classes.input}
+            size="60"
+            list={inputList}
+            value={inputField}
+            type="text"
+            onChange={this.checkInputLength}
+          />
+        </div>
+      );
+    }
     return (
       <div>
         <form>

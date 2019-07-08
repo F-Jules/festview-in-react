@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOnePageHeader } from "../../../Api/apiHandler";
+import { getOnePageHeader } from "../../../Api/apiHandlerGet";
 import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComp/ContributorComp";
 import OnePageHeader from "../PageHeaderComp/OnePageHeader";
@@ -31,54 +31,57 @@ class OnePage extends Component {
   };
 
   render() {
-    const { pageInfos, creatorInfos, editorsInfos, modify } = this.state;
-    if (!pageInfos || !creatorInfos) return <div className={classes.mainDiv} />;
+    if (!this.state.pageInfos || !this.state.creatorInfos)
+      return <div className={classes.mainDiv} />;
     return (
       <div className={classes.mainDiv}>
         <div className={classes.header}>
-          <OnePageHeader pageInfos={pageInfos} modifyState={modify} />
+          <OnePageHeader
+            pageInfos={this.state.pageInfos}
+            modifyState={this.state.modify}
+          />
           <Contributor
-            creatorInfos={creatorInfos}
-            editorsInfos={editorsInfos}
+            creatorInfos={this.state.creatorInfos}
+            editorsInfos={this.state.editorsInfos}
           />
         </div>
         <PageNavBar
-          pageType={pageInfos.title}
+          pageType={this.state.pageInfos.title}
           enableModify={this.enableModify}
-          modifyState={modify}
+          modifyState={this.state.modify}
         />
         <ProgComp
-          pageId={pageInfos.id}
-          pageName={pageInfos.pseudo}
-          modifyState={modify}
+          pageId={this.state.pageInfos.id}
+          pageName={this.state.pageInfos.pseudo}
+          modifyState={this.state.modify}
         />
-        {pageInfos.title === "artists" ? (
+        {this.state.pageInfos.title === "artists" ? (
           <MusicComp
-            pageId={pageInfos.id}
-            pageName={pageInfos.pseudo}
-            modifyState={modify}
+            pageId={this.state.pageInfos.id}
+            pageName={this.state.pageInfos.pseudo}
+            modifyState={this.state.modify}
           />
         ) : (
           <BarComp
-            pageId={pageInfos.id}
-            pageName={pageInfos.pseudo}
-            modifyState={modify}
+            pageId={this.state.pageInfos.id}
+            pageName={this.state.pageInfos.pseudo}
+            modifyState={this.state.modify}
           />
         )}
         <MusicComp
-          pageId={pageInfos.id}
-          pageName={pageInfos.pseudo}
-          modifyState={modify}
+          pageId={this.state.pageInfos.id}
+          pageName={this.state.pageInfos.pseudo}
+          modifyState={this.state.modify}
         />
         <VideoComp
-          pageId={pageInfos.id}
-          pageName={pageInfos.pseudo}
-          modifyState={modify}
+          pageId={this.state.pageInfos.id}
+          pageName={this.state.pageInfos.pseudo}
+          modifyState={this.state.modify}
         />
         <NetworkComp
-          pageId={pageInfos.id}
-          pageName={pageInfos.pseudo}
-          modifyState={modify}
+          pageId={this.state.pageInfos.id}
+          pageName={this.state.pageInfos.pseudo}
+          modifyState={this.state.modify}
         />
       </div>
     );

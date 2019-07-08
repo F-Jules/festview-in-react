@@ -6,9 +6,25 @@ import Select from "../Composants/Input/SelectForm";
 import AddCompButton from "../Composants/Buttons/AddContentButton";
 import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
+import { createModuleContent } from "../../../Api/apiHandlerPost";
 
 class SocialForm extends Component {
-  state = { formArr: [] };
+  state = {
+    formArr: [],
+    title: "networks",
+    category: "",
+    url: "",
+    user_id: "5cf6707352f1a800926e5442"
+  };
+
+  handleSubmit = async evt => {
+    evt.preventDefault();
+    const postModule = await createModuleContent(
+      this.props.match.params.id,
+      this.state
+    );
+    console.log(postModule);
+  };
 
   handleInput = evt => {
     this.setState({ [evt.target.name]: evt.target.value });
@@ -29,12 +45,12 @@ class SocialForm extends Component {
     const { formArr } = this.state;
     const newForm = (
       <div className={classes.formItselft}>
-        <form action="post">
+        <form action="post" onSubmit={this.handleSubmit}>
           <Select
             text="
             Nom du site*"
             type="submit"
-            name="socialType"
+            name="category"
             option={[
               "Dailymotion",
               "Deezer",
@@ -52,7 +68,7 @@ class SocialForm extends Component {
           <Input
             text="Url*"
             type="url"
-            name="socialUrl"
+            name="url"
             handleInput={this.handleInput}
           />
           <Button text="submit" />

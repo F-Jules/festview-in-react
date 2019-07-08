@@ -5,7 +5,9 @@ import AllPageComp from "../AllPagesComp/AllPagesComp";
 const AllPages = props => {
   let dataArray = [];
   let customTitle = "";
-  if (!props.dataList) return null;
+  if (!props.dataList) {
+    return <div className={classes.mainDiv} />;
+  }
   if (props.match.path === "/AllArtists") {
     dataArray = props.dataList.filter(
       oneArtist => oneArtist.title === "artist"

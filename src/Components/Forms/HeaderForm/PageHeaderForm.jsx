@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOnePageHeader } from "../../../Api/apiHandler";
+import { getOnePageHeader } from "../../../Api/apiHandlerGet";
 import InputForm from "../Composants/Input/InputForm";
 import SelectForm from "../Composants/Input/SelectForm";
 import classes from "../form.css";

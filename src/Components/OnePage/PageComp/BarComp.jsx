@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOnePageComp } from "../../../Api/apiHandler";
+import { getOnePageComp } from "../../../Api/apiHandlerGet";
 import classes from "./PageComp.css";
 import { Link } from "react-router-dom";
 import plusIcon from "../../../Assets/images/icon-plus.png";

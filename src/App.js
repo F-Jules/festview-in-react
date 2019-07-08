@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { getAllPagesHeader } from "./Api/apiHandler";
+import { getAllPagesHeader } from "./Api/apiHandlerGet";
 import classes from "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
@@ -26,10 +26,9 @@ class App extends Component {
   };
 
   render() {
-    const { dataList } = this.state;
     return (
       <div className={`${classes.App} ${classes.section}`}>
-        <Header dataList={dataList} />
+        <Header dataList={this.state.dataList} />
         <Switch>
           {/* ---------------get home page-----------------  */}
 
@@ -44,11 +43,15 @@ class App extends Component {
 
           <Route
             path="/AllArtists"
-            render={props => <AllPages {...props} dataList={dataList} />}
+            render={props => (
+              <AllPages {...props} dataList={this.state.dataList} />
+            )}
           />
           <Route
             path="/AllFestivals"
-            render={props => <AllPages {...props} dataList={dataList} />}
+            render={props => (
+              <AllPages {...props} dataList={this.state.dataList} />
+            )}
           />
 
           {/* -------------get the search result page---------------  */}
@@ -56,7 +59,7 @@ class App extends Component {
           <Route
             path="/SearchResult/:search"
             render={props => (
-              <SearchResultPage {...props} dataList={dataList} />
+              <SearchResultPage {...props} dataList={this.state.dataList} />
             )}
           />
 
