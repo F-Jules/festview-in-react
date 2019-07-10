@@ -16,6 +16,7 @@ class OnePage extends Component {
   componentDidMount = async () => {
     const { params } = this.props.match;
     const dBres = await getOnePageHeader(params.id);
+    console.log(dBres);
     let dataEditors = [];
     if (dBres.data.contributors) dataEditors = dBres.data.contributors;
     this.setState({
@@ -55,7 +56,7 @@ class OnePage extends Component {
           pageName={this.state.pageInfos.pseudo}
           modifyState={this.state.modify}
         />
-        {this.state.pageInfos.title === "artists" ? (
+        {this.state.pageInfos.title === "artist" ? (
           <MusicComp
             pageId={this.state.pageInfos.id}
             pageName={this.state.pageInfos.pseudo}
@@ -68,11 +69,6 @@ class OnePage extends Component {
             modifyState={this.state.modify}
           />
         )}
-        <MusicComp
-          pageId={this.state.pageInfos.id}
-          pageName={this.state.pageInfos.pseudo}
-          modifyState={this.state.modify}
-        />
         <VideoComp
           pageId={this.state.pageInfos.id}
           pageName={this.state.pageInfos.pseudo}

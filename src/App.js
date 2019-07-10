@@ -28,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <div className={`${classes.App} ${classes.section}`}>
-        <Header dataList={this.state.dataList} />
+        <Header />
         <Switch>
           {/* ---------------get home page-----------------  */}
 
@@ -57,7 +57,7 @@ class App extends Component {
           {/* -------------get the search result page---------------  */}
 
           <Route
-            path="/SearchResult/:search"
+            path="/search"
             render={props => (
               <SearchResultPage {...props} dataList={this.state.dataList} />
             )}

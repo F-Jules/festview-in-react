@@ -1,37 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import AllPageComp from "../AllPagesComp/AllPagesComp";
 import classes from "../AllPagesComp/AllPageComp.css";
+import inputStyle from "../../Forms/Composants/Input/input.css";
 
 const SearchResult = props => {
-  var resArray = [];
-  console.log(props);
+  const inputState = useState("");
+
+  const inputChangeHandler = evt => {
+    inputState[1](evt.target.value);
+  };
+
+  const filter = data => {
+    return data.name
+      .slice(0, inputState[0].length)
+      .toLowerCase()
+      .includes(inputState[0].toLowerCase());
+  };
+
   if (!props.dataList) return <div className={classes.mainDiv} />;
-  resArray = props.dataList.filter(oneElement => {
-    return oneElement.pseudo.includes(props.match.params.search);
-  });
-  console.log(resArray);
-  return resArray.length > 0 ? (
+  return (
     <div className={classes.mainDiv}>
-      <h2>Résultats:</h2>
+      <label htmlFor="">Rechercher:</label>
+      <input
+        className={inputStyle.input}
+        type="text"
+        name=""
+        id=""
+        value={inputState[0]}
+        onChange={inputChangeHandler}
+      />
       <ul>
-        {resArray.map(oneArray => {
-          return (
-            <AllPageComp
-              key={oneArray.slug}
-              name={oneArray.name}
-              pseudo={oneArray.pseudo}
-              image={oneArray.profile_picture_file}
-              imageAlt={oneArray.profile_picture_alt}
-              id={oneArray.id}
-            />
-          );
+        {props.dataList.map((oneArray, index) => {
+          if (filter(oneArray)) {
+            return (
+              <AllPageComp
+                key={index}
+                name={oneArray.name}
+                pseudo={oneArray.pseudo}
+                image={oneArray.profile_picture_file}
+                imageAlt={oneArray.profile_picture_alt}
+                id={oneArray.id}
+              />
+            );
+          }
         })}
       </ul>
     </div>
-  ) : (
-    <p className={classes.mainDiv}>
-      Oups, rien ne correspond a ta recherche...
-    </p>
   );
 };
 
