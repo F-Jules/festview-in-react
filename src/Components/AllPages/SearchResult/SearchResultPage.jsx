@@ -11,10 +11,7 @@ const SearchResult = props => {
   };
 
   const filter = data => {
-    return data.name
-      .slice(0, inputState[0].length)
-      .toLowerCase()
-      .includes(inputState[0].toLowerCase());
+    return data.name.toLowerCase().includes(inputState[0].toLowerCase());
   };
 
   if (!props.dataList) return <div className={classes.mainDiv} />;
