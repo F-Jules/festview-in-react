@@ -11,7 +11,9 @@ const SearchResult = props => {
   };
 
   const filter = data => {
-    return data.name.toLowerCase().includes(inputState[0].toLowerCase());
+    return data.filter(oneEl => {
+      return oneEl.name.toLowerCase().includes(inputState[0].toLowerCase());
+    });
   };
 
   if (!props.dataList) return <div className={classes.mainDiv} />;
@@ -27,19 +29,17 @@ const SearchResult = props => {
         onChange={inputChangeHandler}
       />
       <ul>
-        {props.dataList.map((oneArray, index) => {
-          if (filter(oneArray)) {
-            return (
-              <AllPageComp
-                key={index}
-                name={oneArray.name}
-                pseudo={oneArray.pseudo}
-                image={oneArray.profile_picture_file}
-                imageAlt={oneArray.profile_picture_alt}
-                id={oneArray.id}
-              />
-            );
-          }
+        {filter(props.dataList).map((oneArray, index) => {
+          return (
+            <AllPageComp
+              key={index}
+              name={oneArray.name}
+              pseudo={oneArray.pseudo}
+              image={oneArray.profile_picture_file}
+              imageAlt={oneArray.profile_picture_alt}
+              id={oneArray.id}
+            />
+          );
         })}
       </ul>
     </div>
