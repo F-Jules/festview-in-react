@@ -6,3 +6,9 @@ ul {
   min-height: 100vh;
   height: min-content;
 }
+
+.LoadingDiv {
+  min-height: 100vh;
+  height: min-content;
+  background-color: lightgray;
+}

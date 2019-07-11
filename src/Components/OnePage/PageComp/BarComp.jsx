@@ -21,7 +21,7 @@ class BarComp extends Component {
     const { barList } = this.state;
     if (!barList) {
       return (
-        <div className={classes.pageComp}>
+        <div className={classes.mainDiv}>
           <h2>Bars</h2>
         </div>
       );

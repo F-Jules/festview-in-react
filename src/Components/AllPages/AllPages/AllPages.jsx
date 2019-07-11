@@ -6,7 +6,11 @@ const AllPages = props => {
   let dataArray = [];
   let customTitle = "";
   if (!props.dataList) {
-    return <div className={classes.mainDiv} />;
+    return (
+      <div className={classes.mainDiv}>
+        <h1>Loading...</h1>
+      </div>
+    );
   }
   if (props.match.path === "/AllArtists") {
     dataArray = props.dataList.filter(

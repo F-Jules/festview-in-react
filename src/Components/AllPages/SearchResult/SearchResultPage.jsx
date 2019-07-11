@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AllPageComp from "../AllPagesComp/AllPagesComp";
 import classes from "../AllPagesComp/AllPageComp.css";
 import inputStyle from "../../Forms/Composants/Input/input.css";
 
 const SearchResult = props => {
-  const inputState = useState("");
-
+  const inputRef = useRef();
+  const [userInput, setUserInput] = useState("");
   const inputChangeHandler = evt => {
-    inputState[1](evt.target.value);
+    setUserInput(evt.target.value);
   };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  });
 
   const filter = data => {
     return data.filter(oneEl => {
-      return oneEl.name.toLowerCase().includes(inputState[0].toLowerCase());
+      return oneEl.name.toLowerCase().includes(userInput.toLowerCase());
     });
   };
 
-  if (!props.dataList) return <div className={classes.mainDiv} />;
+  if (!props.dataList)
+    return (
+      <div className={classes.mainDiv}>
+        <h1>Loading...</h1>
+      </div>
+    );
   return (
     <div className={classes.mainDiv}>
-      <label htmlFor="">Rechercher:</label>
+      <label htmlFor="">
+        <h2>Rechercher:</h2>
+      </label>
       <input
         className={inputStyle.input}
         type="text"
         name=""
         id=""
-        value={inputState[0]}
+        ref={inputRef}
+        value={userInput}
         onChange={inputChangeHandler}
       />
       <ul>

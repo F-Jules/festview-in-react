@@ -33,7 +33,11 @@ class OnePage extends Component {
 
   render() {
     if (!this.state.pageInfos || !this.state.creatorInfos)
-      return <div className={classes.mainDiv} />;
+      return (
+        <div className={classes.mainDiv}>
+          <h1>Loading...</h1>
+        </div>
+      );
     return (
       <div className={classes.mainDiv}>
         <div className={classes.header}>
