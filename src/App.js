@@ -46,11 +46,7 @@ const App = () => {
         {/* ------get all artist or festivals pages-----  */}
 
         <Route
-          path="/AllArtists"
-          render={props => <AllPages {...props} dataList={headerState} />}
-        />
-        <Route
-          path="/AllFestivals"
+          path={["/AllArtists", "/AllFestivals"]}
           render={props => <AllPages {...props} dataList={headerState} />}
         />
 
