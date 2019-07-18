@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import { getOnePageHeader } from "../../../Api/apiHandlerGet";
+import APIHandler from "../../../Api/ApiHandler";
 import InputForm from "../Composants/Input/InputForm";
 import SelectForm from "../Composants/Input/SelectForm";
 import classes from "../form.css";
 import TitleForm from "../Composants/TitleForm/TitleForm";
 import Button from "../Composants/Buttons/Button";
 
+const apiHandler = new APIHandler();
+
 class PageHeaderForm extends Component {
   state = { name: "", category: "", pic: "", startingDate: "", endingDate: "" };
 
   componentDidMount = async () => {
-    let dbRes = await getOnePageHeader(this.props.match.params.id);
+    let dbRes = await apiHandler.get(
+      `/api/pages/${this.props.match.params.id}/headers`
+    );
     const res = dbRes.data;
     if (res.title === "artist") {
       this.setState({

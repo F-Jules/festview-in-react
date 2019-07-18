@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import { getAllPagesHeader } from "./Api/apiHandlerGet";
+import APIHandler from "./Api/ApiHandler";
 import classes from "./App.css";
 import HomePage from "./Components/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
@@ -17,69 +17,68 @@ import VideoForm from "./Components/Forms/PageFrom/VideoForm";
 import SocialForm from "./Components/Forms/PageFrom/NetworkForm";
 import BarForm from "./Components/Forms/PageFrom/BarForm";
 
-class App extends Component {
-  state = {};
+const apiHandler = new APIHandler();
 
-  componentDidMount = async () => {
-    const dBres = await getAllPagesHeader();
-    this.setState({ dataList: dBres.data });
-  };
+const App = () => {
+  const [headerState, setHeaderState] = useState([]);
 
-  render() {
-    return (
-      <div className={`${classes.App} ${classes.section}`}>
-        <Header />
-        <Switch>
-          {/* ---------------get home page-----------------  */}
+  useEffect(() => {
+    const fetchHeaderInfos = async () => {
+      const dbRes = await apiHandler.get("/api/pages/headers");
+      setHeaderState(dbRes.data);
+    };
+    fetchHeaderInfos();
+  }, []);
 
-          <Route path="/" component={HomePage} exact />
+  return (
+    <div className={`${classes.App} ${classes.section}`}>
+      <Header />
+      <Switch>
+        {/* ---------------get home page-----------------  */}
 
-          {/* --------get signup / login forms------------- */}
+        <Route path="/" component={HomePage} exact />
 
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+        {/* --------get signup / login forms------------- */}
 
-          {/* ------get all artist or festivals pages-----  */}
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
 
-          <Route
-            path="/AllArtists"
-            render={props => (
-              <AllPages {...props} dataList={this.state.dataList} />
-            )}
-          />
-          <Route
-            path="/AllFestivals"
-            render={props => (
-              <AllPages {...props} dataList={this.state.dataList} />
-            )}
-          />
+        {/* ------get all artist or festivals pages-----  */}
 
-          {/* -------------get the search result page---------------  */}
+        <Route
+          path="/AllArtists"
+          render={props => <AllPages {...props} dataList={headerState} />}
+        />
+        <Route
+          path="/AllFestivals"
+          render={props => <AllPages {...props} dataList={headerState} />}
+        />
 
-          <Route
-            path="/search"
-            render={props => (
-              <SearchResultPage {...props} dataList={this.state.dataList} />
-            )}
-          />
+        {/* -------------get the search result page---------------  */}
 
-          {/* ----------------- get pages details ------------------  */}
+        <Route
+          path="/search"
+          render={props => (
+            <SearchResultPage {...props} dataList={headerState} />
+          )}
+        />
 
-          <Route path="/details/:page/:id" component={OnePage} />
+        {/* ----------------- get pages details ------------------  */}
 
-          {/* -------------get pages forms---------------  */}
+        <Route path="/details/:page/:id" component={OnePage} />
 
-          <Route path="/edit/:type/:page/:id" component={PageHeaderForm} />
-          <Route path="/add/prog/:page/:id" component={ProgForm} />
-          <Route path="/add/album/:page/:id" component={MusicForm} />
-          <Route path="/add/barInfos/:page/:id" component={BarForm} />
-          <Route path="/add/video/:page/:id" component={VideoForm} />
-          <Route path="/add/network/:page/:id" component={SocialForm} />
-        </Switch>
-        <Footer />
-      </div>
-    );
-  }
-}
+        {/* -------------get pages forms---------------  */}
+
+        <Route path="/edit/:type/:page/:id" component={PageHeaderForm} />
+        <Route path="/add/prog/:page/:id" component={ProgForm} />
+        <Route path="/add/album/:page/:id" component={MusicForm} />
+        <Route path="/add/barInfos/:page/:id" component={BarForm} />
+        <Route path="/add/video/:page/:id" component={VideoForm} />
+        <Route path="/add/network/:page/:id" component={SocialForm} />
+      </Switch>
+      <Footer />
+    </div>
+  );
+};
 
 export default App;

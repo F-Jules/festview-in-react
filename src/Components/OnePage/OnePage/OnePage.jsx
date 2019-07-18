@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOnePageHeader } from "../../../Api/apiHandlerGet";
+import APIHandler from "../../../Api/ApiHandler";
 import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComp/ContributorComp";
 import OnePageHeader from "../PageHeaderComp/OnePageHeader";
@@ -10,13 +10,14 @@ import BarComp from "../PageComp/BarComp";
 import VideoComp from "../PageComp/VideoComp";
 import NetworkComp from "../PageComp/NetworkComp";
 
+const apiHandler = new APIHandler();
 class OnePage extends Component {
   state = { modify: false };
 
   componentDidMount = async () => {
-    const { params } = this.props.match;
-    const dBres = await getOnePageHeader(params.id);
-    console.log(dBres);
+    const dBres = await apiHandler.get(
+      `/api/pages/${this.props.match.params.id}/headers`
+    );
     let dataEditors = [];
     if (dBres.data.contributors) dataEditors = dBres.data.contributors;
     this.setState({

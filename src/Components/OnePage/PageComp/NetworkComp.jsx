@@ -1,15 +1,19 @@
 import React, { Component } from "react";
-import { getOnePageComp } from "../../../Api/apiHandlerGet";
+import APIHandler from "../../../Api/ApiHandler";
 import { Link } from "react-router-dom";
 import classes from "./PageComp.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
+const apiHandler = new APIHandler();
+
 class NetworkComp extends Component {
   state = {};
 
   componentDidMount = async () => {
-    const dbRes = await getOnePageComp(this.props.pageId, "networks");
+    const dbRes = await apiHandler.get(
+      `/api/pages/${this.props.pageId}/networks`
+    );
     this.setState({ snList: dbRes.data });
   };
 

@@ -6,8 +6,9 @@ import Select from "../Composants/Input/SelectForm";
 import AddCompButton from "../Composants/Buttons/AddContentButton";
 import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
-import { createModuleContent } from "../../../Api/apiHandlerPost";
+import APIHandler from "../../../Api/ApiHandler";
 
+const apiHandler = new APIHandler();
 class SocialForm extends Component {
   state = {
     formArr: [],
@@ -19,8 +20,8 @@ class SocialForm extends Component {
 
   handleSubmit = async evt => {
     evt.preventDefault();
-    const postModule = await createModuleContent(
-      this.props.match.params.id,
+    const postModule = await apiHandler.post(
+      `/api/pages/${this.props.match.params.id}/modules`,
       this.state
     );
     console.log(postModule);
