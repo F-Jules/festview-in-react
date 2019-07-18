@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import APIHandler from "../../../Api/ApiHandler";
 import { Link } from "react-router-dom";
 import classes from "./PageComp.css";
@@ -7,69 +7,59 @@ import moreIcon from "../../../Assets/images/icon-more.png";
 
 const apiHandler = new APIHandler();
 
-class ProgComp extends Component {
-  state = {};
+const ProgComp = props => {
+  const [progState, setProgState] = useState([]);
 
-  componentDidMount = async () => {
-    const dbRes = await apiHandler.get(
-      `/api/pages/${this.props.pageId}/programs`
-    );
-    this.setState({ programList: dbRes.data });
-  };
+  useEffect(() => {
+    const fetchProgInfos = async () => {
+      const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/programs`);
+      setProgState(dbRes.data);
+    };
+    fetchProgInfos();
+  }, [props.pageId]);
 
-  getAddAddress = (pageName, id) => {
+  const getAddAddress = (pageName, id) => {
     return `/add/prog/${pageName}/${id}`;
   };
 
-  render() {
-    const { programList } = this.state;
-    if (!programList) {
-      return (
-        <div className={classes.pageComp}>
-          <h2>Programmation</h2>
-        </div>
-      );
-    }
-    let noShow;
-    if (!this.props.modifyState) noShow = { display: "none" };
+  if (!progState) {
     return (
       <div className={classes.pageComp}>
         <h2>Programmation</h2>
-        <div className={classes.bgc} style={noShow}>
-          <Link to={this.getAddAddress(this.props.pageName, this.props.pageId)}>
-            <img
-              className={classes.custIcon}
-              src={plusIcon}
-              alt="modify icon"
-            />
-          </Link>
-        </div>
-        <ul>
-          {programList.map(oneProgram => {
-            return (
-              <div key={oneProgram.id}>
-                <li>{oneProgram.featured_program_page_name}</li>
-                <li style={noShow}>
-                  <Link
-                    to={this.getAddAddress(
-                      this.props.pageName,
-                      this.props.pageId
-                    )}
-                  >
-                    <img
-                      className={classes.custIcon}
-                      src={moreIcon}
-                      alt="modify icon"
-                    />
-                  </Link>
-                </li>
-              </div>
-            );
-          })}
-        </ul>
       </div>
     );
   }
-}
+
+  let noShow;
+  if (!props.modifyState) noShow = { display: "none" };
+  return (
+    <div className={classes.pageComp}>
+      <h2>Programmation</h2>
+      <div className={classes.bgc} style={noShow}>
+        <Link to={getAddAddress(props.pageName, props.pageId)}>
+          <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
+        </Link>
+      </div>
+      <ul>
+        {progState.map(oneProgram => {
+          return (
+            <div key={oneProgram.id}>
+              <li>{oneProgram.featured_program_page_name}</li>
+              <li style={noShow}>
+                <Link to={getAddAddress(props.pageName, props.pageId)}>
+                  <img
+                    className={classes.custIcon}
+                    src={moreIcon}
+                    alt="modify icon"
+                  />
+                </Link>
+              </li>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 export default ProgComp;
