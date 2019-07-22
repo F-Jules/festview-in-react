@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./AllPages.css";
 import AllPageComp from "../AllPagesComp/AllPagesComp";
-import LoadingComp from "../../Extras/LoadingComp";
+import LoadingComp from "../../../Components/Extras/LoadingComp";
 
 const getTitle = props => {
   const dataArray = props.dataList.filter(
@@ -14,7 +14,7 @@ const getTitle = props => {
 };
 
 const AllPages = props => {
-  if (!props.dataList) {
+  if (props.dataList.length === 0 || !props.dataList) {
     return <LoadingComp />;
   }
   return (

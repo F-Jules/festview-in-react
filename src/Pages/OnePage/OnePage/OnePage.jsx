@@ -9,7 +9,7 @@ import MusicComp from "../PageComp/MusicComp";
 import BarComp from "../PageComp/BarComp";
 import VideoComp from "../PageComp/VideoComp";
 import NetworkComp from "../PageComp/NetworkComp";
-import LoadingComp from "../../Extras/LoadingComp";
+import LoadingComp from "../../../Components/Extras/LoadingComp";
 
 const apiHandler = new APIHandler();
 class OnePage extends Component {

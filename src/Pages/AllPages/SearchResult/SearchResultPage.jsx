@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import AllPageComp from "../AllPagesComp/AllPagesComp";
 import classes from "../AllPagesComp/AllPageComp.css";
-import inputStyle from "../../Forms/Composants/Input/input.css";
-import LoadingComp from "../../Extras/LoadingComp";
+import inputStyle from "../../../Components/Forms/Composants/Input/input.css";
+import LoadingComp from "../../../Components/Extras/LoadingComp";
 
 const SearchResult = props => {
   const inputRef = useRef();
