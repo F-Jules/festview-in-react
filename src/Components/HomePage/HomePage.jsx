@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./HomePage.css";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -15,8 +16,12 @@ const HomePage = () => {
         <p>Dive into the fest</p>
       </div>
       <div className={classes.createButtonDiv}>
-        <a href="/">Créer une page artiste</a>
-        <a href="/">Créer une page festival</a>
+        <Link to={`/create/artist`}>
+          <h4 className="link-color-transform">Créer une page artiste</h4>
+        </Link>
+        <Link to={`/create/festival`}>
+          <h4 className="link-color-transform">Créer une page festival</h4>
+        </Link>
       </div>
     </div>
   );

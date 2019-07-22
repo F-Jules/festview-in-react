@@ -46,7 +46,12 @@ class PageHeaderForm extends Component {
 
   render() {
     const { name, category, pic, startingDate, endingDate } = this.state;
-    if (!name) return null;
+    if (!name)
+      return (
+        <div className={classes.mainDiv}>
+          <h1>Loading...</h1>
+        </div>
+      );
     return this.props.match.params.type === "artist" ? (
       <div>
         <TitleForm name={name} />
@@ -55,7 +60,7 @@ class PageHeaderForm extends Component {
             text={"Nom de l'Artiste*"}
             type="text"
             name={name}
-            placeholder={name}
+            value={name}
             handleInput={this.handleInput}
           />
           <SelectForm
@@ -69,7 +74,7 @@ class PageHeaderForm extends Component {
             text={"Url de la photo de profil"}
             type="url"
             name={pic}
-            placeholder={pic}
+            value={pic}
             handleInput={this.handleInput}
           />
           <Button text="Valider les modifications" />
@@ -83,28 +88,28 @@ class PageHeaderForm extends Component {
             text="Nom du festival*"
             type="text"
             name={name}
-            placeholder={name}
+            value={name}
             handleInput={this.handleInput}
           />
           <InputForm
             text="Date de début*"
             type="date"
             name={startingDate}
-            placeholder={this.splitDate(startingDate)}
+            value={this.splitDate(startingDate)}
             handleInput={this.handleInput}
           />
           <InputForm
             text="Date de fin*"
             type="date"
             name={endingDate}
-            placeholder={this.splitDate(endingDate)}
+            value={this.splitDate(endingDate)}
             handleInput={this.handleInput}
           />
           <InputForm
             text="Url de la photo de profil"
             type="url"
             name={pic}
-            placeholder={pic}
+            value={pic}
             handleInput={this.handleInput}
           />
           <Button text="Valider les modifications" />

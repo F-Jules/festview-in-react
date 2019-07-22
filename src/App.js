@@ -16,6 +16,7 @@ import MusicForm from "./Components/Forms/PageFrom/MusicForm";
 import VideoForm from "./Components/Forms/PageFrom/VideoForm";
 import SocialForm from "./Components/Forms/PageFrom/NetworkForm";
 import BarForm from "./Components/Forms/PageFrom/BarForm";
+import CreateForm from "./Components/Forms/CreateForm/CreateForm";
 
 const apiHandler = new APIHandler();
 
@@ -66,6 +67,10 @@ const App = () => {
         {/* -------------get pages forms---------------  */}
 
         <Route path="/edit/:type/:page/:id" component={PageHeaderForm} />
+        <Route
+          path={["/create/festival", "/create/artist"]}
+          component={CreateForm}
+        />
         <Route path="/add/prog/:page/:id" component={ProgForm} />
         <Route path="/add/album/:page/:id" component={MusicForm} />
         <Route path="/add/barInfos/:page/:id" component={BarForm} />
