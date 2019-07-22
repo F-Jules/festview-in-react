@@ -10,10 +10,11 @@ const InputForm = props => {
         type={props.type}
         name={props.name}
         onChange={props.handleInput}
+        value={props.value}
       >
         {props.option.map((oneOption, index) => (
           <option key={index} value={oneOption}>
-            {oneOption}
+            {props.display[index]}
           </option>
         ))}
         />

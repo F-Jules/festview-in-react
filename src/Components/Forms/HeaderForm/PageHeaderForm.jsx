@@ -34,6 +34,7 @@ class PageHeaderForm extends Component {
   };
 
   handleInput = evt => {
+    console.log(evt.target);
     this.setState({ [evt.target.name]: evt.target.value });
   };
 
@@ -55,21 +56,23 @@ class PageHeaderForm extends Component {
           <InputForm
             text={"Nom de l'Artiste*"}
             type="text"
-            name={name}
+            name="name"
             value={name}
             handleInput={this.handleInput}
           />
           <SelectForm
             text="Sélectionnez*"
             type="submit"
-            name={category}
-            option={["Artist solo", "Groupe"]}
+            name="category"
+            value={category}
+            option={["artist", "band"]}
+            display={["Artist solo", "Groupe"]}
             handleInput={this.handleInput}
           />
           <InputForm
             text={"Url de la photo de profil"}
             type="url"
-            name={pic}
+            name="pic"
             value={pic}
             handleInput={this.handleInput}
           />
@@ -83,7 +86,7 @@ class PageHeaderForm extends Component {
           <InputForm
             text="Nom du festival*"
             type="text"
-            name={name}
+            name="name"
             value={name}
             handleInput={this.handleInput}
           />
@@ -104,7 +107,7 @@ class PageHeaderForm extends Component {
           <InputForm
             text="Url de la photo de profil"
             type="url"
-            name={pic}
+            name="pic"
             value={pic}
             handleInput={this.handleInput}
           />

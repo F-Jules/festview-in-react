@@ -32,7 +32,8 @@ class CreateForm extends Component {
           <SelectForm
             text="Sélectionnez*"
             type="submit"
-            option={["Artist solo", "Groupe"]}
+            option={["artist", "band"]}
+            display={["Artist solo", "Groupe"]}
           />
           <InputForm text={"Url de la photo de profil"} type="url" name="pic" />
           <Button text="Créer" />

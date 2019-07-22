@@ -23,7 +23,7 @@ const SearchResult = props => {
     });
   };
 
-  if (!props.dataList) return <LoadingComp />;
+  if (props.dataList.length === 0 || !props.dataList) return <LoadingComp />;
   return (
     <div className={classes.mainDiv}>
       <label htmlFor="">

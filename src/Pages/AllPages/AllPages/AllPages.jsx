@@ -14,9 +14,7 @@ const getTitle = props => {
 };
 
 const AllPages = props => {
-  if (props.dataList.length === 0 || !props.dataList) {
-    return <LoadingComp />;
-  }
+  if (props.dataList.length === 0 || !props.dataList) return <LoadingComp />;
   return (
     <div className={classes.mainDiv}>
       <h3>{getTitle(props)[1]}</h3>

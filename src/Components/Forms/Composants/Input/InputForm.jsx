@@ -9,7 +9,7 @@ const InputForm = props => {
         className={classes.input}
         type={props.type}
         name={props.name}
-        defaultValue={props.value}
+        value={props.value}
         onChange={props.handleInput}
       />
     </React.Fragment>
