@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./AllPages.css";
 import AllPageComp from "../AllPagesComp/AllPagesComp";
+import LoadingComp from "../../Extras/LoadingComp";
 
 const getTitle = props => {
   const dataArray = props.dataList.filter(
@@ -14,11 +15,7 @@ const getTitle = props => {
 
 const AllPages = props => {
   if (!props.dataList) {
-    return (
-      <div className={classes.mainDiv}>
-        <h1>Loading...</h1>
-      </div>
-    );
+    return <LoadingComp />;
   }
   return (
     <div className={classes.mainDiv}>

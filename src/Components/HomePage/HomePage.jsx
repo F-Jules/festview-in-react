@@ -13,7 +13,9 @@ const HomePage = () => {
         </h1>
       </div>
       <div>
-        <p>Dive into the fest</p>
+        <Link to={`/loading`}>
+          <p>Dive into the fest</p>
+        </Link>
       </div>
       <div className={classes.createButtonDiv}>
         <Link to={`/create/artist`}>

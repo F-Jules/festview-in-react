@@ -17,6 +17,7 @@ import VideoForm from "./Components/Forms/PageFrom/VideoForm";
 import SocialForm from "./Components/Forms/PageFrom/NetworkForm";
 import BarForm from "./Components/Forms/PageFrom/BarForm";
 import CreateForm from "./Components/Forms/CreateForm/CreateForm";
+import LoadingComp from "./Components/Extras/LoadingComp";
 
 const apiHandler = new APIHandler();
 
@@ -76,6 +77,10 @@ const App = () => {
         <Route path="/add/barInfos/:page/:id" component={BarForm} />
         <Route path="/add/video/:page/:id" component={VideoForm} />
         <Route path="/add/network/:page/:id" component={SocialForm} />
+
+        {/* -------------Random and test---------------  */}
+
+        <Route path="/loading" component={LoadingComp} />
       </Switch>
       <Footer />
     </div>

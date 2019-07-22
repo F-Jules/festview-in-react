@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import AllPageComp from "../AllPagesComp/AllPagesComp";
 import classes from "../AllPagesComp/AllPageComp.css";
 import inputStyle from "../../Forms/Composants/Input/input.css";
+import LoadingComp from "../../Extras/LoadingComp";
 
 const SearchResult = props => {
   const inputRef = useRef();
@@ -22,12 +23,7 @@ const SearchResult = props => {
     });
   };
 
-  if (!props.dataList)
-    return (
-      <div className={classes.mainDiv}>
-        <h1>Loading...</h1>
-      </div>
-    );
+  if (!props.dataList) return <LoadingComp />;
   return (
     <div className={classes.mainDiv}>
       <label htmlFor="">

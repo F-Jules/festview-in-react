@@ -9,6 +9,7 @@ import MusicComp from "../PageComp/MusicComp";
 import BarComp from "../PageComp/BarComp";
 import VideoComp from "../PageComp/VideoComp";
 import NetworkComp from "../PageComp/NetworkComp";
+import LoadingComp from "../../Extras/LoadingComp";
 
 const apiHandler = new APIHandler();
 class OnePage extends Component {
@@ -34,11 +35,7 @@ class OnePage extends Component {
 
   render() {
     if (!this.state.pageInfos || !this.state.creatorInfos)
-      return (
-        <div className={classes.mainDiv}>
-          <h1>Loading...</h1>
-        </div>
-      );
+      return <LoadingComp />;
     return (
       <div className={classes.mainDiv}>
         <div className={classes.header}>
