@@ -1,12 +1,14 @@
 import React from "react";
-import LoadingImg from "../../Assets/Pictos/loading.svg";
 import classes from "../../App.css";
+import Loader from "react-loader-spinner";
 
 const LoadingComp = () => {
   return (
     <div className={classes.loadDiv}>
-      <h1>CHARGEMENT</h1>
-      <img className={classes.Loading} src={LoadingImg} alt="loading-img" />
+      <div className={classes.loadContent}>
+        <h1>CHARGEMENT</h1>
+        <Loader type="Oval" color="white" height="100" width="100" />
+      </div>
     </div>
   );
 };

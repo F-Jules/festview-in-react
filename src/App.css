@@ -21,8 +21,8 @@ a {
   justify-content: space-around;
 }
 
-.loadDiv h1 {
-  padding-top: 100px;
+.loadContent {
+  margin: auto;
 }
 
 .Loading {
