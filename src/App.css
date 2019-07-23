@@ -39,3 +39,21 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.loadContent h1 {
+  background: linear-gradient(90deg, #8937e5, #2eaed5);
+  background-size: 200% auto;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: -200% center;
+  }
+}
