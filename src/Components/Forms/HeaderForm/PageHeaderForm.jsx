@@ -48,7 +48,7 @@ class PageHeaderForm extends Component {
 
   render() {
     const { name, category, pic, startingDate, endingDate } = this.state;
-    if (!name) return <LoadingComp />;
+    //if (!name) return <LoadingComp />;
     return this.props.match.params.type === "artist" ? (
       <div>
         <TitleForm name={name} />

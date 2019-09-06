@@ -31,11 +31,7 @@
   transition: 0.2s ease-out;
 }
 
-.link-color-transform {
-  border: 2px solid #fff;
-  background-color: none;
-  color: #fff;
-  border-radius: 15px;
-  font-size: 1.2em;
-  transition: 0.2s ease-out;
+.createButtonDiv a:hover {
+  background-color: white;
+  color: #8937e5;
 }

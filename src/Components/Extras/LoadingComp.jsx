@@ -7,7 +7,7 @@ const LoadingComp = () => {
     <div className={classes.loadDiv}>
       <div className={classes.loadContent}>
         <h1>CHARGEMENT</h1>
-        <Loader type="Oval" color="white" height="100" width="100" />
+        <Loader type="Oval" color="#2eaed5" height="100" width="100" />
       </div>
     </div>
   );

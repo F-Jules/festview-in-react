@@ -31,6 +31,15 @@ a {
   animation: loading-spin infinite 5s linear;
 }
 
+.loadContent h1 {
+  background: linear-gradient(90deg, #8937e5, #2eaed5);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2s linear infinite;
+  text-shadow: 1px 1px 1px 1px white;
+}
+
 @keyframes loading-spin {
   from {
     transform: rotate(0deg);
@@ -38,18 +47,6 @@ a {
   to {
     transform: rotate(360deg);
   }
-}
-
-.loadContent h1 {
-  background: linear-gradient(90deg, #8937e5, #2eaed5);
-  background-size: 200% auto;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 5px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: shine 2s linear infinite;
 }
 
 @keyframes shine {
