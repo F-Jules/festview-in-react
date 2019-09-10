@@ -22,6 +22,8 @@
 
 ==> App.css contient les route et un premier call axios de type "header" (Nom, pseudo, type, photo) qui est passé en props a AllPages et SearchPage.
 
+==> PageHeaderComposant correspond au composant Header (Photo + Nom + Slug) et au composant Contributeur du haut de chaque OnePage (Artist ou Festival)
+
 // POUR LE MOMENT LE CSS... C'EST PAS OUF //
 
 // REGARDING CREARTE REACT APP //

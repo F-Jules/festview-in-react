@@ -62,7 +62,7 @@ const MusicComp = props => {
               </li>
               <li>{oneProgram.name}</li>
               <li style={noShow}>
-                <Link to={getAddAddress(props.pageName, props.pageId)}>
+                <Link to={addAlbum(props.pageName, props.pageId)}>
                   <img
                     className={classes.custIcon}
                     src={moreIcon}

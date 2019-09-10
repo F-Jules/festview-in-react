@@ -64,7 +64,7 @@ const NetworkCom = props => {
                 </a>
               </li>
               <li style={noShow}>
-                <Link to={getAddAddress(props.pageName, props.pageId)}>
+                <Link to={addSN(props.pageName, props.pageId)}>
                   <img
                     className={classes.custIcon}
                     src={moreIcon}

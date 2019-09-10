@@ -60,7 +60,7 @@ const VideoComp = props => {
                 title="video"
               />
               <li style={noShow}>
-                <Link to={getAddAddress(props.pageName, props.pageId)}>
+                <Link to={addVideo(props.pageName, props.pageId)}>
                   <img
                     className={classes.custIcon}
                     src={moreIcon}

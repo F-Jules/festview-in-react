@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import APIHandler from "../../../Api/ApiHandler";
 import classes from "./OnePage.css";
-import Contributor from "../PageHeaderComp/ContributorComp";
-import OnePageHeader from "../PageHeaderComp/OnePageHeader";
+import Contributor from "../PageHeaderComposant/ContributorComp";
+import OnePageHeader from "../PageHeaderComposant/OnePageHeader";
 import PageNavBar from "../PageNavBar/PageNavBar";
 import ProgComp from "../PageComposant/ProgComp";
 import MusicComp from "../PageComposant/MusicComp";

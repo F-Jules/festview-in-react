@@ -58,7 +58,7 @@ const ProgComp = props => {
             <div key={oneProgram.id}>
               <li>{oneProgram.featured_program_page_name}</li>
               <li style={noShow}>
-                <Link to={getAddAddress(props.pageName, props.pageId)}>
+                <Link to={addProgr(props.pageName, props.pageId)}>
                   <img
                     className={classes.custIcon}
                     src={moreIcon}
