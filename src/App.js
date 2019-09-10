@@ -19,17 +19,25 @@ import BarForm from "./Components/Forms/PageFrom/BarForm";
 import CreateForm from "./Components/Forms/CreateForm/CreateForm";
 import LoadingComp from "./Components/Extras/LoadingComp";
 
+// Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
 const App = () => {
   const [headerState, setHeaderState] = useState([]);
 
+  // On récupere les infos générales de tous les artistes et de tous les festivales.
+  const fetchHeaderInfos = async () => {
+    const dbRes = await apiHandler.get("/api/pages/headers");
+    setHeaderState(dbRes.data);
+  };
+
+  // On appelle la fonction dans un lyfecycle useEffect.
   useEffect(() => {
-    const fetchHeaderInfos = async () => {
-      const dbRes = await apiHandler.get("/api/pages/headers");
-      setHeaderState(dbRes.data);
-    };
-    fetchHeaderInfos();
+    try {
+      fetchHeaderInfos();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
@@ -45,14 +53,14 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
 
-        {/* ------get all artist or festivals pages-----  */}
+        {/* ------get all artist or festivals pages and passing informations has props-----  */}
 
         <Route
           path={["/AllArtists", "/AllFestivals"]}
           render={props => <AllPages {...props} dataList={headerState} />}
         />
 
-        {/* -------------get the search result page---------------  */}
+        {/* -------------get the search result page and passing informations has props---------------  */}
 
         <Route
           path="/search"

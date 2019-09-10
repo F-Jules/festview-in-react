@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import APIHandler from "../../../Api/ApiHandler";
 import InputForm from "../Composants/Input/InputForm";
 import SelectForm from "../Composants/Input/SelectForm";
 import classes from "../form.css";
 import Button from "../Composants/Buttons/Button";
 import NewPageTitle from "../Composants/TitleForm/NewPageTitle";
-
-const apiHandler = new APIHandler();
 
 class CreateForm extends Component {
   state = { name: "", category: "", pic: "", startingDate: "", endingDate: "" };

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Fonction générique pour récupérer l'adresse d'une page et s'y rendre depuis un OneItemComposant (depuis la page AllArtists, AllFestivals ou Search)
 function getPageAdress(page, id) {
   return `/details/${page}/${id}`;
 }
 
-const OnePageComp = props => {
+const OneItemComposant = props => {
   return (
     <li>
       <Link to={getPageAdress(props.pseudo, props.id)}>
@@ -21,4 +22,4 @@ const OnePageComp = props => {
   );
 };
 
-export default OnePageComp;
+export default OneItemComposant;

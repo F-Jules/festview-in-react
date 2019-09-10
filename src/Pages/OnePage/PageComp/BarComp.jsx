@@ -5,17 +5,22 @@ import { Link } from "react-router-dom";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
+// Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
 const BarComp = props => {
   const [barState, setBarState] = useState([]);
 
   useEffect(() => {
-    const fetchBarInfos = async () => {
-      const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/bars`);
-      setBarState(dbRes.data);
-    };
-    fetchBarInfos();
+    try {
+      const fetchBarInfos = async () => {
+        const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/bars`);
+        setBarState(dbRes.data);
+      };
+      fetchBarInfos();
+    } catch (err) {
+      console.log("BAR INFOS ERROR", err);
+    }
   }, [props.pageId]);
 
   const getAddAddress = (pageName, id) => {

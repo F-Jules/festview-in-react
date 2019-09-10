@@ -1,3 +1,28 @@
+
+                               // REGARDING MY CODE //
+
+- La config Webpack + modules JS se trouve dans le fichier config. NE PAS TOUCHER SAUF CERTITUDE
+
+- index.html se trouve dans le fichier public. Il s'agit du root de la single page app. NE PAS MODIFIER, BOUGER ou SUPPRIMER.
+
+- Les fichiers JSX se trouvent dans le fichier SRC:
+
+==> Dans le fichier API se trouve le APIHandler qui sert de squelette et de conditions pour les futures call axios. Il lui suffit d'etre importé puis appelé avec le mot clé "new" pour pouvoir etre utilisé avec n'importe quel verbe dans n'importe quel fichier se trouvant dans src.
+
+==> Dans le fichier Assets se trouve les images et logos.
+
+==> Dans le ficher Auth se trouve une première configuration du future systeme de login / logout, context provider et protected route avec redirection. (pas encore implantée au 10/09)
+
+==> Dans le fichier components se trouve les composants réutilisables (Loading, Forms, Nav...).
+
+==> Dans le fichier Pages, se trouve les composants pages (All, One...)
+
+==> App.css contient les route et un premier call axios de type "header" (Nom, pseudo, type, photo) qui est passé en props a AllPages et SearchPage.
+
+// POUR LE MOMENT LE CSS... C'EST PAS OUF //
+  
+ // REGARDING CREARTE REACT APP //
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -5,6 +5,7 @@ import classes from "./PageComp.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
+// Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
 const MusicComp = props => {
@@ -47,9 +48,7 @@ const MusicComp = props => {
             <div key={oneProgram.id}>
               <li>
                 <img
-                  src={`https://s3.eu-west-3.amazonaws.com/festview/${
-                    oneProgram.cover_file
-                  }`}
+                  src={`https://s3.eu-west-3.amazonaws.com/festview/${oneProgram.cover_file}`}
                   alt={oneProgram.cover_alt}
                 />
               </li>

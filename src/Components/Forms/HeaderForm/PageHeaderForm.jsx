@@ -5,7 +5,6 @@ import SelectForm from "../Composants/Input/SelectForm";
 import classes from "../form.css";
 import TitleForm from "../Composants/TitleForm/TitleForm";
 import Button from "../Composants/Buttons/Button";
-import LoadingComp from "../../Extras/LoadingComp";
 
 const apiHandler = new APIHandler();
 
@@ -48,7 +47,6 @@ class PageHeaderForm extends Component {
 
   render() {
     const { name, category, pic, startingDate, endingDate } = this.state;
-    //if (!name) return <LoadingComp />;
     return this.props.match.params.type === "artist" ? (
       <div>
         <TitleForm name={name} />

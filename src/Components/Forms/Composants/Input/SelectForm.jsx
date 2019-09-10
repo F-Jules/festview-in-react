@@ -14,7 +14,7 @@ const InputForm = props => {
       >
         {props.option.map((oneOption, index) => (
           <option key={index} value={oneOption}>
-            {props.display[index]}
+            {oneOption}
           </option>
         ))}
         />

@@ -11,11 +11,14 @@ import VideoComp from "../PageComp/VideoComp";
 import NetworkComp from "../PageComp/NetworkComp";
 import LoadingComp from "../../../Components/Extras/LoadingComp";
 
+// Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
+
 class OnePage extends Component {
   state = { modify: false };
 
-  componentDidMount = async () => {
+  // Fonction call Axios vers la DB.
+  fetchingInfosForThisPage = async () => {
     const dBres = await apiHandler.get(
       `/api/pages/${this.props.match.params.id}/headers`
     );
@@ -28,15 +31,27 @@ class OnePage extends Component {
     });
   };
 
+  // On appelle cette fonction lorsque le composant est mount.
+  componentDidMount = () => {
+    try {
+      this.fetchingInfosForThisPage();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   enableModify = evt => {
     evt.preventDefault();
     this.setState({ modify: !this.state.modify });
   };
 
   render() {
+    // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
     if (!this.state.pageInfos || !this.state.creatorInfos)
       return <LoadingComp />;
     return (
+      // OnePage contient tous les modules.
+
       <div className={classes.mainDiv}>
         <div className={classes.header}>
           <OnePageHeader
@@ -58,6 +73,8 @@ class OnePage extends Component {
           pageName={this.state.pageInfos.pseudo}
           modifyState={this.state.modify}
         />
+
+        {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
         {this.state.pageInfos.title === "artist" ? (
           <MusicComp
             pageId={this.state.pageInfos.id}
@@ -71,6 +88,7 @@ class OnePage extends Component {
             modifyState={this.state.modify}
           />
         )}
+
         <VideoComp
           pageId={this.state.pageInfos.id}
           pageName={this.state.pageInfos.pseudo}

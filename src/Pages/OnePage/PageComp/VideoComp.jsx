@@ -5,6 +5,7 @@ import classes from "./PageComp.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
+// Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
 const VideoComp = props => {

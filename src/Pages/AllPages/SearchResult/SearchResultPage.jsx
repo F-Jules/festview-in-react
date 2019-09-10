@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import AllPageComp from "../AllPagesComp/AllPagesComp";
-import classes from "../AllPagesComp/AllPageComp.css";
+import OneItemComposant from "../OneItemComposant/OneItemComposant";
+import classes from "../OneItemComposant/OneItemComposant.css";
 import inputStyle from "../../../Components/Forms/Composants/Input/input.css";
 import LoadingComp from "../../../Components/Extras/LoadingComp";
 
@@ -23,6 +23,7 @@ const SearchResult = props => {
     });
   };
 
+  // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
   if (props.dataList.length === 0 || !props.dataList) return <LoadingComp />;
   return (
     <div className={classes.mainDiv}>
@@ -41,7 +42,7 @@ const SearchResult = props => {
       <ul>
         {filter(props.dataList).map((oneArray, index) => {
           return (
-            <AllPageComp
+            <OneItemComposant
               key={index}
               name={oneArray.name}
               pseudo={oneArray.pseudo}
