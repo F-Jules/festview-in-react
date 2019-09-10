@@ -5,52 +5,64 @@ import classes from "./PageComp.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
+// SN = SOCIAL NETWORK
+
 // Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
-const VideoComp = props => {
-  const [videoState, setVideoState] = useState([]);
+const NetworkCom = props => {
+  const [networkState, setNetworkState] = useState([]);
 
+  //On Fetch les infos Social network de cet artist ou ce festival
   useEffect(() => {
-    const fetchVideoInfos = async () => {
-      const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/videos`);
-      setVideoState(dbRes.data);
-    };
-    fetchVideoInfos();
+    try {
+      const fetchNetworkInfos = async () => {
+        const dbRes = await apiHandler.get(
+          `/api/pages/${props.pageId}/networks`
+        );
+        setNetworkState(dbRes.data);
+      };
+      fetchNetworkInfos();
+    } catch (err) {
+      console.log(err);
+    }
   }, [props.pageId]);
 
-  const getAddAddress = (pageName, id) => {
+  // Ajouter un Social Network
+  const addSN = (pageName, id) => {
     return `/add/video/${pageName}/${id}`;
   };
 
+  // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module SN est en display none
   let noShow;
   if (!props.modifyState) noShow = { display: "none" };
 
-  if (!videoState) {
+  // SI pas de networkState, Cela veut dire que rien na été ajouté comme SN pour cet artiste ou ce festival
+  if (!networkState) {
     return (
       <div className={classes.pageComp}>
-        <h2>Pas encore de Vidéos</h2>
+        <h2>Pas encore d'infos réseaux sociaux.</h2>
       </div>
     );
   }
 
   return (
     <div className={classes.pageComp}>
-      <h2>Videos</h2>
+      <h2>Réseaux sociaux</h2>
       <div className={classes.bgc} style={noShow}>
-        <Link to={getAddAddress(props.pageName, props.pageId)}>
+        <Link to={addSN(props.pageName, props.pageId)}>
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>
       <ul>
-        {videoState.map(oneVideo => {
+        {networkState.map(oneSN => {
           return (
-            <div key={oneVideo.id}>
-              <iframe
-                src={oneVideo.video_embedded_url}
-                frameBorder="10"
-                title="video"
-              />
+            <div key={oneSN.id}>
+              <li>
+                <a href={oneSN.url}>
+                  <p>{oneSN.category}</p>
+                </a>
+              </li>
               <li style={noShow}>
                 <Link to={getAddAddress(props.pageName, props.pageId)}>
                   <img
@@ -68,4 +80,4 @@ const VideoComp = props => {
   );
 };
 
-export default VideoComp;
+export default NetworkCom;

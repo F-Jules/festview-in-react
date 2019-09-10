@@ -1,4 +1,3 @@
-
                                // REGARDING MY CODE //
 
 - La config Webpack + modules JS se trouve dans le fichier config. NE PAS TOUCHER SAUF CERTITUDE
@@ -17,11 +16,15 @@
 
 ==> Dans le fichier Pages, se trouve les composants pages (All, One...)
 
+==> OneItemComposant correspond a un item (Photo + nom) pour les pages listes
+
+==> OnePageComposant correspond aux modules des OnePage (Un Artist ou un Festival)
+
 ==> App.css contient les route et un premier call axios de type "header" (Nom, pseudo, type, photo) qui est passé en props a AllPages et SearchPage.
 
 // POUR LE MOMENT LE CSS... C'EST PAS OUF //
-  
- // REGARDING CREARTE REACT APP //
+
+// REGARDING CREARTE REACT APP //
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

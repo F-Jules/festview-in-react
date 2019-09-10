@@ -8,51 +8,57 @@ import moreIcon from "../../../Assets/images/icon-more.png";
 // Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
-const MusicComp = props => {
-  const [musicState, setMusicState] = useState([]);
+const VideoComp = props => {
+  const [videoState, setVideoState] = useState([]);
 
+  //On Fetch les infos Videos de cet artist ou ce festival
   useEffect(() => {
-    const fetchMusicInfos = async () => {
-      const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/albums`);
-      setMusicState(dbRes.data);
-    };
-    fetchMusicInfos();
+    try {
+      const fetchVideoInfos = async () => {
+        const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/videos`);
+        setVideoState(dbRes.data);
+      };
+      fetchVideoInfos();
+    } catch (err) {
+      console.log(err);
+    }
   }, [props.pageId]);
 
-  const getAddAddress = (pageName, id) => {
+  // Ajouter une vidéo
+  const addVideo = (pageName, id) => {
     return `/add/video/${pageName}/${id}`;
   };
 
+  // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module Vidéos est en display none
   let noShow;
   if (!props.modifyState) noShow = { display: "none" };
 
-  if (!musicState) {
+  // SI pas de videoState, Cela veut dire que rien na été ajouté comme vidéo pour cet artiste ou ce festival
+  if (!videoState) {
     return (
       <div className={classes.pageComp}>
-        <h2>Pas encore d'infos réseaux sociaux.</h2>
+        <h2>Pas encore de Vidéos</h2>
       </div>
     );
   }
 
   return (
     <div className={classes.pageComp}>
-      <h2>Musique</h2>
+      <h2>Videos</h2>
       <div className={classes.bgc} style={noShow}>
-        <Link to={getAddAddress(props.pageName, props.pageId)}>
+        <Link to={addVideo(props.pageName, props.pageId)}>
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>
       <ul>
-        {musicState.map(oneProgram => {
+        {videoState.map(oneVideo => {
           return (
-            <div key={oneProgram.id}>
-              <li>
-                <img
-                  src={`https://s3.eu-west-3.amazonaws.com/festview/${oneProgram.cover_file}`}
-                  alt={oneProgram.cover_alt}
-                />
-              </li>
-              <li>{oneProgram.name}</li>
+            <div key={oneVideo.id}>
+              <iframe
+                src={oneVideo.video_embedded_url}
+                frameBorder="10"
+                title="video"
+              />
               <li style={noShow}>
                 <Link to={getAddAddress(props.pageName, props.pageId)}>
                   <img
@@ -70,4 +76,4 @@ const MusicComp = props => {
   );
 };
 
-export default MusicComp;
+export default VideoComp;

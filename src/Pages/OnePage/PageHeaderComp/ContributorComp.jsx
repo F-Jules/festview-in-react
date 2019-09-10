@@ -13,9 +13,7 @@ const Contributor = props => {
       <div className={classes.creatorInfos}>
         <img
           alt={props.creatorInfos.profile_picture_alt}
-          src={`https://s3.eu-west-3.amazonaws.com/festview/${
-            props.creatorInfos.profile_picture_file
-          }`}
+          src={`https://s3.eu-west-3.amazonaws.com/festview/${props.creatorInfos.profile_picture_file}`}
         />
         <h5>{props.creatorInfos.slug}</h5>
         <p>{props.creatorInfos.points}</p>
@@ -28,9 +26,7 @@ const Contributor = props => {
               <div key={oneEditor.slug} className={classes.creatorInfos}>
                 <img
                   alt={oneEditor.profile_picture_alt}
-                  src={`https://s3.eu-west-3.amazonaws.com/festview/${
-                    oneEditor.profile_picture_file
-                  }`}
+                  src={`https://s3.eu-west-3.amazonaws.com/festview/${oneEditor.profile_picture_file}`}
                 />
                 <h5>{oneEditor.slug}</h5>
                 <p>{oneEditor.points}</p>

@@ -4,11 +4,11 @@ import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComp/ContributorComp";
 import OnePageHeader from "../PageHeaderComp/OnePageHeader";
 import PageNavBar from "../PageNavBar/PageNavBar";
-import ProgComp from "../PageComp/ProgComp";
-import MusicComp from "../PageComp/MusicComp";
-import BarComp from "../PageComp/BarComp";
-import VideoComp from "../PageComp/VideoComp";
-import NetworkComp from "../PageComp/NetworkComp";
+import ProgComp from "../PageComposant/ProgComp";
+import MusicComp from "../PageComposant/MusicComp";
+import BarComp from "../PageComposant/BarComp";
+import VideoComp from "../PageComposant/VideoComp";
+import NetworkComp from "../PageComposant/NetworkComp";
 import LoadingComp from "../../../Components/Extras/LoadingComp";
 
 // Nouvelle instance de la classe APIHandler
@@ -50,7 +50,7 @@ class OnePage extends Component {
     if (!this.state.pageInfos || !this.state.creatorInfos)
       return <LoadingComp />;
     return (
-      // OnePage contient tous les modules.
+      // OnePage (Artist ou Festival) contient tous ces modules.
 
       <div className={classes.mainDiv}>
         <div className={classes.header}>

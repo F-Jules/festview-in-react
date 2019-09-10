@@ -11,6 +11,7 @@ const apiHandler = new APIHandler();
 const BarComp = props => {
   const [barState, setBarState] = useState([]);
 
+  //On Fetch les infos du bar de CE festival
   useEffect(() => {
     try {
       const fetchBarInfos = async () => {
@@ -23,13 +24,16 @@ const BarComp = props => {
     }
   }, [props.pageId]);
 
-  const getAddAddress = (pageName, id) => {
-    return `/add/video/${pageName}/${id}`;
+  // Ajouter un bar.
+  const addBar = (pageName, id) => {
+    return `/add/bar/${pageName}/${id}`;
   };
 
+  // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module bar est en display none
   let noShow;
   if (!props.modifyState) noShow = { display: "none" };
 
+  // SI pas de BarState, Cela veut dire que rien na été ajouté pour en infos bar pour ce festival
   if (!barState) {
     return (
       <div className={classes.pageComp}>
@@ -42,7 +46,7 @@ const BarComp = props => {
     <div className={classes.pageComp}>
       <h2>Bars</h2>
       <div className={classes.bgc} style={noShow}>
-        <Link to={getAddAddress(props.pageName, props.pageId)}>
+        <Link to={addBar(props.pageName, props.pageId)}>
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>
