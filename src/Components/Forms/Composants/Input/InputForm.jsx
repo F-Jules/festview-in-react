@@ -10,7 +10,6 @@ const InputForm = props => {
         type={props.type}
         name={props.name}
         value={props.value}
-        onChange={props.handleInput}
       />
     </React.Fragment>
   );

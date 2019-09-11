@@ -1,55 +1,54 @@
 import React, { Component } from "react";
+import APIHandler from "../../../Api/ApiHandler";
 import classes from "../form.css";
 import TitleFormCo from "../Composants/TitleForm/TitleFormCo";
 import Input from "../Composants/Input/InputForm";
 import Button from "../Composants/Buttons/Button";
 
+const apiHandler = new APIHandler();
+
 class Signup extends Component {
-  state = {};
+  state = {
+    email: "",
+    pseudo: "",
+    password: "",
+    confirmedPassword: "",
+    betaPassword: "ArnoldLayne"
+  };
+
+  handlePost = evt => {
+    evt.preventDefault();
+    console.log(this.state);
+  };
+
   handleInput = evt => {
+    evt.preventDefault();
     this.setState({ [evt.target.name]: evt.target.value });
   };
+
   render() {
     return (
       <div className={classes.form}>
         <TitleFormCo text="Créez votre compte" />
-        <form action="post">
-          <Input
-            text="Adresse email*"
-            type="email"
-            name="email"
-            handleInput={this.handleInput}
-          />
-          <Input
-            text="Choisissez un pseudo*"
-            type="text"
-            name="pseudo"
-            handleInput={this.handleInput}
-          />
+        <form onSubmit={this.handlePost} onChange={this.handleInput}>
+          <Input text="Adresse email*" type="email" name="email" />
+          <Input text="Choisissez un pseudo*" type="text" name="pseudo" />
           <Input
             text="Code d'accès FestView Beta*"
             type="text"
-            name="?"
-            handleInput={this.handleInput}
+            name="betaPassword"
           />
-          <Input
-            text="Mot de passe*"
-            type="password"
-            name="password"
-            handleInput={this.handleInput}
-          />
+          <Input text="Mot de passe*" type="password" name="password" />
           <Input
             text="Confirmez votre mot de passe*"
             type="password"
-            name="password"
-            handleInput={this.handleInput}
+            name="confirmedPassword"
           />
-          <Input
+          {/* <Input
             text="Url de la photo de profil"
             type="url"
             name="avatar"
-            handleInput={this.handleInput}
-          />
+          /> */}
         </form>
         <Button text="Créer son compte" />
       </div>
