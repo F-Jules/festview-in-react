@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-// import APIHandler from "./Api/ApiHandler";
 import classes from "./App.css";
 import HomePage from "./Pages/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
@@ -19,27 +18,7 @@ import BarForm from "./Components/Forms/PageFrom/BarForm";
 import CreateForm from "./Components/Forms/CreateForm/CreateForm";
 import LoadingComp from "./Components/Extras/LoadingComp";
 
-// Nouvelle instance de la classe APIHandler
-// const apiHandler = new APIHandler();
-
 const App = () => {
-  // const [headerState, setHeaderState] = useState([]);
-
-  // // On récupere les infos générales de tous les artistes et de tous les festivales.
-  // const fetchHeaderInfos = async () => {
-  //   const dbRes = await apiHandler.get("/api/pages/headers");
-  //   setHeaderState(dbRes.data);
-  // };
-
-  // // On appelle la fonction dans un lyfecycle useEffect.
-  // useEffect(() => {
-  //   try {
-  //     fetchHeaderInfos();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, []);
-
   return (
     <div className={`${classes.App} ${classes.section}`}>
       <Header />
