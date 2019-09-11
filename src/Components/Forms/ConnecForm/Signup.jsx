@@ -31,7 +31,10 @@ class Signup extends Component {
       .then(dbRes => {
         console.log(dbRes);
         if (dbRes.status === 200 || dbRes.status === 201) {
-          this.props.history.push("/login");
+          this.props.history.push({
+            pathname: "/login",
+            state: { msg: "Account created succesfully." }
+          });
         }
       })
       .catch(dbErr => {

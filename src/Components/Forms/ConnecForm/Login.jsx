@@ -5,6 +5,7 @@ import InputFrom from "../Composants/Input/InputForm";
 import Button from "../Composants/Buttons/Button";
 import TitleFormCo from "../Composants/TitleForm/TitleFormCo";
 import CreateButton from "../Composants/Buttons/CreateAccBut";
+import FeedBack from "./FeedBack";
 
 class Login extends Component {
   state = {};
@@ -13,6 +14,7 @@ class Login extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   };
   render() {
+    console.log(typeof this.props.location.state);
     return (
       <div className={classes.form}>
         <TitleFormCo text="Connexion" />
@@ -31,9 +33,13 @@ class Login extends Component {
           />
           <Button text="Me Connecter" />
         </form>
-        <Link to="/signup">
-          <CreateButton />
-        </Link>
+        {this.props.location.state === undefined ? (
+          <Link to="/signup">
+            <CreateButton />
+          </Link>
+        ) : (
+          <FeedBack msg={this.props.location.state.msg} />
+        )}
       </div>
     );
   }
