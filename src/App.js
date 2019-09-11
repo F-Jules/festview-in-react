@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
-import APIHandler from "./Api/ApiHandler";
+// import APIHandler from "./Api/ApiHandler";
 import classes from "./App.css";
 import HomePage from "./Pages/HomePage/HomePage";
 import Header from "./Components/Header/NavBar/NavBar";
@@ -20,25 +20,25 @@ import CreateForm from "./Components/Forms/CreateForm/CreateForm";
 import LoadingComp from "./Components/Extras/LoadingComp";
 
 // Nouvelle instance de la classe APIHandler
-const apiHandler = new APIHandler();
+// const apiHandler = new APIHandler();
 
 const App = () => {
-  const [headerState, setHeaderState] = useState([]);
+  // const [headerState, setHeaderState] = useState([]);
 
-  // On récupere les infos générales de tous les artistes et de tous les festivales.
-  const fetchHeaderInfos = async () => {
-    const dbRes = await apiHandler.get("/api/pages/headers");
-    setHeaderState(dbRes.data);
-  };
+  // // On récupere les infos générales de tous les artistes et de tous les festivales.
+  // const fetchHeaderInfos = async () => {
+  //   const dbRes = await apiHandler.get("/api/pages/headers");
+  //   setHeaderState(dbRes.data);
+  // };
 
-  // On appelle la fonction dans un lyfecycle useEffect.
-  useEffect(() => {
-    try {
-      fetchHeaderInfos();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  // // On appelle la fonction dans un lyfecycle useEffect.
+  // useEffect(() => {
+  //   try {
+  //     fetchHeaderInfos();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
 
   return (
     <div className={`${classes.App} ${classes.section}`}>
@@ -55,23 +55,15 @@ const App = () => {
 
         {/* ------get all artist or festivals pages and passing informations has props-----  */}
 
-        <Route
-          path={["/AllArtists", "/AllFestivals"]}
-          render={props => <AllPages {...props} dataList={headerState} />}
-        />
+        <Route path={["/AllArtists", "/AllFestivals"]} component={AllPages} />
 
         {/* -------------get the search result page and passing informations has props---------------  */}
 
-        <Route
-          path="/search"
-          render={props => (
-            <SearchResultPage {...props} dataList={headerState} />
-          )}
-        />
+        <Route path="/search" component={SearchResultPage} />
 
         {/* ----------------- get pages details ------------------  */}
 
-        <Route path="/details/:page/:id" component={OnePage} />
+        <Route path="/details/:entity/:page/:id" component={OnePage} />
 
         {/* -------------get pages forms---------------  */}
 

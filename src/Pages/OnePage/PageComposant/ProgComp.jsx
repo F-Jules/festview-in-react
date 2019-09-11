@@ -15,9 +15,7 @@ const ProgComp = props => {
   useEffect(() => {
     try {
       const fetchProgInfos = async () => {
-        const dbRes = await apiHandler.get(
-          `/api/pages/${props.pageId}/programs`
-        );
+        const dbRes = await apiHandler.get(`/api/event/${props.pageId}`);
         setProgState(dbRes.data);
       };
       fetchProgInfos();

@@ -17,9 +17,7 @@ const NetworkCom = props => {
   useEffect(() => {
     try {
       const fetchNetworkInfos = async () => {
-        const dbRes = await apiHandler.get(
-          `/api/pages/${props.pageId}/networks`
-        );
+        const dbRes = await apiHandler.get(`/api/networks/${props.pageId}`);
         setNetworkState(dbRes.data);
       };
       fetchNetworkInfos();

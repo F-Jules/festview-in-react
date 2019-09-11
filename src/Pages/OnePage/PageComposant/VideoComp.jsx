@@ -15,7 +15,7 @@ const VideoComp = props => {
   useEffect(() => {
     try {
       const fetchVideoInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/videos`);
+        const dbRes = await apiHandler.get(`/api/videos/${props.pageId}`);
         setVideoState(dbRes.data);
       };
       fetchVideoInfos();

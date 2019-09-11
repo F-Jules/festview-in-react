@@ -12,10 +12,10 @@ const Contributor = props => {
       <h3>Createur:</h3>
       <div className={classes.creatorInfos}>
         <img
-          alt={props.creatorInfos.profile_picture_alt}
-          src={`https://s3.eu-west-3.amazonaws.com/festview/${props.creatorInfos.profile_picture_file}`}
+          alt={props.creatorInfos.profilePictureAlt}
+          src={props.creatorInfos.profilePicture}
         />
-        <h5>{props.creatorInfos.slug}</h5>
+        <h5>{props.creatorInfos.pseudo}</h5>
         <p>{props.creatorInfos.points}</p>
       </div>
       {uniqueEditors.length > 0 ? (
@@ -23,12 +23,12 @@ const Contributor = props => {
           <h3>Designers:</h3>
           {uniqueEditors.map(oneEditor => {
             return (
-              <div key={oneEditor.slug} className={classes.creatorInfos}>
+              <div key={oneEditor.pseudo} className={classes.creatorInfos}>
                 <img
                   alt={oneEditor.profile_picture_alt}
                   src={`https://s3.eu-west-3.amazonaws.com/festview/${oneEditor.profile_picture_file}`}
                 />
-                <h5>{oneEditor.slug}</h5>
+                <h5>{oneEditor.pseudo}</h5>
                 <p>{oneEditor.points}</p>
               </div>
             );

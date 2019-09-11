@@ -21,14 +21,9 @@ const OnePageHeader = props => {
   if (!modifyState) noShow = { display: "none" };
   return (
     <div className={classes.onePageHeader}>
-      <img
-        alt={pageInfos.profile_picture_alt}
-        src={`https://s3.eu-west-3.amazonaws.com/festview/${
-          pageInfos.profile_picture_file
-        }`}
-      />
+      <img alt={pageInfos.profilePictureAlt} src={pageInfos.profilePicture} />
       <h1>{pageInfos.name}</h1>
-      <h3>@{pageInfos.pseudo}</h3>
+      <h3>@{pageInfos.slug}</h3>
       {pageInfos.title === "festival" ? (
         <h3>
           {splitDate(pageInfos.event_starting_date)} /{" "}
@@ -36,9 +31,7 @@ const OnePageHeader = props => {
         </h3>
       ) : null}
       <div className={classes.bgc} style={noShow}>
-        <Link
-          to={getPageAdress(pageInfos.title, pageInfos.pseudo, pageInfos.id)}
-        >
+        <Link to={getPageAdress(pageInfos.title, pageInfos.slug, pageInfos.id)}>
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>

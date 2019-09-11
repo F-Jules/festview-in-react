@@ -20,14 +20,13 @@ class OnePage extends Component {
   // Fonction call Axios vers la DB.
   fetchingInfosForThisPage = async () => {
     const dBres = await apiHandler.get(
-      `/api/pages/${this.props.match.params.id}/headers`
+      `/api/${this.props.match.params.entity}/${this.props.match.params.id}`
     );
-    let dataEditors = [];
-    if (dBres.data.contributors) dataEditors = dBres.data.contributors;
+    console.log(dBres);
     this.setState({
       pageInfos: dBres.data,
-      creatorInfos: dBres.data.creator,
-      editorsInfos: dataEditors
+      creatorInfos: dBres.data.parent.creator,
+      editorsInfos: dBres.data.parent.editors
     });
   };
 
@@ -46,6 +45,8 @@ class OnePage extends Component {
   };
 
   render() {
+    console.log("PAGE INFOS", this.state.pageInfos);
+    //console.log("USER INFOS", this.state.creatorInfos);
     // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
     if (!this.state.pageInfos || !this.state.creatorInfos)
       return <LoadingComp />;

@@ -1,36 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import APIHandler from "../../../Api/ApiHandler";
 import classes from "./AllPages.css";
 import OneItemComposant from "../OneItemComposant/OneItemComposant";
 import LoadingComp from "../../../Components/Extras/LoadingComp";
 
-// Fonction pour récupérer le "titre" de la plage (Artiste ou Festival) et ne garder que les informations relativent a son titre.
-const getTitle = props => {
-  const dataArray = props.dataList.filter(
-    oneArtist =>
-      oneArtist.title ===
-      props.match.path.slice(4, props.match.path.length - 1).toLowerCase()
-  );
-  const customTitle = props.match.path.slice(4);
-  return [dataArray, customTitle];
-};
+const apiHandler = new APIHandler();
 
 const AllPages = props => {
+  // Fonction pour récupérer le "titre" de la plage (Artiste ou Festival) et ne garder que les informations relativent a son titre.
+  const getEntities = url => {
+    let apiCall;
+    url.match.url.slice(4).toLowerCase() === "artists"
+      ? (apiCall = "artists")
+      : (apiCall = "organizers");
+    return apiCall;
+  };
+
+  const [dataState, setDataState] = useState([]);
+
+  useEffect(() => {
+    try {
+      const fetchDataFromApi = async () => {
+        const dBres = await apiHandler.get(`/api/${getEntities(props)}`);
+        console.log(dBres.status);
+        setDataState(dBres.data["hydra:member"]);
+      };
+      fetchDataFromApi();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [props]);
+
   // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
-  if (props.dataList.length === 0 || !props.dataList) return <LoadingComp />;
+  if (dataState.length === 0 || !dataState) return <LoadingComp />;
   return (
     <div className={classes.mainDiv}>
-      <h3>{getTitle(props)[1]}</h3>
+      <h3>{getEntities(props)}</h3>
       <ul>
         {/* ON MAP AUTOUR DE CHAQUE INFOS (CHAQUE ARTISTE OU CHAQUE FESTIVAL ET ON PASSE LES INFOS RELATIVENT) */}
-        {getTitle(props)[0].map(oneData => {
+        {dataState.map(oneData => {
           return (
             <OneItemComposant
               key={oneData.slug}
+              entity={getEntities(props)}
               name={oneData.name}
-              pseudo={oneData.pseudo}
+              slug={oneData.slug}
               id={oneData.id}
-              image={oneData.profile_picture_file}
-              imageAlt={oneData.profile_picture_alt}
+              image={oneData.profilePicture}
+              imageAlt={oneData.profilePictureAlt}
             />
           );
         })}

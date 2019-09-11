@@ -15,7 +15,7 @@ const MusicComp = props => {
   useEffect(() => {
     try {
       const fetchMusicInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/albums`);
+        const dbRes = await apiHandler.get(`/api/albums/${props.pageId}`);
         setMusicState(dbRes.data);
       };
       fetchMusicInfos();

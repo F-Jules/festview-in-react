@@ -15,7 +15,7 @@ const BarComp = props => {
   useEffect(() => {
     try {
       const fetchBarInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/pages/${props.pageId}/bars`);
+        const dbRes = await apiHandler.get(`/api/drinks/${props.pageId}`);
         setBarState(dbRes.data);
       };
       fetchBarInfos();
