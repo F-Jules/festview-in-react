@@ -4,6 +4,7 @@ import classes from "../form.css";
 import TitleFormCo from "../Composants/TitleForm/TitleFormCo";
 import Input from "../Composants/Input/InputForm";
 import Button from "../Composants/Buttons/Button";
+import FeedBack from "./FeedBack";
 
 const apiHandler = new APIHandler();
 
@@ -13,12 +14,34 @@ class Signup extends Component {
     pseudo: "",
     password: "",
     confirmedPassword: "",
-    betaPassword: "ArnoldLayne"
+    betaPassword: "ArnoldLayne",
+    msg: ""
   };
 
   handlePost = evt => {
     evt.preventDefault();
-    console.log(this.state);
+    const userInfos = {
+      email: this.state.email,
+      pseudo: this.state.pseudo,
+      password: this.state.password,
+      betaPassword: this.state.betaPassword
+    };
+    apiHandler
+      .post("/api/users", userInfos)
+      .then(dbRes => {
+        console.log(dbRes);
+        if (dbRes.status === 200 || dbRes.status === 201) {
+          this.props.history.push("/login");
+        }
+      })
+      .catch(dbErr => {
+        console.log(dbErr.response);
+        if (dbErr.response.status === 400 || dbErr.response.status === 500) {
+          this.setState({
+            msg: dbErr.response.data["hydra:description"].toUpperCase()
+          });
+        }
+      });
   };
 
   handleInput = evt => {
@@ -37,6 +60,7 @@ class Signup extends Component {
             text="Code d'accès FestView Beta*"
             type="text"
             name="betaPassword"
+            value={this.state.betaPassword}
           />
           <Input text="Mot de passe*" type="password" name="password" />
           <Input
@@ -49,8 +73,9 @@ class Signup extends Component {
             type="url"
             name="avatar"
           /> */}
+          <Button text="Créer son compte" />
         </form>
-        <Button text="Créer son compte" />
+        <FeedBack msg={this.state.msg} />
       </div>
     );
   }
