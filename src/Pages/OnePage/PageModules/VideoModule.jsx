@@ -36,7 +36,7 @@ const VideoModule = props => {
           return (
             <div key={oneVideo.embeddedUrl}>
               <iframe
-                src={oneVideo.video_embedded_url}
+                src={oneVideo.embeddedUrl}
                 frameBorder="10"
                 title="video"
               />

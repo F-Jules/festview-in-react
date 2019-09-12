@@ -16,6 +16,7 @@ class PageHeaderForm extends Component {
       `/api/pages/${this.props.match.params.id}/headers`
     );
     const res = dbRes.data;
+    console.log(dbRes);
     if (res.title === "artist") {
       this.setState({
         name: res.name,

@@ -1,21 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
+import APIHandler from "../../../Api/ApiHandler";
 import OneItemComposant from "../OneItemComposant/OneItemComposant";
 import classes from "../OneItemComposant/OneItemComposant.css";
 import inputStyle from "../../../Components/Forms/Composants/Input/input.css";
 import LoadingComponent from "../../../Components/Extras/LoadingComponent";
 
+const apiHandlder = new APIHandler();
+
 const SearchResult = props => {
   const inputRef = useRef();
+
   const [userInput, setUserInput] = useState("");
+  const [dataBaseResponse, setDataBaseResponse] = useState([]);
+
   const inputChangeHandler = evt => {
     setUserInput(evt.target.value);
+  };
+
+  const fetchingDataForSearch = async () => {
+    const dbRes = await Promise.all([
+      apiHandlder.get("/api/artists"),
+      apiHandlder.get("/api/organizers")
+    ]);
+    setDataBaseResponse(
+      dbRes[0].data["hydra:member"].concat(dbRes[1].data["hydra:member"])
+    );
   };
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  });
+    try {
+      fetchingDataForSearch();
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const filter = data => {
     return data.filter(oneEl => {
@@ -23,9 +44,14 @@ const SearchResult = props => {
     });
   };
 
-  // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
-  if (props.dataList.length === 0 || !props.dataList)
+  const addAnS = entityName => {
+    return entityName.toLowerCase() + "s";
+  };
+
+  // SI PAS D'Infos CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
+  if (dataBaseResponse.length === 0 || !dataBaseResponse)
     return <LoadingComponent />;
+  console.log(dataBaseResponse);
   return (
     <div className={classes.mainDiv}>
       <label htmlFor="">
@@ -41,15 +67,16 @@ const SearchResult = props => {
         onChange={inputChangeHandler}
       />
       <ul>
-        {filter(props.dataList).map((oneArray, index) => {
+        {filter(dataBaseResponse).map((oneResult, index) => {
           return (
             <OneItemComposant
               key={index}
-              name={oneArray.name}
-              pseudo={oneArray.pseudo}
-              image={oneArray.profile_picture_file}
-              imageAlt={oneArray.profile_picture_alt}
-              id={oneArray.id}
+              name={oneResult.name}
+              slug={oneResult.slug}
+              image={oneResult.profilePicture}
+              imageAlt={oneResult.profilePictureAlt}
+              id={oneResult.id}
+              entity={addAnS(oneResult.entityName)}
             />
           );
         })}

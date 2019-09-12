@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import APIHandler from "../../../Api/ApiHandler";
 import classes from "./OnePage.css";
 import Contributor from "../PageHeaderComponent/ContributorComp";
@@ -14,94 +14,91 @@ import LoadingComponent from "../../../Components/Extras/LoadingComponent";
 // Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
 
-class OnePage extends Component {
-  state = { modify: false };
+const OnePage = props => {
+  const [modifyState, setModifyState] = useState(false);
+  const [pageInfos, setpageInfos] = useState([]);
+  const [creatorInfos, setCreatorInfos] = useState([]);
+  const [editorsInfos, setEditorsInfos] = useState([]);
 
   // Fonction call Axios vers la DB.
-  fetchingInfosForThisPage = async () => {
+  const fetchingInfosForThisPage = async () => {
     const dBres = await apiHandler.get(
-      `/api/${this.props.match.params.entity}/${this.props.match.params.id}`
+      `/api/${props.match.params.entity}/${props.match.params.id}`
     );
-    this.setState({
-      pageInfos: dBres.data,
-      creatorInfos: dBres.data.creator,
-      editorsInfos: dBres.data.editors
-    });
+    setpageInfos(dBres.data);
+    setCreatorInfos(dBres.data.creator);
+    setEditorsInfos(dBres.data.editors);
   };
 
   // On appelle cette fonction lorsque le composant est mount.
-  componentDidMount = () => {
+  useEffect(() => {
     try {
-      this.fetchingInfosForThisPage();
+      fetchingInfosForThisPage();
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []);
 
-  enableModify = evt => {
+  const enableModify = evt => {
     evt.preventDefault();
-    this.setState({ modify: !this.state.modify });
+    setModifyState(!modifyState);
   };
+  // console.log("PAGE INFOS", pageInfos, creatorInfos, editorsInfos);
+  // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
+  if (
+    !pageInfos ||
+    pageInfos.length === 0 ||
+    !creatorInfos ||
+    creatorInfos.length === 0
+  )
+    return <LoadingComponent />;
 
-  render() {
-    console.log("PAGE INFOS", this.state.pageInfos);
-    //console.log("USER INFOS", this.state.creatorInfos);
-    // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
-    if (!this.state.pageInfos || !this.state.creatorInfos)
-      return <LoadingComponent />;
-    return (
-      // OnePage (Artist ou Festival) contient tous ces modules.
+  return (
+    // OnePage (Artist ou Festival) contient tous ces modules.
 
-      <div className={classes.mainDiv}>
-        <div className={classes.header}>
-          <OnePageHeader
-            pageInfos={this.state.pageInfos}
-            modifyState={this.state.modify}
-          />
-          <Contributor
-            creatorInfos={this.state.creatorInfos}
-            editorsInfos={this.state.editorsInfos}
-          />
-        </div>
-        <PageNavBar
-          pageType={this.state.pageInfos.title}
-          enableModify={this.enableModify}
-          modifyState={this.state.modify}
-        />
-        <EventModule
-          eventsInfos={this.state.pageInfos.events}
-          pageName={this.state.pageInfos.pseudo}
-          modifyState={this.state.modify}
-        />
-
-        {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
-        {this.state.pageInfos.entityName === "Artist" ? (
-          <AlbumModule
-            albumInfos={this.state.pageInfos.albums}
-            pageName={this.state.pageInfos.pseudo}
-            modifyState={this.state.modify}
-          />
-        ) : (
-          <DrinkModule
-            drinksInfos={this.state.pageInfos.drinks}
-            pageName={this.state.pageInfos.pseudo}
-            modifyState={this.state.modify}
-          />
-        )}
-
-        <VideoModule
-          videosInfos={this.state.pageInfos.videos}
-          pageName={this.state.pageInfos.pseudo}
-          modifyState={this.state.modify}
-        />
-        <NetworkModule
-          networksInfos={this.state.pageInfos.networks}
-          pageName={this.state.pageInfos.pseudo}
-          modifyState={this.state.modify}
-        />
+    <div className={classes.mainDiv}>
+      <div className={classes.header}>
+        <OnePageHeader pageInfos={pageInfos} modifyState={enableModify} />
+        <Contributor creatorInfos={creatorInfos} editorsInfos={editorsInfos} />
       </div>
-    );
-  }
-}
+      <PageNavBar
+        pageType={pageInfos.title}
+        enableModify={enableModify}
+        modifyState={enableModify}
+      />
+      <EventModule
+        eventsInfos={pageInfos.events}
+        pageName={pageInfos.pseudo}
+        modifyState={enableModify}
+      />
+
+      {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
+      {pageInfos.entityName === "Artist" ? (
+        <AlbumModule
+          albumInfos={pageInfos.albums}
+          pageName={pageInfos.pseudo}
+          modifyState={enableModify}
+        />
+      ) : (
+        <DrinkModule
+          drinksInfos={pageInfos.drinks}
+          pageName={pageInfos.pseudo}
+          modifyState={enableModify}
+        />
+      )}
+
+      <VideoModule
+        videosInfos={pageInfos.videos}
+        pageName={pageInfos.pseudo}
+        modifyState={enableModify}
+      />
+      <NetworkModule
+        networksInfos={pageInfos.networks}
+        pageName={pageInfos.pseudo}
+        modifyState={enableModify}
+      />
+    </div>
+  );
+};
 
 export default OnePage;
