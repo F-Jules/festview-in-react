@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import OneItemComposant from "../OneItemComposant/OneItemComposant";
 import classes from "../OneItemComposant/OneItemComposant.css";
 import inputStyle from "../../../Components/Forms/Composants/Input/input.css";
-import LoadingComp from "../../../Components/Extras/LoadingComp";
+import LoadingComponent from "../../../Components/Extras/LoadingComponent";
 
 const SearchResult = props => {
   const inputRef = useRef();
@@ -24,7 +24,8 @@ const SearchResult = props => {
   };
 
   // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
-  if (props.dataList.length === 0 || !props.dataList) return <LoadingComp />;
+  if (props.dataList.length === 0 || !props.dataList)
+    return <LoadingComponent />;
   return (
     <div className={classes.mainDiv}>
       <label htmlFor="">

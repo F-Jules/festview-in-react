@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import APIHandler from "../../../Api/ApiHandler";
 import classes from "./OnePage.css";
-import Contributor from "../PageHeaderComposant/ContributorComp";
-import OnePageHeader from "../PageHeaderComposant/OnePageHeader";
+import Contributor from "../PageHeaderComponent/ContributorComp";
+import OnePageHeader from "../PageHeaderComponent/OnePageHeader";
 import PageNavBar from "../PageNavBar/PageNavBar";
-import ProgComp from "../PageComposant/ProgComp";
-import MusicComp from "../PageComposant/MusicComp";
-import BarComp from "../PageComposant/BarComp";
-import VideoComp from "../PageComposant/VideoComp";
-import NetworkComp from "../PageComposant/NetworkComp";
-import LoadingComp from "../../../Components/Extras/LoadingComp";
+import EventModule from "../PageModules/EventModule";
+import AlbumModule from "../PageModules/AlbumModule";
+import DrinkModule from "../PageModules/DrinkModule";
+import VideoModule from "../PageModules/VideoModule";
+import NetworkModule from "../PageModules/NetworkModule";
+import LoadingComponent from "../../../Components/Extras/LoadingComponent";
 
 // Nouvelle instance de la classe APIHandler
 const apiHandler = new APIHandler();
@@ -22,11 +22,10 @@ class OnePage extends Component {
     const dBres = await apiHandler.get(
       `/api/${this.props.match.params.entity}/${this.props.match.params.id}`
     );
-    console.log(dBres);
     this.setState({
       pageInfos: dBres.data,
-      creatorInfos: dBres.data.parent.creator,
-      editorsInfos: dBres.data.parent.editors
+      creatorInfos: dBres.data.creator,
+      editorsInfos: dBres.data.editors
     });
   };
 
@@ -49,7 +48,7 @@ class OnePage extends Component {
     //console.log("USER INFOS", this.state.creatorInfos);
     // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
     if (!this.state.pageInfos || !this.state.creatorInfos)
-      return <LoadingComp />;
+      return <LoadingComponent />;
     return (
       // OnePage (Artist ou Festival) contient tous ces modules.
 
@@ -69,34 +68,34 @@ class OnePage extends Component {
           enableModify={this.enableModify}
           modifyState={this.state.modify}
         />
-        <ProgComp
-          pageId={this.state.pageInfos.id}
+        <EventModule
+          eventsInfos={this.state.pageInfos.events}
           pageName={this.state.pageInfos.pseudo}
           modifyState={this.state.modify}
         />
 
         {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
-        {this.state.pageInfos.title === "artist" ? (
-          <MusicComp
-            pageId={this.state.pageInfos.id}
+        {this.state.pageInfos.albums ? (
+          <AlbumModule
+            albumInfos={this.state.pageInfos.albums}
             pageName={this.state.pageInfos.pseudo}
             modifyState={this.state.modify}
           />
         ) : (
-          <BarComp
-            pageId={this.state.pageInfos.id}
+          <DrinkModule
+            drinksInfos={this.state.pageInfos.drinks}
             pageName={this.state.pageInfos.pseudo}
             modifyState={this.state.modify}
           />
         )}
 
-        <VideoComp
-          pageId={this.state.pageInfos.id}
+        <VideoModule
+          videosInfos={this.state.pageInfos.videos}
           pageName={this.state.pageInfos.pseudo}
           modifyState={this.state.modify}
         />
-        <NetworkComp
-          pageId={this.state.pageInfos.id}
+        <NetworkModule
+          networksInfos={this.state.pageInfos.networks}
           pageName={this.state.pageInfos.pseudo}
           modifyState={this.state.modify}
         />

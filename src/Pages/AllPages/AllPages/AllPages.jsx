@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import APIHandler from "../../../Api/ApiHandler";
 import classes from "./AllPages.css";
 import OneItemComposant from "../OneItemComposant/OneItemComposant";
-import LoadingComp from "../../../Components/Extras/LoadingComp";
+import LoadingComponent from "../../../Components/Extras/LoadingComponent";
 
 const apiHandler = new APIHandler();
 
@@ -32,7 +32,7 @@ const AllPages = props => {
   }, [props]);
 
   // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
-  if (dataState.length === 0 || !dataState) return <LoadingComp />;
+  if (dataState.length === 0 || !dataState) return <LoadingComponent />;
   return (
     <div className={classes.mainDiv}>
       <h3>{getEntities(props)}</h3>

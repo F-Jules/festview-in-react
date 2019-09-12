@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from "react";
-import APIHandler from "../../../Api/ApiHandler";
+import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./PageComp.css";
+import classes from "./PageModule.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
-// Nouvelle instance de la classe APIHandler
-const apiHandler = new APIHandler();
-
-const MusicComp = props => {
-  const [musicState, setMusicState] = useState([]);
-
-  //On Fetch les infos musicales de CET artist
-  useEffect(() => {
-    try {
-      const fetchMusicInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/albums/${props.pageId}`);
-        setMusicState(dbRes.data);
-      };
-      fetchMusicInfos();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [props.pageId]);
-
+const AlbumModule = props => {
   // Ajouter un album
   const addAlbum = (pageName, id) => {
     return `/add/video/${pageName}/${id}`;
@@ -31,10 +12,10 @@ const MusicComp = props => {
 
   // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module album est en display none
   let noShow;
-  if (!props.modifyState) noShow = { display: "none" };
+  if (!props.albumInfos) noShow = { display: "none" };
 
   // SI pas de musicState, Cela veut dire que rien na été ajouté comme album pour cet artiste
-  if (!musicState) {
+  if (props.albumInfos.length === 0) {
     return (
       <div className={classes.pageComp}>
         <h2>Pas encore d'infos réseaux sociaux.</h2>
@@ -51,16 +32,13 @@ const MusicComp = props => {
         </Link>
       </div>
       <ul>
-        {musicState.map(oneProgram => {
+        {props.albumInfos.map(oneAlbum => {
           return (
-            <div key={oneProgram.id}>
+            <div key={oneAlbum.name}>
               <li>
-                <img
-                  src={`https://s3.eu-west-3.amazonaws.com/festview/${oneProgram.cover_file}`}
-                  alt={oneProgram.cover_alt}
-                />
+                <img src={oneAlbum.coverImage} alt={oneAlbum.coverImageAlt} />
               </li>
-              <li>{oneProgram.name}</li>
+              <li>{oneAlbum.name}</li>
               <li style={noShow}>
                 <Link to={addAlbum(props.pageName, props.pageId)}>
                   <img
@@ -78,4 +56,4 @@ const MusicComp = props => {
   );
 };
 
-export default MusicComp;
+export default AlbumModule;

@@ -10,10 +10,6 @@ const apiHandler = new APIHandler();
 
 class Signup extends Component {
   state = {
-    email: "",
-    pseudo: "",
-    password: "",
-    confirmedPassword: "",
     betaPassword: "ArnoldLayne",
     msg: ""
   };

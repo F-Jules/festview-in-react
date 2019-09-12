@@ -1,31 +1,10 @@
-import React, { useState, useEffect } from "react";
-import APIHandler from "../../../Api/ApiHandler";
+import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./PageComp.css";
+import classes from "./PageModule.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
-// SN = SOCIAL NETWORK
-
-// Nouvelle instance de la classe APIHandler
-const apiHandler = new APIHandler();
-
-const NetworkCom = props => {
-  const [networkState, setNetworkState] = useState([]);
-
-  //On Fetch les infos Social network de cet artist ou ce festival
-  useEffect(() => {
-    try {
-      const fetchNetworkInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/networks/${props.pageId}`);
-        setNetworkState(dbRes.data);
-      };
-      fetchNetworkInfos();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [props.pageId]);
-
+const NetworkModule = props => {
   // Ajouter un Social Network
   const addSN = (pageName, id) => {
     return `/add/video/${pageName}/${id}`;
@@ -36,7 +15,7 @@ const NetworkCom = props => {
   if (!props.modifyState) noShow = { display: "none" };
 
   // SI pas de networkState, Cela veut dire que rien na été ajouté comme SN pour cet artiste ou ce festival
-  if (!networkState) {
+  if (props.networksInfos.length === 0) {
     return (
       <div className={classes.pageComp}>
         <h2>Pas encore d'infos réseaux sociaux.</h2>
@@ -53,9 +32,9 @@ const NetworkCom = props => {
         </Link>
       </div>
       <ul>
-        {networkState.map(oneSN => {
+        {props.networksInfos.map((oneSN, index) => {
           return (
-            <div key={oneSN.id}>
+            <div key={index}>
               <li>
                 <a href={oneSN.url}>
                   <p>{oneSN.category}</p>
@@ -78,4 +57,4 @@ const NetworkCom = props => {
   );
 };
 
-export default NetworkCom;
+export default NetworkModule;

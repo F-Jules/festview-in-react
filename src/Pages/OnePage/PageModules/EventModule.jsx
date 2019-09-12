@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from "react";
-import APIHandler from "../../../Api/ApiHandler";
+import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./PageComp.css";
+import classes from "./PageModule.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
-// Nouvelle instance de la classe APIHandler
-const apiHandler = new APIHandler();
-
-const ProgComp = props => {
-  const [progState, setProgState] = useState([]);
-
-  //On Fetch les infos Programmation de cet artist ou ce festival
-  useEffect(() => {
-    try {
-      const fetchProgInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/event/${props.pageId}`);
-        setProgState(dbRes.data);
-      };
-      fetchProgInfos();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [props.pageId]);
-
+const EventModule = props => {
   // Ajouter une programmation
   const addProgr = (pageName, id) => {
     return `/add/prog/${pageName}/${id}`;
@@ -34,7 +15,7 @@ const ProgComp = props => {
   if (!props.modifyState) noShow = { display: "none" };
 
   // SI pas de progState, Cela veut dire que rien na été ajouté comme Programmation pour cet artiste ou ce festival
-  if (!progState) {
+  if (props.eventsInfos.length === 0) {
     return (
       <div className={classes.pageComp}>
         <h2>Pas encore de programmation prévue ou renseignée</h2>
@@ -51,7 +32,7 @@ const ProgComp = props => {
         </Link>
       </div>
       <ul>
-        {progState.map(oneProgram => {
+        {props.eventsInfos.map(oneProgram => {
           return (
             <div key={oneProgram.id}>
               <li>{oneProgram.featured_program_page_name}</li>
@@ -72,4 +53,4 @@ const ProgComp = props => {
   );
 };
 
-export default ProgComp;
+export default EventModule;

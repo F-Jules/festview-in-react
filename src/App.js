@@ -16,7 +16,7 @@ import VideoForm from "./Components/Forms/PageFrom/VideoForm";
 import SocialForm from "./Components/Forms/PageFrom/NetworkForm";
 import BarForm from "./Components/Forms/PageFrom/BarForm";
 import CreateForm from "./Components/Forms/CreateForm/CreateForm";
-import LoadingComp from "./Components/Extras/LoadingComp";
+import LoadingComponent from "./Components/Extras/LoadingComponent";
 
 const App = () => {
   return (
@@ -59,7 +59,7 @@ const App = () => {
 
         {/* -------------Random and test---------------  */}
 
-        <Route path="/loading" component={LoadingComp} />
+        <Route path="/loading" component={LoadingComponent} />
       </Switch>
       <Footer />
     </div>

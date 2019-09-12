@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../../App.css";
 import Loader from "react-loader-spinner";
 
-const LoadingComp = () => {
+const LoadingComponent = () => {
   return (
     <div className={classes.loadDiv}>
       <div className={classes.loadContent}>
@@ -13,4 +13,4 @@ const LoadingComp = () => {
   );
 };
 
-export default LoadingComp;
+export default LoadingComponent;

@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from "react";
-import APIHandler from "../../../Api/ApiHandler";
+import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./PageComp.css";
+import classes from "./PageModule.css";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
-// Nouvelle instance de la classe APIHandler
-const apiHandler = new APIHandler();
-
-const VideoComp = props => {
-  const [videoState, setVideoState] = useState([]);
-
-  //On Fetch les infos Videos de cet artist ou ce festival
-  useEffect(() => {
-    try {
-      const fetchVideoInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/videos/${props.pageId}`);
-        setVideoState(dbRes.data);
-      };
-      fetchVideoInfos();
-    } catch (err) {
-      console.log(err);
-    }
-  }, [props.pageId]);
-
+const VideoModule = props => {
   // Ajouter une vidéo
   const addVideo = (pageName, id) => {
     return `/add/video/${pageName}/${id}`;
@@ -34,7 +15,7 @@ const VideoComp = props => {
   if (!props.modifyState) noShow = { display: "none" };
 
   // SI pas de videoState, Cela veut dire que rien na été ajouté comme vidéo pour cet artiste ou ce festival
-  if (!videoState) {
+  if (props.videosInfos.length === 0) {
     return (
       <div className={classes.pageComp}>
         <h2>Pas encore de Vidéos</h2>
@@ -51,9 +32,9 @@ const VideoComp = props => {
         </Link>
       </div>
       <ul>
-        {videoState.map(oneVideo => {
+        {props.videosInfos.map(oneVideo => {
           return (
-            <div key={oneVideo.id}>
+            <div key={oneVideo.embeddedUrl}>
               <iframe
                 src={oneVideo.video_embedded_url}
                 frameBorder="10"
@@ -76,4 +57,4 @@ const VideoComp = props => {
   );
 };
 
-export default VideoComp;
+export default VideoModule;

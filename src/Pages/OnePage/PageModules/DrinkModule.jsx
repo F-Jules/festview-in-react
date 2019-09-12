@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from "react";
-import APIHandler from "../../../Api/ApiHandler";
-import classes from "./PageComp.css";
+import React from "react";
+import classes from "./PageModule.css";
 import { Link } from "react-router-dom";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
-// Nouvelle instance de la classe APIHandler
-const apiHandler = new APIHandler();
-
-const BarComp = props => {
-  const [barState, setBarState] = useState([]);
-
-  //On Fetch les infos du bar de CE festival
-  useEffect(() => {
-    try {
-      const fetchBarInfos = async () => {
-        const dbRes = await apiHandler.get(`/api/drinks/${props.pageId}`);
-        setBarState(dbRes.data);
-      };
-      fetchBarInfos();
-    } catch (err) {
-      console.log("BAR INFOS ERROR", err);
-    }
-  }, [props.pageId]);
-
+const DrinkModule = props => {
   // Ajouter un bar.
   const addBar = (pageName, id) => {
     return `/add/bar/${pageName}/${id}`;
@@ -34,10 +15,10 @@ const BarComp = props => {
   if (!props.modifyState) noShow = { display: "none" };
 
   // SI pas de BarState, Cela veut dire que rien na été ajouté pour en infos bar pour ce festival
-  if (!barState) {
+  if (props.drinksInfos.length === 0) {
     return (
       <div className={classes.pageComp}>
-        <h2>Pas encore d'infos réseaux sociaux.</h2>
+        <h2>Pas encore d'infos sur le bar et ses boissons.</h2>
       </div>
     );
   }
@@ -51,7 +32,7 @@ const BarComp = props => {
         </Link>
       </div>
       <ul>
-        {barState.map(oneDrink => {
+        {props.drinksInfos.map(oneDrink => {
           return (
             <div key={oneDrink.id}>
               <li>
@@ -76,4 +57,4 @@ const BarComp = props => {
   );
 };
 
-export default BarComp;
+export default DrinkModule;
