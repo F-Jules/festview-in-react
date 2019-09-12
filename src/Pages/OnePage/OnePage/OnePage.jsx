@@ -75,7 +75,7 @@ class OnePage extends Component {
         />
 
         {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
-        {this.state.pageInfos.albums ? (
+        {this.state.pageInfos.entityName === "Artist" ? (
           <AlbumModule
             albumInfos={this.state.pageInfos.albums}
             pageName={this.state.pageInfos.pseudo}
