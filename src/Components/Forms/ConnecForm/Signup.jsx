@@ -14,6 +14,10 @@ class Signup extends Component {
     msg: ""
   };
 
+  checkConfirmedPassword = () => {
+    if (this.state.password === this.state.confirmedPassword) return true;
+  };
+
   handlePost = evt => {
     evt.preventDefault();
     const userInfos = {
@@ -22,24 +26,29 @@ class Signup extends Component {
       password: this.state.password,
       betaPassword: this.state.betaPassword
     };
-    apiHandler
-      .post("/api/users", userInfos)
-      .then(dbRes => {
-        console.log(dbRes);
-        if (dbRes.status === 200 || dbRes.status === 201) {
-          this.props.history.push({
-            pathname: "/login",
-            state: { msg: "Account created succesfully." }
-          });
-        }
-      })
-      .catch(dbErr => {
-        console.log(dbErr.response);
-        if (dbErr.response.status === 400 || dbErr.response.status === 500) {
-          this.setState({
-            msg: dbErr.response.data["hydra:description"].toUpperCase()
-          });
-        }
+    if (this.checkConfirmedPassword()) {
+      apiHandler
+        .post("/api/users", userInfos)
+        .then(dbRes => {
+          console.log(dbRes);
+          if (dbRes.status === 200 || dbRes.status === 201) {
+            this.props.history.push({
+              pathname: "/login",
+              state: { msg: "Account created succesfully." }
+            });
+          }
+        })
+        .catch(dbErr => {
+          console.log(dbErr.response);
+          if (dbErr.response.status === 400 || dbErr.response.status === 500) {
+            this.setState({
+              msg: dbErr.response.data["hydra:description"].toUpperCase()
+            });
+          }
+        });
+    } else
+      this.setState({
+        msg: "Oups, it seems that your password is not matching."
       });
   };
 
