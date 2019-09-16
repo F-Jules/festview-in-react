@@ -22,7 +22,6 @@ const AllPages = props => {
     try {
       const fetchDataFromApi = async () => {
         const dBres = await apiHandler.get(`/api/${getEntities(props)}`);
-        console.log(dBres.status);
         setDataState(dBres.data["hydra:member"]);
       };
       fetchDataFromApi();

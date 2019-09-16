@@ -11,11 +11,10 @@ const FeedBack = props => {
     color: "chartreuse",
     marginTop: "10px"
   };
-  console.log(props.msg.includes("succesfully"));
   return (
     <div
       style={
-        props.msg.length > 0
+        props.msg
           ? props.msg.includes("succesfully")
             ? failure
             : success

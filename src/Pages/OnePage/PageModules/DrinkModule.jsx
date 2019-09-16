@@ -32,9 +32,9 @@ const DrinkModule = props => {
         </Link>
       </div>
       <ul>
-        {props.drinksInfos.map(oneDrink => {
+        {props.drinksInfos.map((oneDrink, index) => {
           return (
-            <div key={oneDrink.id}>
+            <div key={index}>
               <li>
                 <a href={oneDrink.url}>
                   <p>{oneDrink.category}</p>
