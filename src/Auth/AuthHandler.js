@@ -1,10 +1,17 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+const signup = userInfos => {
+  return axios.post(
+    `${process.env.REACT_APP_API_ENTRYPOINT}/api/users`,
+    userInfos
+  );
+};
+
 const authenticate = credentitials => {
   return axios
     .post(
-      `${process.env.REACT_APP_BACKEND_URL}/authentication_token`,
+      `${process.env.REACT_APP_API_ENTRYPOINT}/authentication_token`,
       credentitials
     )
     .then(res => res.data.token)
@@ -41,12 +48,13 @@ const tokenSetUp = () => {
 };
 
 const setAxiosHeader = token => {
-  axios.defaults.headers["Authorization"] = "Bearer" + token;
+  axios.defaults.headers["Authorization"] = "Bearer " + token;
 };
 
 export default {
   authenticate,
   logout,
   tokenSetUp,
-  isAuthenticated
+  isAuthenticated,
+  signup
 };

@@ -3,8 +3,8 @@ import classes from "./OnePageHeader.css";
 import { Link } from "react-router-dom";
 import plusIcon from "../../../Assets/images/icon-plus.png";
 
-function getPageAdress(type, page, id) {
-  return `/edit/${type}/${page}/${id}`;
+function getPageAdress(entity, page, id) {
+  return `/edit/${entity}/${page}/${id}`;
 }
 
 function splitDate(oneDate) {
@@ -15,23 +15,42 @@ function splitDate(oneDate) {
     .join("-");
 }
 
+const getEntity = props => {
+  return props.pageInfos.entityName.toLowerCase();
+};
+
 const OnePageHeader = props => {
-  const { pageInfos, modifyState } = props;
   let noShow;
-  if (!modifyState) noShow = { display: "none" };
+  if (!props.modifyState) noShow = { display: "none" };
   return (
     <div className={classes.onePageHeader}>
-      <img alt={pageInfos.profilePictureAlt} src={pageInfos.profilePicture} />
-      <h1>{pageInfos.name}</h1>
-      <h3>@{pageInfos.slug}</h3>
-      {pageInfos.title === "festival" ? (
+      <img
+        alt={props.pageInfos.profilePictureAlt}
+        src={props.pageInfos.profilePicture}
+      />
+      <h1>{props.pageInfos.name}</h1>
+      <h3>@{props.pageInfos.slug}</h3>
+      {props.pageInfos.title === "festival" ? (
         <h3>
-          {splitDate(pageInfos.event_starting_date)} /{" "}
-          {splitDate(pageInfos.event_ending_date)}
+          {splitDate(props.pageInfos.event_starting_date)} /{" "}
+          {splitDate(props.pageInfos.event_ending_date)}
         </h3>
       ) : null}
       <div className={classes.bgc} style={noShow}>
-        <Link to={getPageAdress(pageInfos.title, pageInfos.slug, pageInfos.id)}>
+        <Link
+          to={{
+            pathname: getPageAdress(
+              getEntity(props),
+              props.pageInfos.slug,
+              props.id
+            ),
+            state: {
+              name: props.pageInfos.name,
+              entity: props.pageInfos.entityName,
+              picture: props.pageInfos.profilePicture
+            }
+          }}
+        >
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>

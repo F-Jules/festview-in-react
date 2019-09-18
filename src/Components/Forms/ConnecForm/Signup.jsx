@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import APIHandler from "../../../Api/ApiHandler";
 import classes from "../form.css";
 import TitleFormCo from "../Composants/TitleForm/TitleFormCo";
 import Input from "../Composants/Input/InputForm";
 import Button from "../Composants/Buttons/Button";
 import FeedBack from "./FeedBack";
-
-const apiHandler = new APIHandler();
+import AuthHandler from "../../../Auth/AuthHandler";
 
 class Signup extends Component {
   state = {
@@ -27,8 +25,7 @@ class Signup extends Component {
       betaPassword: this.state.betaPassword
     };
     if (this.checkConfirmedPassword()) {
-      apiHandler
-        .post("/api/users", userInfos)
+      AuthHandler.signup(userInfos)
         .then(dbRes => {
           console.log(dbRes);
           if (dbRes.status === 200 || dbRes.status === 201) {
@@ -39,7 +36,7 @@ class Signup extends Component {
           }
         })
         .catch(dbErr => {
-          console.log(dbErr.response);
+          console.log("YOYO", dbErr.response);
           if (dbErr.response.status === 400 || dbErr.response.status === 500) {
             this.setState({
               msg: dbErr.response.data["hydra:description"].toUpperCase()

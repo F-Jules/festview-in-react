@@ -23,7 +23,7 @@ const Login = props => {
         props.history.replace(props.history.location.state.from.pathname);
       else props.history.replace("/");
     } catch (err) {
-      if (err.response.status) {
+      if (err.response) {
         if (err.response.status !== 200 || err.response.status !== 201) {
           if (err.response.data.error)
             setErrorMsg(err.response.data.error.exception[0].message);
@@ -31,7 +31,7 @@ const Login = props => {
             setErrorMsg(err.response.data.message);
           else setErrorMsg("Oups... Something went wrong..");
         }
-      }
+      } else console.log(err);
     }
   };
 

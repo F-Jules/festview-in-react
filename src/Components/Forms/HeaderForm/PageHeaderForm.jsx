@@ -1,44 +1,47 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import APIHandler from "../../../Api/ApiHandler";
 import InputForm from "../Composants/Input/InputForm";
 import SelectForm from "../Composants/Input/SelectForm";
 import classes from "../form.css";
 import TitleForm from "../Composants/TitleForm/TitleForm";
 import Button from "../Composants/Buttons/Button";
+import Axios from "axios";
 
-const apiHandler = new APIHandler();
+const apiHanlder = new APIHandler();
 
-class PageHeaderForm extends Component {
-  state = { name: "", category: "", pic: "", startingDate: "", endingDate: "" };
+const PageHeaderForm = props => {
+  const [dataToModify, setDataToModify] = useState({
+    name: props.location.state.name,
+    profilePicture: props.location.state.picture
+  });
 
-  componentDidMount = async () => {
-    let dbRes = await apiHandler.get(
-      `/api/pages/${this.props.match.params.id}/headers`
-    );
-    const res = dbRes.data;
-    console.log(dbRes);
-    if (res.title === "artist") {
-      this.setState({
-        name: res.name,
-        category: res.category,
-        pic: res.profile_picture_file
-      });
-    } else if (res.title === "festival") {
-      this.setState({
-        name: res.name,
-        startingDate: res.event_starting_date,
-        endingDate: res.event_ending_date,
-        pic: res.profile_picture_file
-      });
+  const getEntity = infos => {
+    if (infos.location.state.entity === "Artist") return "artists";
+    return "organizers";
+  };
+
+  console.log(dataToModify);
+
+  const handlePost = async evt => {
+    console.log(dataToModify);
+    evt.preventDefault();
+    try {
+      const dbRes = await apiHanlder.replace(
+        `/api/${getEntity(props)}/${props.match.params.id}`,
+        dataToModify
+      );
+      console.log(dbRes);
+    } catch (err) {
+      console.log(err.response);
     }
   };
 
-  handleInput = evt => {
-    console.log(evt.target);
-    this.setState({ [evt.target.name]: evt.target.value });
+  const handleInput = evt => {
+    evt.preventDefault();
+    setDataToModify({ ...dataToModify, [evt.target.name]: evt.target.value });
   };
 
-  splitDate = oneDate => {
+  const splitDate = oneDate => {
     const formated = oneDate.split("T");
     return formated[0]
       .split("-")
@@ -46,75 +49,71 @@ class PageHeaderForm extends Component {
       .join("-");
   };
 
-  render() {
-    const { name, category, pic, startingDate, endingDate } = this.state;
-    return this.props.match.params.type === "artist" ? (
-      <div>
-        <TitleForm name={name} />
-        <form action="post" className={classes.form}>
-          <InputForm
-            text={"Nom de l'Artiste*"}
-            type="text"
-            name="name"
-            value={name}
-            handleInput={this.handleInput}
-          />
-          <SelectForm
-            text="Sélectionnez*"
-            type="submit"
-            name="category"
-            value={category}
-            option={["artist", "band"]}
-            display={["Artist solo", "Groupe"]}
-            handleInput={this.handleInput}
-          />
-          <InputForm
-            text={"Url de la photo de profil"}
-            type="url"
-            name="pic"
-            value={pic}
-            handleInput={this.handleInput}
-          />
-          <Button text="Valider les modifications" />
-        </form>
-      </div>
-    ) : (
-      <div>
-        <TitleForm name={name} />
-        <form action="post" className={classes.form}>
-          <InputForm
-            text="Nom du festival*"
-            type="text"
-            name="name"
-            value={name}
-            handleInput={this.handleInput}
-          />
-          <InputForm
-            text="Date de début*"
-            type="date"
-            name={startingDate}
-            value={this.splitDate(startingDate)}
-            handleInput={this.handleInput}
-          />
-          <InputForm
-            text="Date de fin*"
-            type="date"
-            name={endingDate}
-            value={this.splitDate(endingDate)}
-            handleInput={this.handleInput}
-          />
-          <InputForm
-            text="Url de la photo de profil"
-            type="url"
-            name="pic"
-            value={pic}
-            handleInput={this.handleInput}
-          />
-          <Button text="Valider les modifications" />
-        </form>
-      </div>
-    );
-  }
-}
+  return props.location.state.entity === "Artist" ? (
+    <div>
+      <TitleForm name={props.location.state.name} />
+      <form
+        onSubmit={handlePost}
+        className={classes.form}
+        onChange={handleInput}
+      >
+        <InputForm
+          text={"Nom de l'Artiste*"}
+          type="text"
+          name="name"
+          value={dataToModify.name}
+        />
+        <SelectForm
+          text="Sélectionnez*"
+          type="submit"
+          name="category"
+          option={["-- Please, select one: --", "artist", "band"]}
+        />
+        <InputForm
+          text={"Url de la photo de profil"}
+          type="url"
+          name="profilePicture"
+          value={dataToModify.profilePicture}
+        />
+        <Button text="Valider les modifications" />
+      </form>
+    </div>
+  ) : (
+    <div>
+      {/* <TitleForm name={name} />
+      <form action="post" className={classes.form}>
+        <InputForm
+          text="Nom du festival*"
+          type="text"
+          name="name"
+          value={name}
+          handleInput={handleInput}
+        />
+        <InputForm
+          text="Date de début*"
+          type="date"
+          name={startingDate}
+          value={splitDate(startingDate)}
+          handleInput={handleInput}
+        />
+        <InputForm
+          text="Date de fin*"
+          type="date"
+          name={endingDate}
+          value={splitDate(endingDate)}
+          handleInput={handleInput}
+        />
+        <InputForm
+          text="Url de la photo de profil"
+          type="url"
+          name="pic"
+          value={pic}
+          handleInput={handleInput}
+        />
+        <Button text="Valider les modifications" />
+      </form> */}
+    </div>
+  );
+};
 
 export default PageHeaderForm;

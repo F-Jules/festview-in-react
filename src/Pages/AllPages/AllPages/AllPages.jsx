@@ -26,7 +26,7 @@ const AllPages = props => {
       };
       fetchDataFromApi();
     } catch (err) {
-      console.log(err);
+      console.log("HELLLLLLL", err.response);
     }
   }, [props]);
 

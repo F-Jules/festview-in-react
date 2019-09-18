@@ -17,10 +17,14 @@ export default class APIHandler extends HTTPRequestChecker {
   constructor(url) {
     super(url);
     this.name = "APIHandler";
-    this.url = url || process.env.REACT_APP_BACKEND_URL;
+    this.url = url || process.env.REACT_APP_API_ENTRYPOINT;
     if (!this.url) throw new Error("A URL must be specified as target domain.");
+
     this.api = axios.create({
-      baseURL: this.url
+      baseURL: this.url,
+      headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("authToken")
+      }
     });
   }
 
@@ -28,9 +32,7 @@ export default class APIHandler extends HTTPRequestChecker {
     super.checkRoute(route, config);
     if (payload && typeof payload !== "object")
       throw new Error(
-        `${
-          this.name
-        } post() function expects payload argument to be of type Object`
+        `${this.name} post() function expects payload argument to be of type Object`
       );
     return this.api.post(route, payload);
   }
@@ -41,9 +43,7 @@ export default class APIHandler extends HTTPRequestChecker {
     if (query) {
       if (typeof query !== "object")
         throw new Error(
-          `${
-            this.name
-          } get() function expects query argument to be of type Object`
+          `${this.name} get() function expects query argument to be of type Object`
         );
       let count = 0;
       let keyCount = Object.keys(query);
@@ -62,9 +62,7 @@ export default class APIHandler extends HTTPRequestChecker {
     super.checkRoute(route, config);
     if (!payload || typeof payload !== "object")
       throw new Error(
-        `${
-          this.name
-        } update() function expects payload argument to be of type Object`
+        `${this.name} update() function expects payload argument to be of type Object`
       );
     return this.api.patch(route);
   }
@@ -73,9 +71,7 @@ export default class APIHandler extends HTTPRequestChecker {
     super.checkRoute(route, config);
     if (!payload || typeof payload !== "object")
       throw new Error(
-        `${
-          this.name
-        } replace() function expects payload argument to be of type Object`
+        `${this.name} replace() function expects payload argument to be of type Object`
       );
     return this.api.put(route);
   }
@@ -84,9 +80,7 @@ export default class APIHandler extends HTTPRequestChecker {
     super.checkRoute(route, config);
     if (!id)
       throw new Error(
-        `${
-          this.name
-        } destroy() function expects the id of the ressource targeted for deletion`
+        `${this.name} destroy() function expects the id of the ressource targeted for deletion`
       );
     return this.api.delete(`${route}/${id}`);
   }

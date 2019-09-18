@@ -52,13 +52,17 @@ const OnePage = props => {
     creatorInfos.length === 0
   )
     return <LoadingComponent />;
-
+  console.log(pageInfos);
   return (
     // OnePage (Artist ou Festival) contient tous ces modules.
 
     <div className={classes.mainDiv}>
       <div className={classes.header}>
-        <OnePageHeader pageInfos={pageInfos} modifyState={enableModify} />
+        <OnePageHeader
+          pageInfos={pageInfos}
+          modifyState={modifyState}
+          id={props.match.params.id}
+        />
         <Contributor creatorInfos={creatorInfos} editorsInfos={editorsInfos} />
       </div>
       <PageNavBar
@@ -69,7 +73,7 @@ const OnePage = props => {
       <EventModule
         eventsInfos={pageInfos.events}
         pageName={pageInfos.pseudo}
-        modifyState={enableModify}
+        modifyState={modifyState}
       />
 
       {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
@@ -77,25 +81,25 @@ const OnePage = props => {
         <AlbumModule
           albumInfos={pageInfos.albums}
           pageName={pageInfos.pseudo}
-          modifyState={enableModify}
+          modifyState={modifyState}
         />
       ) : (
         <DrinkModule
           drinksInfos={pageInfos.drinks}
           pageName={pageInfos.pseudo}
-          modifyState={enableModify}
+          modifyState={modifyState}
         />
       )}
 
       <VideoModule
         videosInfos={pageInfos.videos}
         pageName={pageInfos.pseudo}
-        modifyState={enableModify}
+        modifyState={modifyState}
       />
       <NetworkModule
         networksInfos={pageInfos.networks}
         pageName={pageInfos.pseudo}
-        modifyState={enableModify}
+        modifyState={modifyState}
       />
     </div>
   );
