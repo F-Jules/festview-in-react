@@ -19,9 +19,14 @@ const Login = props => {
       await AuthHandler.authenticate(credentialsState);
       setErrorMsg("");
       setLogState(true);
-      if (props.history.location.state.from)
+      if (
+        props.history.location.state &&
+        props.history.location.state.length > 0
+      ) {
         props.history.replace(props.history.location.state.from.pathname);
-      else props.history.replace("/");
+      } else {
+        props.history.replace("/");
+      }
     } catch (err) {
       if (err.response) {
         if (err.response.status !== 200 || err.response.status !== 201) {

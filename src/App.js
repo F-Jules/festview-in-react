@@ -10,11 +10,11 @@ import SearchResultPage from "./Pages/AllPages/SearchResult/SearchResultPage";
 import PageHeaderForm from "./Components/Forms/HeaderForm/PageHeaderForm";
 import Login from "./Components/Forms/ConnecForm/Login";
 import Signup from "./Components/Forms/ConnecForm/Signup";
-import ProgForm from "./Components/Forms/PageFrom/ProgForm";
-import MusicForm from "./Components/Forms/PageFrom/MusicForm";
+import EventForm from "./Components/Forms/PageFrom/EventForm";
+import AlbumForm from "./Components/Forms/PageFrom/AlbumForm";
 import VideoForm from "./Components/Forms/PageFrom/VideoForm";
-import SocialForm from "./Components/Forms/PageFrom/NetworkForm";
-import BarForm from "./Components/Forms/PageFrom/BarForm";
+import NetworkForm from "./Components/Forms/PageFrom/NetworkForm";
+import DrinkForm from "./Components/Forms/PageFrom/DrinkForm";
 import CreateForm from "./Components/Forms/CreateForm/CreateForm";
 import LoadingComponent from "./Components/Extras/LoadingComponent";
 import AuthHandler from "./Auth/AuthHandler";
@@ -69,13 +69,13 @@ const App = () => {
             path={["/create/festival", "/create/artist"]}
             component={CreateForm}
           />
-          <ProtectedRoute path="/add/prog/:page/:id" component={ProgForm} />
-          <ProtectedRoute path="/add/album/:page/:id" component={MusicForm} />
-          <ProtectedRoute path="/add/barInfos/:page/:id" component={BarForm} />
+          <ProtectedRoute path="/add/prog/:page/:id" component={EventForm} />
+          <ProtectedRoute path="/add/album/:page/:id" component={AlbumForm} />
+          <ProtectedRoute path="/add/drinks" component={DrinkForm} />
           <ProtectedRoute path="/add/video/:page/:id" component={VideoForm} />
           <ProtectedRoute
             path="/add/network/:page/:id"
-            component={SocialForm}
+            component={NetworkForm}
           />
 
           {/* -------------Random and test---------------  */}

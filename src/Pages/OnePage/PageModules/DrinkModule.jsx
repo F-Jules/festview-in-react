@@ -5,11 +5,6 @@ import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
 const DrinkModule = props => {
-  // Ajouter un bar.
-  const addBar = (pageName, id) => {
-    return `/add/bar/${pageName}/${id}`;
-  };
-
   // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module bar est en display none
   let noShow;
   if (!props.modifyState) noShow = { display: "none" };
@@ -27,7 +22,15 @@ const DrinkModule = props => {
     <div className={classes.pageComp}>
       <h2>Bars</h2>
       <div className={classes.bgc} style={noShow}>
-        <Link to={addBar(props.pageName, props.pageId)}>
+        <Link
+          to={{
+            pathname: "/add/drinks",
+            state: {
+              pageId: props.pageId,
+              name: props.pageName
+            }
+          }}
+        >
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>

@@ -51,7 +51,6 @@ const SearchResult = props => {
   // SI PAS D'Infos CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
   if (dataBaseResponse.length === 0 || !dataBaseResponse)
     return <LoadingComponent />;
-  console.log(dataBaseResponse);
   return (
     <div className={classes.mainDiv}>
       <label htmlFor="">

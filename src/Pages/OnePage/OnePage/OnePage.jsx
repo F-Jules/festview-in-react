@@ -86,7 +86,8 @@ const OnePage = props => {
       ) : (
         <DrinkModule
           drinksInfos={pageInfos.drinks}
-          pageName={pageInfos.pseudo}
+          pageName={pageInfos.name}
+          pageId={pageInfos["@id"]}
           modifyState={modifyState}
         />
       )}

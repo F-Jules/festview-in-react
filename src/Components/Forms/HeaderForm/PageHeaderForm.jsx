@@ -16,21 +16,26 @@ const PageHeaderForm = props => {
   });
 
   const getEntity = infos => {
-    if (infos.location.state.entity === "Artist") return "artists";
+    if (infos === "Artist") return "artists";
     return "organizers";
   };
-
-  console.log(dataToModify);
 
   const handlePost = async evt => {
     console.log(dataToModify);
     evt.preventDefault();
     try {
-      const dbRes = await apiHanlder.replace(
-        `/api/${getEntity(props)}/${props.match.params.id}`,
+      const dbRes = await Axios.put(
+        `https://localhost:8443/api/${getEntity(props.location.state.entity)}/${
+          props.match.params.id
+        }`,
         dataToModify
       );
       console.log(dbRes);
+      props.history.replace(
+        `/details/${getEntity(dbRes.data.entityName)}/${dbRes.data.slug}/${
+          dbRes.data.id
+        }`
+      );
     } catch (err) {
       console.log(err.response);
     }
@@ -41,13 +46,13 @@ const PageHeaderForm = props => {
     setDataToModify({ ...dataToModify, [evt.target.name]: evt.target.value });
   };
 
-  const splitDate = oneDate => {
-    const formated = oneDate.split("T");
-    return formated[0]
-      .split("-")
-      .reverse()
-      .join("-");
-  };
+  // const splitDate = oneDate => {
+  //   const formated = oneDate.split("T");
+  //   return formated[0]
+  //     .split("-")
+  //     .reverse()
+  //     .join("-");
+  // };
 
   return props.location.state.entity === "Artist" ? (
     <div>
@@ -80,16 +85,16 @@ const PageHeaderForm = props => {
     </div>
   ) : (
     <div>
-      {/* <TitleForm name={name} />
+      <TitleForm name={props.location.state.name} />
       <form action="post" className={classes.form}>
         <InputForm
           text="Nom du festival*"
           type="text"
           name="name"
-          value={name}
+          value={dataToModify.name}
           handleInput={handleInput}
         />
-        <InputForm
+        {/* <InputForm
           text="Date de début*"
           type="date"
           name={startingDate}
@@ -102,16 +107,16 @@ const PageHeaderForm = props => {
           name={endingDate}
           value={splitDate(endingDate)}
           handleInput={handleInput}
-        />
+        /> */}
         <InputForm
           text="Url de la photo de profil"
           type="url"
           name="pic"
-          value={pic}
+          value={dataToModify.profilePicture}
           handleInput={handleInput}
         />
         <Button text="Valider les modifications" />
-      </form> */}
+      </form>
     </div>
   );
 };
