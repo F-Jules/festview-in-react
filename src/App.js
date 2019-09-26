@@ -69,14 +69,11 @@ const App = () => {
             path={["/create/festival", "/create/artist"]}
             component={CreateForm}
           />
-          <ProtectedRoute path="/add/prog/:page/:id" component={EventForm} />
-          <ProtectedRoute path="/add/album/:page/:id" component={AlbumForm} />
-          <ProtectedRoute path="/add/drinks" component={DrinkForm} />
-          <ProtectedRoute path="/add/video/:page/:id" component={VideoForm} />
-          <ProtectedRoute
-            path="/add/network/:page/:id"
-            component={NetworkForm}
-          />
+          <ProtectedRoute path="/add/event/:slug" component={EventForm} />
+          <ProtectedRoute path="/add/album/:slug" component={AlbumForm} />
+          <ProtectedRoute path="/add/drinks/:slug" component={DrinkForm} />
+          <ProtectedRoute path="/add/video/:slug" component={VideoForm} />
+          <ProtectedRoute path="/add/network/:slug" component={NetworkForm} />
 
           {/* -------------Random and test---------------  */}
 

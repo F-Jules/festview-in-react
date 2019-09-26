@@ -73,6 +73,7 @@ const PageHeaderForm = props => {
           type="submit"
           name="category"
           option={["-- Please, select one: --", "artist", "band"]}
+          display={["-- Please, select one: --", "Solo", "Groupe"]}
         />
         <InputForm
           text={"Url de la photo de profil"}

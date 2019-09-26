@@ -1,97 +1,86 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import classes from "../form.css";
 import CompTitle from "../Composants/TitleForm/CompTitleForm";
 import Input from "../Composants/Input/InputForm";
 import Select from "../Composants/Input/SelectForm";
 import AddCompButton from "../Composants/Buttons/AddContentButton";
-import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
 import APIHandler from "../../../Api/ApiHandler";
 
 const apiHandler = new APIHandler();
-class SocialForm extends Component {
-  state = {
-    formArr: [],
-    title: "networks",
-    category: "",
-    url: "",
-    user_id: "5cf6707352f1a800926e5442"
-  };
 
-  handleSubmit = async evt => {
+const SocialForm = props => {
+  const [pageInfos] = useState(props.location.state.pageId);
+
+  const [networkInfos, setNetworkInfos] = useState({});
+
+  const handlePost = async evt => {
     evt.preventDefault();
-    const postModule = await apiHandler.post(
-      `/api/pages/${this.props.match.params.id}/modules`,
-      this.state
-    );
-    console.log(postModule);
+    pageInfos.includes("artists")
+      ? (networkInfos.performer = pageInfos)
+      : (networkInfos.organizer = pageInfos);
+    try {
+      const dbRes = await apiHandler.post("/api/networks", networkInfos);
+      networkInfos.pageId.includes("artists")
+        ? props.history.replace(
+            `/details/artists/${dbRes.data.performer.slug}/${getId(
+              networkInfos.pageId
+            )}`
+          )
+        : props.history.replace(
+            `/details/organizers/${dbRes.data.organizer.slug}/${getId(
+              networkInfos.pageId
+            )}`
+          );
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
-  handleInput = evt => {
-    this.setState({ [evt.target.name]: evt.target.value });
+  const handleInput = evt => {
+    evt.preventDefault();
+    setNetworkInfos({ ...networkInfos, [evt.target.name]: evt.target.value });
   };
 
-  addForm = form => {
-    this.state.formArr.push(form);
-    this.setState({ formArr: this.state.formArr });
+  const networks = [
+    "Dailymotion",
+    "Deezer",
+    "Facebook",
+    "Instagram",
+    "Last.fm",
+    "Resident Advisor",
+    "SoundCloud",
+    "Spotify",
+    "Twitter",
+    "YouTube"
+  ];
+
+  const getId = infos => {
+    return parseInt(infos.match(/\d+/g));
   };
 
-  removeForm = () => {
-    if (this.state.formArr.length > 0) this.state.formArr.pop();
-    this.setState({ formArr: this.state.formArr });
-  };
-
-  render() {
-    const name = this.props.match.params.page.toUpperCase();
-    const { formArr } = this.state;
-    const newForm = (
+  return (
+    <div className={classes.form}>
+      <CompTitle name={props.location.state.name} text="vidéos" />
       <div className={classes.formItselft}>
-        <form action="post" onSubmit={this.handleSubmit}>
+        <form onSubmit={handlePost} onChange={handleInput}>
           <Select
             text="
             Nom du site*"
             type="submit"
             name="category"
-            option={[
-              "Dailymotion",
-              "Deezer",
-              "Facebook",
-              "Instagram",
-              "Last.fm",
-              "Resident Advisor",
-              "SoundCloud",
-              "Spotify",
-              "Twitter",
-              "Youtube"
-            ]}
-            handleInput={this.handleInput}
+            option={networks}
+            display={networks}
           />
-          <Input
-            text="Url*"
-            type="url"
-            name="url"
-            handleInput={this.handleInput}
-          />
+          <Input text="Url*" type="url" name="url" />
           <Button text="submit" />
+          <div style={{ borderTop: "1px solid grey", marginTop: "10px" }}>
+            <AddCompButton text="autre vidéo" />
+          </div>
         </form>
       </div>
-    );
-    return (
-      <div className={classes.form}>
-        <CompTitle name={name} text="vidéos" />
-        {newForm}
-        {formArr.map(oneEl => {
-          return oneEl;
-        })}
-        <CancelButton removeForm={this.removeForm} />
-        <AddCompButton
-          text="autre vidéo"
-          addAForm={this.addForm}
-          newForm={newForm}
-        />
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default SocialForm;

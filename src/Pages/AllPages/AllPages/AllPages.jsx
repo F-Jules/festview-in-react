@@ -37,10 +37,10 @@ const AllPages = props => {
       <h3>{getEntities(props)}</h3>
       <ul>
         {/* ON MAP AUTOUR DE CHAQUE INFOS (CHAQUE ARTISTE OU CHAQUE FESTIVAL ET ON PASSE LES INFOS RELATIVENT) */}
-        {dataState.map(oneData => {
+        {dataState.map((oneData, index) => {
           return (
             <OneItemComposant
-              key={oneData.slug}
+              key={index}
               entity={getEntities(props)}
               name={oneData.name}
               slug={oneData.slug}

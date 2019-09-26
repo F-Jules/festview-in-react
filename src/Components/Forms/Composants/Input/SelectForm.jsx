@@ -9,7 +9,6 @@ const InputForm = props => {
         className={classes.input}
         type={props.type}
         name={props.name}
-        onChange={props.handleInput}
         value={props.value}
       >
         {props.option.map((oneOption, index) => (

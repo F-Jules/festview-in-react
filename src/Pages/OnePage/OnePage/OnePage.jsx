@@ -43,8 +43,7 @@ const OnePage = props => {
     evt.preventDefault();
     setModifyState(!modifyState);
   };
-  // console.log("PAGE INFOS", pageInfos, creatorInfos, editorsInfos);
-  // SI PAS D'INFOS CHARGEES AU MOUNTING DU COMPOSANT (CAR ERREUR) CHARGER LE COMPOSANT LOADING
+
   if (
     !pageInfos ||
     pageInfos.length === 0 ||
@@ -52,10 +51,8 @@ const OnePage = props => {
     creatorInfos.length === 0
   )
     return <LoadingComponent />;
-  console.log(pageInfos);
-  return (
-    // OnePage (Artist ou Festival) contient tous ces modules.
 
+  return (
     <div className={classes.mainDiv}>
       <div className={classes.header}>
         <OnePageHeader
@@ -72,7 +69,9 @@ const OnePage = props => {
       />
       <EventModule
         eventsInfos={pageInfos.events}
-        pageName={pageInfos.pseudo}
+        pageName={pageInfos.name}
+        pageSlug={pageInfos.slug}
+        pageId={pageInfos["@id"]}
         modifyState={modifyState}
       />
 
@@ -80,26 +79,30 @@ const OnePage = props => {
       {pageInfos.entityName === "Artist" ? (
         <AlbumModule
           albumInfos={pageInfos.albums}
-          pageName={pageInfos.pseudo}
+          pageName={pageInfos.name}
+          pageSlug={pageInfos.slug}
+          pageId={pageInfos["@id"]}
           modifyState={modifyState}
         />
       ) : (
         <DrinkModule
           drinksInfos={pageInfos.drinks}
           pageName={pageInfos.name}
+          pageSlug={pageInfos.slug}
           pageId={pageInfos["@id"]}
           modifyState={modifyState}
         />
       )}
-
-      <VideoModule
+      {/* <VideoModule
         videosInfos={pageInfos.videos}
-        pageName={pageInfos.pseudo}
+        pageName={pageInfos.name}
         modifyState={modifyState}
-      />
+      /> */}
       <NetworkModule
         networksInfos={pageInfos.networks}
-        pageName={pageInfos.pseudo}
+        pageName={pageInfos.name}
+        pageSlug={pageInfos.slug}
+        pageId={pageInfos["@id"]}
         modifyState={modifyState}
       />
     </div>
