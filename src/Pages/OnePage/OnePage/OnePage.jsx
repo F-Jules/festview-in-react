@@ -75,7 +75,6 @@ const OnePage = props => {
         modifyState={modifyState}
       />
 
-      {/* si OnePage Artist ==> Module musique / Si OnePage Festival ==> Module Bar */}
       {pageInfos.entityName === "Artist" ? (
         <AlbumModule
           albumInfos={pageInfos.albums}
@@ -93,11 +92,13 @@ const OnePage = props => {
           modifyState={modifyState}
         />
       )}
-      {/* <VideoModule
+      <VideoModule
         videosInfos={pageInfos.videos}
         pageName={pageInfos.name}
+        pageSlug={pageInfos.slug}
+        pageId={pageInfos["@id"]}
         modifyState={modifyState}
-      /> */}
+      />
       <NetworkModule
         networksInfos={pageInfos.networks}
         pageName={pageInfos.name}

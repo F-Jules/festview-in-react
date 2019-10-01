@@ -6,6 +6,7 @@ import Input from "../Composants/Input/InputForm";
 import AddCompButton from "../Composants/Buttons/AddContentButton";
 import Button from "../Composants/Buttons/Button";
 import RadioForm from "../Composants/Input/RadioForm";
+import Feedback from "../ConnecForm/FeedBack";
 
 const apiHandler = new APIHandler();
 
@@ -15,6 +16,8 @@ const EventForm = props => {
   const [eventInfos, setEventInfos] = useState({
     category: "Live set "
   });
+
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [checkState, setCheckState] = useState(0);
 
@@ -36,7 +39,10 @@ const EventForm = props => {
             )}`
           );
     } catch (err) {
-      console.log(err.response);
+      if (err.response) {
+        console.log(err.response);
+        setErrorMsg(err.response.data["hydra:description"].toUpperCase());
+      } else console.log(err);
     }
   };
 
@@ -75,6 +81,7 @@ const EventForm = props => {
           </div>
         </form>
       </div>
+      <Feedback msg={errorMsg} />
     </div>
   );
 };

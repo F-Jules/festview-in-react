@@ -1,82 +1,86 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import APIHandler from "../../../Api/ApiHandler";
 import classes from "../form.css";
 import CompTitle from "../Composants/TitleForm/CompTitleForm";
 import Input from "../Composants/Input/InputForm";
 import Select from "../Composants/Input/SelectForm";
 import AddCompButton from "../Composants/Buttons/AddContentButton";
-import CancelButton from "../Composants/Buttons/CancelButton";
 import Button from "../Composants/Buttons/Button";
+import Feedback from "../ConnecForm/FeedBack";
 
-class VideoForm extends Component {
-  state = { formArr: [] };
+const apiHandler = new APIHandler();
 
-  handleInput = evt => {
-    this.setState({ [evt.target.name]: evt.target.value });
+const VideoForm = props => {
+  const [pageInfos] = useState(props.location.state.pageId);
+
+  const [videoInfos, setVideoInfos] = useState({});
+
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handlePost = async evt => {
+    evt.preventDefault();
+    console.log(videoInfos);
+    pageInfos.includes("artists")
+      ? (videoInfos.performer = pageInfos)
+      : (videoInfos.organizer = pageInfos);
+    try {
+      const dbRes = await apiHandler.post("/api/albums", videoInfos);
+      console.log(dbRes);
+      props.history.replace(
+        `/details/artists/${dbRes.data.performer.slug}/${getId(
+          videoInfos.performer
+        )}`
+      );
+    } catch (err) {
+      if (err.response) {
+        console.log(err.response);
+        setErrorMsg(err.response.data["hydra:description"].toUpperCase());
+      } else console.log(err);
+    }
   };
 
-  addForm = form => {
-    this.state.formArr.push(form);
-    this.setState({ formArr: this.state.formArr });
+  const handleInput = evt => {
+    setVideoInfos({ ...videoInfos, [evt.target.name]: evt.target.value });
   };
 
-  removeForm = () => {
-    if (this.state.formArr.length > 0) this.state.formArr.pop();
-    this.setState({ formArr: this.state.formArr });
+  const getId = infos => {
+    return parseInt(infos.match(/\d+/g));
   };
 
-  render() {
-    const name = this.props.match.params.page.toUpperCase();
-    const { formArr } = this.state;
-    const newForm = (
+  const videoType = [
+    "--- Veuillez choisir ---",
+    "Live",
+    "Live session",
+    "Freestyle",
+    "Clip",
+    "Documentaire",
+    "Interview"
+  ];
+
+  return (
+    <div className={classes.form}>
+      <CompTitle name={props.location.state.name} text="vidéos" />
       <div className={classes.formItselft}>
-        <form action="post">
-          <Input
-            text="Url*"
-            type="url"
-            name="videoUrl"
-            handleInput={this.handleInput}
-          />
+        <form onSubmit={handlePost} onChange={handleInput}>
+          <Input text="Url*" type="url" name="url" />
           <Select
             text="
             Type de vidéo"
             type="submit"
-            name="videoType"
-            option={[
-              "Live",
-              "Live session",
-              "Freestyle",
-              "Clip",
-              "Documentaire",
-              "Interview"
-            ]}
-            handleInput={this.handleInput}
+            name="category"
+            option={videoType}
+            display={videoType}
           />
-          <Input
-            text="Date*"
-            type="date"
-            name="videoDate"
-            handleInput={this.handleInput}
-          />
+          <Input text="Date*" type="date" name="datePublished" />
           <Button text="submit" />
+          <div style={{ borderTop: "1px solid grey", marginTop: "10px" }}>
+            <AddCompButton text="autre évenement" />
+          </div>
         </form>
       </div>
-    );
-    return (
-      <div className={classes.form}>
-        <CompTitle name={name} text="vidéos" />
-        {newForm}
-        {formArr.map(oneEl => {
-          return oneEl;
-        })}
-        <CancelButton removeForm={this.removeForm} />
-        <AddCompButton
-          text="autre vidéo"
-          addAForm={this.addForm}
-          newForm={newForm}
-        />
-      </div>
-    );
-  }
-}
+      <Feedback msg={errorMsg} />
+    </div>
+  );
+};
 
 export default VideoForm;

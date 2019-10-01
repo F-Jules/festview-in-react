@@ -8,7 +8,6 @@ const EventModule = props => {
   // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module Progr est en display none
   let noShow;
   if (!props.modifyState) noShow = { display: "none" };
-  console.log(props.eventsInfos);
   return (
     <div className={classes.pageComp}>
       <h2>Événements</h2>

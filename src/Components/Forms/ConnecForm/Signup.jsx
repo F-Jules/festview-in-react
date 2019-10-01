@@ -40,7 +40,6 @@ const Signup = props => {
     evt.preventDefault();
     setUserInfos({ ...userInfos, [evt.target.name]: evt.target.value });
   };
-  console.log(userInfos);
   return (
     <div className={classes.form}>
       <TitleFormCo text="Créez votre compte" />

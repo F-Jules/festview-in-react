@@ -5,29 +5,22 @@ import plusIcon from "../../../Assets/images/icon-plus.png";
 import moreIcon from "../../../Assets/images/icon-more.png";
 
 const AlbumModule = props => {
-  // Ajouter un album
-  const addAlbum = (pageName, id) => {
-    return `/add/video/${pageName}/${id}`;
-  };
-
   // Si le bouton modifier la page n'est pas cliqué, le bouton modifier module album est en display none
   let noShow;
-  if (!props.albumInfos) noShow = { display: "none" };
-
-  // SI pas de musicState, Cela veut dire que rien na été ajouté comme album pour cet artiste
-  if (props.albumInfos.length === 0) {
-    return (
-      <div className={classes.pageComp}>
-        <h2>Pas encore d'infos réseaux sociaux.</h2>
-      </div>
-    );
-  }
-
+  if (!props.modifyState) noShow = { display: "none" };
   return (
     <div className={classes.pageComp}>
-      <h2>Musique</h2>
+      <h2>Albums</h2>
       <div className={classes.bgc} style={noShow}>
-        <Link to={addAlbum(props.pageName, props.pageId)}>
+        <Link
+          to={{
+            pathname: `/add/album/${props.pageSlug}`,
+            state: {
+              pageId: props.pageId,
+              name: props.pageName
+            }
+          }}
+        >
           <img className={classes.custIcon} src={plusIcon} alt="modify icon" />
         </Link>
       </div>
@@ -40,13 +33,11 @@ const AlbumModule = props => {
               </li>
               <li>{oneAlbum.name}</li>
               <li style={noShow}>
-                <Link to={addAlbum(props.pageName, props.pageId)}>
-                  <img
-                    className={classes.custIcon}
-                    src={moreIcon}
-                    alt="modify icon"
-                  />
-                </Link>
+                <img
+                  className={classes.custIcon}
+                  src={moreIcon}
+                  alt="modify icon"
+                />
               </li>
             </div>
           );

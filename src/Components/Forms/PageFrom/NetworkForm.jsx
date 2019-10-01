@@ -6,6 +6,7 @@ import Select from "../Composants/Input/SelectForm";
 import AddCompButton from "../Composants/Buttons/AddContentButton";
 import Button from "../Composants/Buttons/Button";
 import APIHandler from "../../../Api/ApiHandler";
+import Feedback from "../ConnecForm/FeedBack";
 
 const apiHandler = new APIHandler();
 
@@ -13,6 +14,8 @@ const SocialForm = props => {
   const [pageInfos] = useState(props.location.state.pageId);
 
   const [networkInfos, setNetworkInfos] = useState({});
+
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handlePost = async evt => {
     evt.preventDefault();
@@ -33,7 +36,10 @@ const SocialForm = props => {
             )}`
           );
     } catch (err) {
-      console.log(err.response);
+      if (err.response) {
+        console.log(err.response);
+        setErrorMsg(err.response.data["hydra:description"].toUpperCase());
+      } else console.log(err);
     }
   };
 
@@ -43,6 +49,7 @@ const SocialForm = props => {
   };
 
   const networks = [
+    "--- Veuillez choisir ---",
     "Dailymotion",
     "Deezer",
     "Facebook",
@@ -79,6 +86,7 @@ const SocialForm = props => {
           </div>
         </form>
       </div>
+      <Feedback msg={errorMsg} />
     </div>
   );
 };
