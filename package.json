@@ -50,7 +50,7 @@
     "react": "^16.8.6",
     "react-advanced-form": "^1.7.2",
     "react-app-polyfill": "^1.0.1",
-    "react-dev-utils": "^9.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.8.6",
     "react-loader-spinner": "^2.3.0",
     "react-modal": "^3.8.1",
